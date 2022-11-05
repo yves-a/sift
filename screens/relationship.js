@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -10,10 +11,13 @@ const Home = ({ navigation }) => {
   });
 
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("Home");
+  const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-    { label: "Relationship", value: "Relationship" },
-    { label: "Intrests", value: "Intrests" },
+    { label: "Significant Other", value: "significantOther" },
+    { label: "Friend", value: "friend" },
+    { label: "Family", value: "family" },
+    { label: "Pet", value: "pet" },
+    { label: "Other", value: "other" },
   ]);
 
   if (!fontsLoaded) {
@@ -25,9 +29,19 @@ const Home = ({ navigation }) => {
       <View style={styles.progressBar}>
         <View style={styles.progressEvent}></View>
       </View>
-      <View style={styles.backButton}></View>
+      <View style={styles.backButton}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("Home");
+          }}
+          title="Go to Page"
+          accessibilityLabel="Go to the next page, Intrests."
+        >
+          <Icon name="chevron-left" size={"40%"} color="#1C1B1F" />
+        </Pressable>
+      </View>
       <View style={styles.body}>
-        <Text style={styles.header}>Navigation Testing</Text>
+        <Text style={styles.header}>You're Buying For</Text>
         <DropDownPicker
           open={open}
           value={value}
@@ -35,20 +49,22 @@ const Home = ({ navigation }) => {
           setOpen={setOpen}
           setValue={setValue}
           setItems={setItems}
-          placeholder="Select Page"
+          placeholder="Select"
         />
         <Pressable
+          onPress={() => {
+            if (value != null) {
+              navigation.navigate("Intrests");
+            }
+          }}
           style={({ pressed }) => [
             {
               backgroundColor:
-                pressed || value == "Home" ? "#4F4F4F24" : "#4F4F4F",
+                pressed || value == null ? "#4F4F4F24" : "#4F4F4F",
             },
             styles.nextButton,
           ]}
-          onPress={() => {
-            navigation.navigate(value);
-          }}
-          title="Go to Page"
+          title="Next"
           accessibilityLabel="Go to the next page, Intrests."
         >
           <Text style={styles.text}>Next</Text>
@@ -62,7 +78,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   progressEvent: {
-    flex: 0.1,
+    flex: 0.3,
     backgroundColor: "#333333",
     height: "100%",
   },
@@ -90,11 +106,10 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   header: {
-    fontSize: 40,
+    fontSize: 45,
     fontFamily: "SF-Pro-Display",
     color: "#1C1B1F",
     flex: 0.28,
-    textAlign: "center",
   },
   nextButton: {
     color: "white",
