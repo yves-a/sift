@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -55,10 +55,10 @@ const Home = ({ navigation }) => {
         </Pressable>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 
 const styles = StyleSheet.create({
   progressEvent: {
@@ -111,4 +111,4 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
-});
+})

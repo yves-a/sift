@@ -16,6 +16,8 @@
     "expo-app-loading": "~2.1.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
+    "feather-icons": "^4.29.0",
+    "formik": "^2.2.9",
     "react": "18.0.0",
     "react-native": "0.69.6",
     "react-native-bubble-select": "^0.6.0",
