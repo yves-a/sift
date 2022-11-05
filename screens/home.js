@@ -12,8 +12,13 @@ const Home = ({ navigation }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Home");
   const [items, setItems] = useState([
+    { label: "Login", value: "Login" },
+    { label: "SignUp", value: "SignUp" },
+    { label: "Email", value: "Email" },
+    { label: "Forgot", value: "Forgot" },
+    { label: "Name", value: "Name" },
     { label: "Relationship", value: "Relationship" },
-    { label: "Intrests", value: "Intrests" },
+    { label: "Interests", value: "Interests" },
   ]);
 
   if (!fontsLoaded) {
@@ -49,16 +54,16 @@ const Home = ({ navigation }) => {
             navigation.navigate(value);
           }}
           title="Go to Page"
-          accessibilityLabel="Go to the next page, Intrests."
+          accessibilityLabel="Go to the next page, Interests."
         >
           <Text style={styles.text}>Next</Text>
         </Pressable>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 
 const styles = StyleSheet.create({
   progressEvent: {
@@ -111,4 +116,4 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
-})
+});

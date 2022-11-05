@@ -75,7 +75,7 @@ const Home = ({ navigation }) => {
           ]}
           onPress={() => {}}
           title="Next"
-          accessibilityLabel="Go to the next page, Intrests."
+          accessibilityLabel="Go to the next page, Interests."
         >
           <Text style={styles.text}>Next</Text>
         </Pressable>

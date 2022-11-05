@@ -35,7 +35,7 @@ const Home = ({ navigation }) => {
             navigation.navigate("Home");
           }}
           title="Go to Page"
-          accessibilityLabel="Go to the next page, Intrests."
+          accessibilityLabel="Go to the next page, Interests."
         >
           <Icon name="chevron-left" size={"40%"} color="#1C1B1F" />
         </Pressable>
@@ -54,7 +54,7 @@ const Home = ({ navigation }) => {
         <Pressable
           onPress={() => {
             if (value != null) {
-              navigation.navigate("Intrests");
+              navigation.navigate("Interests");
             }
           }}
           style={({ pressed }) => [
@@ -65,7 +65,7 @@ const Home = ({ navigation }) => {
             styles.nextButton,
           ]}
           title="Next"
-          accessibilityLabel="Go to the next page, Intrests."
+          accessibilityLabel="Go to the next page, Interests."
         >
           <Text style={styles.text}>Next</Text>
         </Pressable>
