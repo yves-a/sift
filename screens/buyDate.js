@@ -37,8 +37,7 @@ const PurchaseDate = ({ navigation }) => {
                             navigation.navigate("Relationship");
                         }}
                         title="Skip"
-                        accessibilityLabel="Go to the next page, Relationship."
-                    >
+                        accessibilityLabel="Go to the next page, Relationship.">
                         <Text style={styles.skipText}>SKIP</Text>
                     </Pressable>
                 </View>
