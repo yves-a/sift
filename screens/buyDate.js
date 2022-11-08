@@ -26,8 +26,7 @@ const PurchaseDate = ({ navigation }) => {
                             navigation.navigate("shoppingFor");
                         }}
                         title="Go to Page"
-                        accessibilityLabel="Go to the previous page, Shopping For."
-                    >
+                        accessibilityLabel="Go to the previous page, Shopping For.">
                         <Icon name="chevron-left" size={"40%"} color="#1C1B1F" />
                     </Pressable>
                 </View>
