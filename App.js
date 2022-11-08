@@ -16,9 +16,9 @@ export default function App() {
           headerShown: false,
         }}
       >
+        <Stack.Screen name="shoppingFor" component={FirstNameInput} />
         <Stack.Screen name="Home" component={Home} />
-        {/* <Stack.Screen name="shoppingFor" component={FirstNameInput} /> */}
-        {/* <Stack.Screen name="PurchaseDate" component={PurchaseDate} /> */}
+        <Stack.Screen name="PurchaseDate" component={PurchaseDate} />
       </Stack.Navigator>
     </NavigationContainer>
   );
