@@ -2,9 +2,19 @@ import React, { useState } from "react";
 import { Pressable, SafeAreaView, StyleSheet, TextInput, Text, View, Button, TouchableOpacity } from "react-native";
 
 const FirstNameInput = ({ navigation }) => {
-    const [text, onChangeText] = useState("FIRST NAME");
     const [onPressInActive, SetOnPressInActive] = useState('#33691E');
+    const [textInputName, setTextInputName] = useState('');
 
+    const checkTextInput = () => {
+        if (!textInputName.trim()) {
+            alert('Please Enter Name');
+            return;
+        }
+        else {
+            navigation.navigate('PurchaseDate')
+        }
+
+    };
 
     return (
         <SafeAreaView
@@ -16,15 +26,17 @@ const FirstNameInput = ({ navigation }) => {
                 </Text>
             </View>
             <TextInput
+                placeholder="FIRST NAME"
                 style={styles.input}
-                onChangeText={onChangeText}
-                value={text}
+                onChangeText={
+                    (value) => setTextInputName(value)
+                }
             />
             <View style={styles.button}>
                 <Button
                     style={styles.buto}
-                    onPress={() => navigation.navigate('PurchaseDate')}
                     color='white'
+                    onPress={checkTextInput}
                     title='Next'
                 />
             </View>
@@ -53,7 +65,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'black',
         borderBottomWidth: 3,
         padding: 10,
-        color: 'rgba(18, 18, 18, 0.6)',
+        color: 'black',
     },
     head: {
         position: 'absolute',
