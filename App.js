@@ -12,6 +12,8 @@ import Relationship from "./screens/Relationship";
 import Interests from "./screens/Interests";
 import Swipe from "./screens/Swipe";
 import Price from "./screens/Price";
+import FirstNameInput from "./screens/shoppingFor";
+import PurchaseDate from "./screens/buyDate";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +35,8 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Swipe" component={Swipe} />
         <Stack.Screen name="Price" component={Price} />
+        <Stack.Screen name="shoppingFor" component={FirstNameInput} />
+        <Stack.Screen name="PurchaseDate" component={PurchaseDate} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -41,7 +45,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#00fff",
     alignItems: "center",
     justifyContent: "center",
   },
