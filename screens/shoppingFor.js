@@ -13,7 +13,6 @@ const FirstNameInput = ({ navigation }) => {
         else {
             navigation.navigate('PurchaseDate')
         }
-
     };
 
     return (
