@@ -19,6 +19,7 @@ const Home = ({ navigation }) => {
     { label: "Name", value: "Name" },
     { label: "Relationship", value: "Relationship" },
     { label: "Interests", value: "Interests" },
+    { label: "Price", value: "Price" },
   ]);
 
   if (!fontsLoaded) {
