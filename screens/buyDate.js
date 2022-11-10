@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Pressable, SafeAreaView, StyleSheet, TextInput, Text, View, Button } from "react-native";
+import {Animated, Pressable, SafeAreaView, StyleSheet, TextInput, Text, View, Button } from "react-native";
 import DatePicker from 'react-native-datepicker'
 import { useFonts } from "expo-font";
-// import {dateRangeInput} from '@datepicker-react/styled'
 import Icon from "react-native-vector-icons/FontAwesome";
-// import 'react-datepicker/dist/react-datepicker.css';
+import { TextInputMask } from 'react-native-masked-text'
+
+
 
 
 const PurchaseDate = ({ navigation }) => {
@@ -42,7 +43,18 @@ const PurchaseDate = ({ navigation }) => {
                 </View>
             </View>
             <Text style={styles.header}>You're Buying By</Text>
-            <DatePicker style={styles.calApp} selected={startDate} onChange={(date) => setStartDate(date)} />
+            <DatePicker
+            style={styles.calApp}
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            mode="date"
+            format="YYYY/MM/DD"
+            minDate="01-01-1990"
+            maxDate="31-12-2020"
+            placeholder="select date"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+             />
             <View style={styles.button}>
                 <Button
                     style={styles.buto}
@@ -56,28 +68,21 @@ const PurchaseDate = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        position: 'absolute',
-        width: 390,
-        height: 844,
-        left: 0,
-        top: 0,
-    },
     header: {
         fontSize: 45,
-        right: "5%",
+        // right: "5%",
+        width: "80%",
         fontFamily: "SF-Pro-Display",
         color: "#1C1B1F",
-        flex: 0.28,
         top: "12%",
-      },
+    },
     backButton: {
         flex: 0.8,
         right: "35%",
         top: "5%",
     },
-    skipButton:{
-        top: "5%",
+    skipButton: {
+        top: "6%",
     },
     skipText: {
         fontSize: 22,
@@ -85,13 +90,17 @@ const styles = StyleSheet.create({
     },
     container2: {
         flex: 1,
+        width: "100%",
+        height: "100%",
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "top",
         top: "8%",
     },
     calApp: {
-        top: "1%",
+        top: "18%",
+        width: "80%",
+        left: "3%",
     },
     progressEvent: {
         flex: 0.25,
@@ -110,9 +119,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         gap: 8,
         position: 'absolute',
-        width: 342,
+        width: "80%",
         height: 44,
-        left: 24,
+        left: "10%",
         top: "45%",
         opacity: 0.3,
         backgroundColor: 'rgba(79, 79, 79, 1)',
@@ -120,13 +129,6 @@ const styles = StyleSheet.create({
     },
     buto: {
         position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 342,
-        height: 44,
-        opacity: 0,
-        left: 24,
-        gap: 8,
         color: 'white',
         fontSize: 18,
     },
