@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Animated, Pressable, SafeAreaView, StyleSheet, TextInput, Text, View, Button } from "react-native";
+import { Animated, Pressable, SafeAreaView, StyleSheet, TextInput, Text, View, Button } from "react-native";
 import DatePicker from 'react-native-datepicker'
 import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -20,7 +20,10 @@ const PurchaseDate = ({ navigation }) => {
             <View style={styles.progressBar}>
                 <View style={styles.progressEvent}></View>
             </View>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{
+                flexDirection: 'row',
+                top: "8%",
+            }}>
                 <View style={styles.backButton}>
                     <Pressable
                         onPress={() => {
@@ -43,18 +46,20 @@ const PurchaseDate = ({ navigation }) => {
                 </View>
             </View>
             <Text style={styles.header}>You're Buying By</Text>
-            <DatePicker
-            style={styles.calApp}
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            mode="date"
-            format="YYYY/MM/DD"
-            minDate="01-01-1990"
-            maxDate="31-12-2020"
-            placeholder="select date"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-             />
+            <View style={styles.datePick}>
+                <DatePicker
+                    style={styles.calApp}
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    mode="date"
+                    format="YYYY/MM/DD"
+                    minDate="01-01-1990"
+                    maxDate="31-12-2020"
+                    placeholder="select date"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                />
+            </View>
             <View style={styles.button}>
                 <Button
                     style={styles.buto}
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
         width: "80%",
         fontFamily: "SF-Pro-Display",
         color: "#1C1B1F",
-        top: "12%",
+        top: "22%",
     },
     backButton: {
         flex: 0.8,
@@ -89,18 +94,19 @@ const styles = StyleSheet.create({
         fontFamily: "SF-Pro-Display",
     },
     container2: {
-        flex: 1,
         width: "100%",
         height: "100%",
+        position: 'absolute',
         backgroundColor: "#fff",
         alignItems: "center",
-        justifyContent: "top",
-        top: "8%",
+    },
+    datePick: {
+        top: "45%",
+        position: 'absolute',
+        justifyContent: "center",
     },
     calApp: {
-        top: "18%",
-        width: "80%",
-        left: "3%",
+        // width: "100%",
     },
     progressEvent: {
         flex: 0.25,
@@ -113,6 +119,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#e0e0de",
         width: "100%",
         height: "5%",
+        top: "8%",
     },
     button: {
         display: 'flex',
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
         width: "80%",
         height: 44,
         left: "10%",
-        top: "45%",
+        top: "55%",
         opacity: 0.3,
         backgroundColor: 'rgba(79, 79, 79, 1)',
         borderRadius: 7,

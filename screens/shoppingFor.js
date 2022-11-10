@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: "100%",
         height: "100%",
+        backgroundColor: 'white',
+    },
+    buttonActive:{
+        backgroundColor: 'red',
     },
     input: {
         position: 'absolute',
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
         gap: 8,
         position: 'absolute',
         width: "80%",
-        height: 44,
+        height: "4.5%",
         left: "10%",
         top: 462,
         opacity: 0.3,
@@ -91,6 +95,8 @@ const styles = StyleSheet.create({
     buto: {
         position: 'absolute',
         color: 'white',
+        justifyContent: 'center',
+        alignContent: 'center',
         fontSize: 18,
     },
 });
