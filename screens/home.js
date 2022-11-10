@@ -20,6 +20,7 @@ const Home = ({ navigation }) => {
     { label: "Relationship", value: "Relationship" },
     { label: "Interests", value: "Interests" },
     { label: "Swipe", value: "Swipe" },
+    { label: "Price", value: "Price" },
   ]);
 
   if (!fontsLoaded) {
