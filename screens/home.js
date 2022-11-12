@@ -8,6 +8,7 @@ const Home = ({ navigation }) => {
   let [fontsLoaded, error] = useFonts({
     "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
   });
+  
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Home");
