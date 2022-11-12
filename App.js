@@ -12,6 +12,7 @@ import Relationship from "./screens/Relationship";
 import Interests from "./screens/Interests";
 import Swipe from "./screens/Swipe";
 import Price from "./screens/Price";
+import Home from "./screens/home";
 import FirstNameInput from "./screens/shoppingFor";
 import PurchaseDate from "./screens/buyDate";
 
@@ -25,7 +26,6 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="shoppingFor" component={FirstNameInput} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Relationship" component={Relationship} />
         <Stack.Screen name="Interests" component={Interests} />
