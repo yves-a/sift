@@ -10,6 +10,7 @@ import Email from "./screens/Email";
 import SignUp from "./screens/SignUp";
 import Relationship from "./screens/Relationship";
 import Interests from "./screens/Interests";
+import Swipe from "./screens/Swipe";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
         <Stack.Screen name="Forgot" component={Forgot} />
         <Stack.Screen name="Email" component={Email} />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Swipe" component={Swipe} />
       </Stack.Navigator>
     </NavigationContainer>
   );
