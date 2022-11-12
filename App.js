@@ -12,7 +12,6 @@ import Relationship from "./screens/Relationship";
 import Interests from "./screens/Interests";
 import Swipe from "./screens/Swipe";
 import Price from "./screens/Price";
-import Home from "./screens/home";
 import FirstNameInput from "./screens/shoppingFor";
 import PurchaseDate from "./screens/buyDate";
 
