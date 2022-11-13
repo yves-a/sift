@@ -10,12 +10,12 @@ import {
 import { Formik } from 'formik'
 import styles from './LoginInFlow.style.js'
 import { AntDesign } from '@expo/vector-icons'
-const Forgot = (props) => {
+const Forgot = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          return null
+          navigation.goBack()
         }}
         style={styles.tinyLogo}
       >

@@ -1,28 +1,29 @@
-import { View, Text, StyleSheet, Pressable, Image } from "react-native";
-import React, { useState } from "react";
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
-import DropDownPicker from "react-native-dropdown-picker";
+import { View, Text, StyleSheet, Pressable, Image } from 'react-native'
+import React, { useState } from 'react'
+import { useFonts } from 'expo-font'
+import AppLoading from 'expo-app-loading'
+import DropDownPicker from 'react-native-dropdown-picker'
 
 const Home = ({ navigation }) => {
   let [fontsLoaded, error] = useFonts({
-    "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
-  });
+    'SF-Pro-Display': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+  })
 
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("Home");
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState('Home')
   const [items, setItems] = useState([
-    { label: "Login", value: "Login" },
-    { label: "SignUp", value: "SignUp" },
-    { label: "Email", value: "Email" },
-    { label: "Forgot", value: "Forgot" },
-    { label: "Name", value: "Name" },
-    { label: "Relationship", value: "Relationship" },
-    { label: "Interests", value: "Interests" },
-  ]);
+    { label: 'Login', value: 'Login' },
+    { label: 'SignUp', value: 'SignUp' },
+    { label: 'Email', value: 'Email' },
+    { label: 'Forgot', value: 'Forgot' },
+    { label: 'Landing', value: 'Landing' },
+    { label: 'Name', value: 'Name' },
+    { label: 'Relationship', value: 'Relationship' },
+    { label: 'Interests', value: 'Interests' },
+  ])
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return <AppLoading />
   }
 
   return (
@@ -46,12 +47,12 @@ const Home = ({ navigation }) => {
           style={({ pressed }) => [
             {
               backgroundColor:
-                pressed || value == "Home" ? "#4F4F4F24" : "#4F4F4F",
+                pressed || value == 'Home' ? '#4F4F4F24' : '#4F4F4F',
             },
             styles.nextButton,
           ]}
           onPress={() => {
-            navigation.navigate(value);
+            navigation.navigate(value)
           }}
           title="Go to Page"
           accessibilityLabel="Go to the next page, Interests."
@@ -60,60 +61,60 @@ const Home = ({ navigation }) => {
         </Pressable>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 
 const styles = StyleSheet.create({
   progressEvent: {
     flex: 0.1,
-    backgroundColor: "#333333",
-    height: "100%",
+    backgroundColor: '#333333',
+    height: '100%',
   },
   progressBar: {
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 0.03,
-    backgroundColor: "#e0e0de",
-    width: "100%",
-    height: "5%",
+    backgroundColor: '#e0e0de',
+    width: '100%',
+    height: '5%',
   },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "top",
-    top: "10%",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'top',
+    top: '10%',
   },
   backButton: {
     flex: 0.2,
-    right: "35%",
-    top: "5%",
+    right: '35%',
+    top: '5%',
   },
   body: {
     flex: 0.5,
-    width: "80%",
+    width: '80%',
   },
   header: {
     fontSize: 40,
-    fontFamily: "SF-Pro-Display",
-    color: "#1C1B1F",
+    fontFamily: 'SF-Pro-Display',
+    color: '#1C1B1F',
     flex: 0.28,
-    textAlign: "center",
+    textAlign: 'center',
   },
   nextButton: {
-    color: "white",
+    color: 'white',
     borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 32,
-    top: "10%",
+    top: '10%',
   },
   text: {
     fontSize: 16,
     lineHeight: 21,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     letterSpacing: 0.25,
-    color: "white",
-    textAlign: "center",
+    color: 'white',
+    textAlign: 'center',
   },
-});
+})

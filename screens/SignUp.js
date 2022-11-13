@@ -7,15 +7,43 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
 import styles from './LoginInFlow.style.js'
 import { AntDesign } from '@expo/vector-icons'
-const SignUp = (props) => {
+import { auth, createUserWithEmailAndPassword } from '../firebase.js'
+const SignUp = ({ navigation }) => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const onRegisterPress = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        const uid = response.user.uid
+        const data = {
+          id: uid,
+          email,
+        }
+        navigation.navigate('Login')
+        // const usersRef = firebase.firestore().collection('users')
+        // usersRef
+        //   .doc(uid)
+        //   .set(data)
+        //   .then(() => {
+        //     navigation.navigate('Home', { user: data })
+        //   })
+        //   .catch((error) => {
+        //     alert(error)
+        //   })
+      })
+      .catch((error) => {
+        alert(error)
+      })
+  }
   return (
     <View style={styles.containerSignUp}>
       <TouchableOpacity
         onPress={() => {
-          return null
+          navigation.goBack()
         }}
         style={styles.tinyLogo}
       >
@@ -24,7 +52,12 @@ const SignUp = (props) => {
       <Text style={styles.title}>Sign Up.</Text>
       <Formik
         initialValues={{ email: '', password: '' }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          console.log(values)
+          setEmail(values.email)
+          setPassword(values.password)
+          onRegisterPress()
+        }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>

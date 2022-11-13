@@ -1,9 +1,9 @@
 {
-  "apiKey": "",
-  "authDomain": "",
-  "projectId": "",
-  "storageBucket": "",
-  "messagingSenderId": "",
-  "appId": "",
-  "measurementId": ""
+  "apiKey": "AIzaSyCEuqXkF_WIWJaHVKbfPfJekyFQRAGKeAY",
+  "authDomain": "team2-gift-recommendation.firebaseapp.com",
+  "projectId": "team2-gift-recommendation",
+  "storageBucket": "team2-gift-recommendation.appspot.com",
+  "messagingSenderId": "1031736772389",
+  "appId": "1:1031736772389:web:a28f1754aa4455a50c7ccc",
+  "measurementId": "G-BBZMW5R8GB"
 }

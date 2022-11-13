@@ -15,7 +15,7 @@ const Email = (props) => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          return null
+          navigation.goBack()
         }}
         style={styles.tinyLogo}
       >
