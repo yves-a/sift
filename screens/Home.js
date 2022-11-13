@@ -23,6 +23,7 @@ const Home = ({ navigation }) => {
     { label: "Price", value: "Price" },
     { label: "Date", value: "Date" },
     { label: "RecipientName", value: "RecipientName" },
+    { label: "Landing", value: "Landing" },
   ]);
 
   if (!fontsLoaded) {

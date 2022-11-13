@@ -15,3 +15,5 @@ firebaseConfig.js
 
 # macOS
 .DS_Store
+
+firebaseConfig.json
