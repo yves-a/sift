@@ -7,15 +7,31 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native'
+import React, { useState } from 'react'
 import { Formik } from 'formik'
 import styles from './LoginInFlow.style.js'
 import { AntDesign } from '@expo/vector-icons'
-const Login = (props) => {
+import { auth, signInWithEmailAndPassword } from '../firebase.js'
+
+const Login = ({ navigation }) => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const onSignInPress = () => {
+    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      // Signed in
+      const user = userCredential.user
+    })
+    navigation.navigate('Name').catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+    })
+  }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          return null
+          navigation.goBack()
         }}
         style={styles.tinyLogo}
       >
@@ -24,7 +40,12 @@ const Login = (props) => {
       <Text style={styles.title}>Welcome Back!</Text>
       <Formik
         initialValues={{ email: '', password: '' }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          console.log(values)
+          setEmail(values.email)
+          setPassword(values.password)
+          onSignInPress()
+        }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
