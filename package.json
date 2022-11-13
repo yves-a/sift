@@ -25,6 +25,7 @@
     "react": "18.0.0",
     "react-native": "0.69.6",
     "react-native-bubble-select": "^0.6.0",
+    "react-native-datepicker": "^1.7.2",
     "react-native-dotenv": "^3.4.2",
     "react-native-dropdown-picker": "^5.4.2",
     "react-native-ionicons": "^4.6.5",

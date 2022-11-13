@@ -12,8 +12,8 @@ import Relationship from "./screens/Relationship";
 import Interests from "./screens/Interests";
 import Swipe from "./screens/Swipe";
 import Price from "./screens/Price";
-import FirstNameInput from "./screens/shoppingFor";
-import PurchaseDate from "./screens/buyDate";
+import RecipientName from "./screens/RecipientName";
+import Date from "./screens/Date";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,8 +35,8 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Swipe" component={Swipe} />
         <Stack.Screen name="Price" component={Price} />
-        <Stack.Screen name="shoppingFor" component={FirstNameInput} />
-        <Stack.Screen name="PurchaseDate" component={PurchaseDate} />
+        <Stack.Screen name="RecipientName" component={RecipientName} />
+        <Stack.Screen name="Date" component={Date} />
       </Stack.Navigator>
     </NavigationContainer>
   );
