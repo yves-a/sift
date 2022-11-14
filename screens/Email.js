@@ -6,16 +6,16 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-} from 'react-native'
-import { Formik } from 'formik'
-import styles from './LoginInFlow.style.js'
-import { AntDesign } from '@expo/vector-icons'
+} from "react-native";
+import { Formik } from "formik";
+import styles from "./LoginInFlow.style.js";
+import { AntDesign } from "@expo/vector-icons";
 const Email = (props) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          navigation.goBack()
+          navigation.goBack();
         }}
         style={styles.tinyLogo}
       >
@@ -24,11 +24,11 @@ const Email = (props) => {
       <Text style={styles.title}>Welcome Back!</Text>
       <View>
         <Text style={styles.subheadingForgot}>
-          We’ve sent password recovery instructions to your {'\n'}email.
+          We’ve sent password recovery instructions to your {"\n"}email.
         </Text>
         <TouchableOpacity
           onPress={() => {
-            return null
+            return null;
           }}
           style={styles.formButtonContainerEmail}
         >
@@ -37,6 +37,6 @@ const Email = (props) => {
         <Text style={styles.subheadingEmail}>I'll confirm later</Text>
       </View>
     </View>
-  )
-}
-export default Email
+  );
+};
+export default Email;

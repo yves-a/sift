@@ -6,44 +6,33 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-} from 'react-native'
-import React, { useState } from 'react'
-import { Formik } from 'formik'
-import styles from './LoginInFlow.style.js'
-import { AntDesign } from '@expo/vector-icons'
-import { auth, createUserWithEmailAndPassword } from '../firebase.js'
+} from "react-native";
+import React, { useState } from "react";
+import { Formik } from "formik";
+import styles from "./LoginInFlow.style.js";
+import { AntDesign } from "@expo/vector-icons";
+import { auth, createUserWithEmailAndPassword } from "../firebase.js";
+import { createUser, health } from "../clients/FlaskServer.js";
 const SignUp = ({ navigation }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const onRegisterPress = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const onRegisterPress = async () => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((response) => {
-        const uid = response.user.uid
-        const data = {
-          id: uid,
-          email,
-        }
-        navigation.navigate('Login')
-        // const usersRef = firebase.firestore().collection('users')
-        // usersRef
-        //   .doc(uid)
-        //   .set(data)
-        //   .then(() => {
-        //     navigation.navigate('Home', { user: data })
-        //   })
-        //   .catch((error) => {
-        //     alert(error)
-        //   })
+      .then(async (response) => {
+        const create = await createUser(response.user.uid);
+        navigation.navigate("Name");
       })
       .catch((error) => {
-        alert(error)
-      })
-  }
+        setError(error.message);
+      });
+  };
   return (
     <View style={styles.containerSignUp}>
       <TouchableOpacity
         onPress={() => {
-          navigation.goBack()
+          navigation.goBack();
         }}
         style={styles.tinyLogo}
       >
@@ -51,27 +40,27 @@ const SignUp = ({ navigation }) => {
       </TouchableOpacity>
       <Text style={styles.title}>Sign Up.</Text>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={(values) => {
-          console.log(values)
-          setEmail(values.email)
-          setPassword(values.password)
-          onRegisterPress()
+          console.log(values);
+          setEmail(values.email);
+          setPassword(values.password);
+          onRegisterPress();
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
             <View>
               <TextInput
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
                 value={values.email}
                 placeholder="Enter Email"
                 style={styles.input}
               />
               <TextInput
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
                 value={values.password}
                 placeholder="Enter Password"
                 style={styles.input}
@@ -85,25 +74,25 @@ const SignUp = ({ navigation }) => {
               <Text style={styles.formButtonTextSignUp}>Create Account</Text>
             </TouchableOpacity>
             <Text style={styles.subheadingTOS}>
-              Creating an account means you’re okay with our {'\n'} Terms of
+              Creating an account means you’re okay with our {"\n"} Terms of
               Service and our Privacy Policy
             </Text>
           </View>
         )}
       </Formik>
     </View>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
 
 const customStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'fixed',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "fixed",
     marginTop: -200,
   },
-})
+});

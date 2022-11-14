@@ -21,7 +21,7 @@ const Home = ({ navigation }) => {
     { label: "Interests", value: "Interests" },
     { label: "Swipe", value: "Swipe" },
     { label: "Price", value: "Price" },
-    { label: "Date", value: "Date" },
+    { label: "PurchaseDate", value: "PurchaseDate" },
     { label: "RecipientName", value: "RecipientName" },
     { label: "Landing", value: "Landing" },
   ]);
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   header: {
-    fontSize: 40,
+    fontSize: 35,
     fontFamily: "SF-Pro-Display",
     color: "#1C1B1F",
     flex: 0.28,

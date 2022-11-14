@@ -1,12 +1,17 @@
 // var axios = require("axios");
 import axios from "axios";
 
-const baseUrl = "http://127.0.0.1:5000/";
+// const baseUrl = "http://127.0.0.1:5000";
+const baseUrl = "https://210e-76-66-132-135.ngrok.io";
 
 // RECIPIENTS
 
+export const health = async () => {
+  const response = await axios.get(baseUrl + "/health");
+  return response.data;
+};
+
 export const getRecipient = async (id) => {
-  console.log(baseUrl);
   const config = {
     method: "get",
     url: `${baseUrl}/recipient`,
@@ -112,13 +117,30 @@ export const createUser = async (id) => {
     headers: {
       "Content-Type": "application/json",
     },
-    data: { id },
+    data: { id: id },
   };
   try {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
+  }
+};
+
+export const addName = async (id, name) => {
+  const config = {
+    method: "patch",
+    url: `${baseUrl}/user`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: { id, name },
+  };
+  try {
+    const response = await axios(config);
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
 };
 

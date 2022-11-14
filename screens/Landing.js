@@ -6,49 +6,51 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-} from 'react-native'
-import React, { useState } from 'react'
-import { Formik } from 'formik'
-import gift from '../assets/images/gift.png'
-import confetti from '../assets/images/confetti.png'
-import { AntDesign } from '@expo/vector-icons'
+} from "react-native";
+import React, { useState } from "react";
+import { Formik } from "formik";
+import gift from "../assets/images/gift.png";
+import confetti from "../assets/images/confetti.png";
+import { AntDesign } from "@expo/vector-icons";
 import {
   auth,
   provider,
   signInWithPopup,
   GoogleAuthProvider,
-} from '../firebase'
+} from "../firebase";
+
 const Landing = ({ navigation }) => {
-  const [signInOptions, setSignInOptions] = useState(false)
+  const [signInOptions, setSignInOptions] = useState(false);
 
   const googleSignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result)
-        const token = credential.accessToken
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
         // The signed-in user info.
-        const user = result.user
+        const user = result.user;
         // ...
       })
       .catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code
-        const errorMessage = error.message
+        const errorCode = error.code;
+        const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.customData.email
+        const email = error.customData.email;
         // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error)
+        const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
-      })
-  }
+      });
+  };
+
   return (
     <View
       style={{
-        backgroundColor: '#3D8AFF',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
+        backgroundColor: "#3D8AFF",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <View style={styles.imageContainer}>
@@ -58,69 +60,71 @@ const Landing = ({ navigation }) => {
       </View>
       {signInOptions ? (
         <View style={styles.buttons}>
-          <TouchableOpacity
+          {/* GOOGLE LOGIN */}
+          {/* <TouchableOpacity
             onPress={() => {
-              googleSignIn()
+              googleSignIn();
             }}
             style={styles.signInButton}
           >
             <AntDesign
               name="google"
               size={24}
-              style={{ position: 'absolute', left: 20 }}
+              style={{ position: "absolute", left: 20 }}
               color="#FCFCFC"
             />
-            <Text style={[styles.buttonText, { color: '#FCFCFC' }]}>
+            <Text style={[styles.buttonText, { color: "#FCFCFC" }]}>
               Sign in with Google
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </TouchableOpacity> */}
+          {/* FACEBOOK LOGIN */}
+          {/* <TouchableOpacity
             onPress={() => {
-              return null
+              return null;
             }}
             style={styles.signInButton}
           >
             <AntDesign
               name="facebook-square"
               size={24}
-              style={{ position: 'absolute', left: 20 }}
+              style={{ position: "absolute", left: 20 }}
               color="#FCFCFC"
             />
-            <Text style={[styles.buttonText, { color: '#FCFCFC' }]}>
+            <Text style={[styles.buttonText, { color: "#FCFCFC" }]}>
               Sign in with Facebook
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Login')
+              navigation.navigate("Login");
             }}
             style={styles.signInButton}
           >
             <AntDesign
               name="mail"
               size={24}
-              style={{ position: 'absolute', left: 20 }}
+              style={{ position: "absolute", left: 20 }}
               color="#FCFCFC"
             />
-            <Text style={[styles.buttonText, { color: '#FCFCFC' }]}>
+            <Text style={[styles.buttonText, { color: "#FCFCFC" }]}>
               Sign in with Email
             </Text>
           </TouchableOpacity>
           <View
             style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
             }}
           >
             <Text style={styles.subheading}>Don't have an account?</Text>
             <Text
               onPress={() => {
-                navigation.navigate('SignUp')
+                navigation.navigate("SignUp");
               }}
               style={[
                 styles.subheading,
-                { marginLeft: 0, textDecorationLine: 'underline' },
+                { marginLeft: 0, textDecorationLine: "underline" },
               ]}
             >
               Register
@@ -131,7 +135,7 @@ const Landing = ({ navigation }) => {
         <View style={styles.buttons}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('SignUp')
+              navigation.navigate("SignUp");
             }}
             style={styles.createAccountButton}
           >
@@ -139,112 +143,112 @@ const Landing = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setSignInOptions(true)
+              setSignInOptions(true);
             }}
             style={styles.signInButton}
           >
-            <Text style={[styles.buttonText, { color: '#FCFCFC' }]}>
+            <Text style={[styles.buttonText, { color: "#FCFCFC" }]}>
               Sign In
             </Text>
           </TouchableOpacity>
         </View>
       )}
     </View>
-  )
-}
-export default Landing
+  );
+};
+export default Landing;
 
 const styles = StyleSheet.create({
   imageContainer: {
-    position: 'relative',
+    position: "relative",
     top: 0,
     left: 0,
     marginBottom: 0,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
   },
   gift: {
-    position: 'relative',
-    top: '25%',
-    left: '22%',
+    position: "relative",
+    top: "25%",
+    left: "22%",
   },
   confetti: {
-    position: 'relative',
-    top: '-25%',
-    left: '5%',
+    position: "relative",
+    top: "-25%",
+    left: "5%",
   },
   title: {
-    fontFamily: 'Bryant Pro',
-    fontSize: '57px',
-    fontWeight: '700',
-    lineHeight: '64px',
-    letterSpacing: '-4px',
-    textAlign: 'left',
-    color: '#FFFFFF',
-    position: 'relative',
-    top: '-33%',
-    left: '37%',
+    // fontFamily: "Bryant Pro",
+    fontSize: "57px",
+    fontWeight: "700",
+    lineHeight: "64px",
+    letterSpacing: "-4px",
+    textAlign: "left",
+    color: "#FFFFFF",
+    position: "relative",
+    top: "-33%",
+    left: "37%",
   },
   buttons: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: -150,
+    display: "flex",
+    flexDirection: "column",
+    marginTop: -50,
   },
   signInButton: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
     elevation: 8,
-    backgroundColor: 'transparent',
-    borderStyle: 'solid',
-    borderColor: '#FCFCFC',
-    borderWidth: '2px',
-    borderRadius: '7px',
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderColor: "#FCFCFC",
+    borderWidth: "2px",
+    borderRadius: "7px",
     paddingVertical: 8,
     paddingHorizontal: 12,
     height: 44,
     width: 342,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
     margin: 5,
-    gap: '8px',
-    color: '#FCFCFC',
+    gap: "8px",
+    color: "#FCFCFC",
   },
   buttonText: {
-    fontFamily: 'SF Pro Display',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    fontSize: '14px',
-    lineHeight: '18px',
+    // fontFamily: "SF Pro Display",
+    fontStyle: "normal",
+    fontWeight: "500",
+    fontSize: "14px",
+    lineHeight: "18px",
   },
   createAccountButton: {
     elevation: 8,
-    backgroundColor: '#FCFCFC',
-    borderStyle: 'solid',
-    borderColor: '#FCFCFC',
-    borderWidth: '2px',
-    borderRadius: '7px',
+    backgroundColor: "#FCFCFC",
+    borderStyle: "solid",
+    borderColor: "#FCFCFC",
+    borderWidth: "2px",
+    borderRadius: "7px",
     paddingVertical: 8,
     paddingHorizontal: 12,
     height: 44,
     width: 342,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
     margin: 5,
-    gap: '8px',
+    gap: "8px",
   },
   subheading: {
-    fontFamily: 'SF Pro Display',
-    fontStyle: 'normal',
-    fontSize: '12px',
-    fontWeight: '500',
-    lineHeight: '20px',
-    letterSpacing: '0.1px',
-    textAlign: 'right',
-    color: '#FCFCFC',
-    alignSelf: 'flex-end',
+    // fontFamily: "SF Pro Display",
+    fontStyle: "normal",
+    fontSize: "12px",
+    fontWeight: "500",
+    lineHeight: "20px",
+    letterSpacing: "0.1px",
+    textAlign: "right",
+    color: "#FCFCFC",
+    alignSelf: "flex-end",
     margin: 10,
     marginTop: 5,
   },
-})
+});

@@ -13,7 +13,9 @@ import Interests from "./screens/Interests";
 import Swipe from "./screens/Swipe";
 import Price from "./screens/Price";
 import RecipientName from "./screens/RecipientName";
-import Date from "./screens/Date";
+import PurchaseDate from "./screens/PurchaseDate";
+import Landing from "./screens/Landing";
+// import { auth } from "./firebase.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,7 +38,8 @@ export default function App() {
         <Stack.Screen name="Swipe" component={Swipe} />
         <Stack.Screen name="Price" component={Price} />
         <Stack.Screen name="RecipientName" component={RecipientName} />
-        <Stack.Screen name="Date" component={Date} />
+        <Stack.Screen name="PurchaseDate" component={PurchaseDate} />
+        <Stack.Screen name="Landing" component={Landing} />
       </Stack.Navigator>
     </NavigationContainer>
   );

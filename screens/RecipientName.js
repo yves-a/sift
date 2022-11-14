@@ -19,7 +19,8 @@ const RecipientName = ({ navigation }) => {
       alert("Please Enter Name");
       return;
     } else {
-      navigation.navigate("PurchaseDate");
+      // navigation.navigate("Date", { params: { recipientName: textInputName.trim } });
+      navigation.navigate("Date");
     }
   };
 

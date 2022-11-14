@@ -1,4 +1,4 @@
-const firebaseConfig = require('./firebaseConfig.json')
+const firebaseConfig = require("./firebaseConfig.json");
 import {
   getAuth,
   onAuthStateChanged,
@@ -6,24 +6,18 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
-} from 'firebase/auth'
-import { initializeApp } from 'firebase/app'
+} from "firebase/auth";
+import { initializeApp } from "firebase/app";
 
-const firebaseApp = initializeApp(firebaseConfig)
-// let app
-// if (firebase.apps.length === 0) {
-//   app = initializeApp(firebaseConfig)
-// } else {
-//   app = firebase.app()
-// }
+const firebaseApp = initializeApp(firebaseConfig);
 
-// export default app
-const auth = getAuth(firebaseApp)
+const auth = getAuth(firebaseApp);
 onAuthStateChanged(auth, (user) => {
   // Check for user status
-})
+});
 
-const provider = new GoogleAuthProvider()
+const provider = new GoogleAuthProvider();
+
 export {
   auth,
   createUserWithEmailAndPassword,
@@ -31,4 +25,4 @@ export {
   provider,
   signInWithPopup,
   GoogleAuthProvider,
-}
+};
