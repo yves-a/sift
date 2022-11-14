@@ -19,8 +19,11 @@ const RecipientName = ({ navigation }) => {
       alert("Please Enter Name");
       return;
     } else {
-      // navigation.navigate("Date", { params: { recipientName: textInputName.trim } });
-      navigation.navigate("Date");
+      navigation.navigate("PurchaseDate", {
+        recipient: {
+          name: textInputName.trim(),
+        },
+      });
     }
   };
 

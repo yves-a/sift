@@ -15,19 +15,19 @@ const SCREEN_HEIGHT = Dimensions.get("window").height * 0.7;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 import Icon from "react-native-vector-icons/Ionicons";
 
-const Users = [
-  { id: "1", uri: require("../assets/tester.jpg") },
-  { id: "2", uri: require("../assets/tester.jpg") },
-  { id: "3", uri: require("../assets/tester.jpg") },
-  { id: "4", uri: require("../assets/tester.jpg") },
-  { id: "5", uri: require("../assets/tester.jpg") },
-  { id: "6", uri: require("../assets/tester.jpg") },
-  { id: "7", uri: require("../assets/tester.jpg") },
-  { id: "8", uri: require("../assets/tester.jpg") },
-];
+// const Users = [
+//   { id: "1", uri: require("../assets/tester.jpg") },
+//   { id: "2", uri: require("../assets/tester.jpg") },
+//   { id: "3", uri: require("../assets/tester.jpg") },
+//   { id: "4", uri: require("../assets/tester.jpg") },
+//   { id: "5", uri: require("../assets/tester.jpg") },
+//   { id: "6", uri: require("../assets/tester.jpg") },
+//   { id: "7", uri: require("../assets/tester.jpg") },
+//   { id: "8", uri: require("../assets/tester.jpg") },
+// ];
 
-const calcIndex = (index, inc) => {
-  let length = Users.length;
+const calcIndex = (index, inc, users) => {
+  let length = users.length;
   index = index + inc;
   if (index < 0) {
     return length - 1;
@@ -39,13 +39,15 @@ const calcIndex = (index, inc) => {
 };
 
 class Cards extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.position = new Animated.ValueXY();
     this.state = {
       currentIndex: 0,
     };
+
+    this.users = this.props.users;
 
     this.rotate = this.position.x.interpolate({
       inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
@@ -126,7 +128,7 @@ class Cards extends Component {
         if (gestureState.dx < -120) {
           this.position.setValue({ x: 400, y: 0 });
           this.setState(
-            { currentIndex: calcIndex(this.state.currentIndex, 1) },
+            { currentIndex: calcIndex(this.state.currentIndex, 1, this.users) },
             () => {
               Animated.spring(this.position, {
                 toValue: { x: 0, y: 0 },
@@ -137,7 +139,9 @@ class Cards extends Component {
         } else if (gestureState.dx > 120) {
           this.position.setValue({ x: -400, y: 0 });
           this.setState(
-            { currentIndex: calcIndex(this.state.currentIndex, -1) },
+            {
+              currentIndex: calcIndex(this.state.currentIndex, -1, this.users),
+            },
             () => {
               Animated.spring(this.position, {
                 toValue: { x: 0, y: 0 },
@@ -148,7 +152,7 @@ class Cards extends Component {
         } else if (gestureState.dy < -120) {
           this.position.setValue({ x: 500, y: 0 });
           this.setState(
-            { currentIndex: calcIndex(this.state.currentIndex, 1) },
+            { currentIndex: calcIndex(this.state.currentIndex, 1, this.users) },
             () => {
               Animated.spring(this.position, {
                 toValue: { x: 0, y: 0 },
@@ -160,7 +164,7 @@ class Cards extends Component {
         } else if (gestureState.dy > 120) {
           this.position.setValue({ x: 500, y: 0 });
           this.setState(
-            { currentIndex: calcIndex(this.state.currentIndex, 1) },
+            { currentIndex: calcIndex(this.state.currentIndex, 1, this.users) },
             () => {
               Animated.spring(this.position, {
                 toValue: { x: 0, y: 0 },
@@ -181,52 +185,55 @@ class Cards extends Component {
   }
 
   renderUsers = () => {
-    return Users.map((item, i) => {
-      if (i < this.state.currentIndex) {
-        return null;
-      } else if (i == this.state.currentIndex) {
-        return (
-          <Animated.View
-            {...this.PanResponder.panHandlers}
-            key={item.id}
-            style={[
-              this.rotateAndTranslate,
-              {
-                height: SCREEN_HEIGHT - 120,
-                width: SCREEN_WIDTH - 60,
-                paddingHorizontal: 30,
-                position: "absolute",
-              },
-            ]}
-          >
-            <ProductCard
-              height={SCREEN_HEIGHT - 120}
-              width={SCREEN_WIDTH - 60}
-              item={item}
-            />
-          </Animated.View>
-        );
-      } else {
-        return (
-          <Animated.View
-            key={item.id}
-            style={[
-              {
-                opacity: this.nextCardOpacity,
-                transform: [{ scale: this.nextCardScale }],
-                height: SCREEN_HEIGHT - 120,
-                width: SCREEN_WIDTH,
-                padding: 10,
-                position: "absolute",
-                left: 500,
-              },
-            ]}
-          >
-            <ProductCard />
-          </Animated.View>
-        );
-      }
-    }).reverse();
+    return this.users
+      .map((item, i) => {
+        if (i < this.state.currentIndex) {
+          return null;
+        } else if (i == this.state.currentIndex) {
+          return (
+            <Animated.View
+              {...this.PanResponder.panHandlers}
+              key={item.id}
+              style={[
+                this.rotateAndTranslate,
+                {
+                  height: SCREEN_HEIGHT - 120,
+                  width: SCREEN_WIDTH - 60,
+                  paddingHorizontal: 30,
+                  position: "absolute",
+                },
+              ]}
+            >
+              <ProductCard
+                height={SCREEN_HEIGHT - 120}
+                width={SCREEN_WIDTH - 60}
+                item={item}
+              />
+            </Animated.View>
+          );
+        }
+        // else {
+        //   return (
+        //     <Animated.View
+        //       key={item.id}
+        //       style={[
+        //         {
+        //           opacity: this.nextCardOpacity,
+        //           transform: [{ scale: this.nextCardScale }],
+        //           height: SCREEN_HEIGHT - 120,
+        //           width: SCREEN_WIDTH,
+        //           padding: 10,
+        //           position: "absolute",
+        //           left: 500,
+        //         },
+        //       ]}
+        //     >
+        //       {/* <ProductCard /> */}
+        //     </Animated.View>
+        //   );
+        // }
+      })
+      .reverse();
   };
 
   render() {

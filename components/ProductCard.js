@@ -8,6 +8,7 @@ import {
   Animated,
   PanResponder,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height * 0.7;
@@ -24,15 +25,26 @@ class ProductCard extends Component {
           width: this.props.width,
         }}
         source={require("../assets/tester.jpg")}
+        // source={{ uri: this.props.item.img }}
       >
+        {/* <Text>{this.prop}</Text> */}
         <LinearGradient
           colors={["transparent", "transparent", "#000000"]}
           style={{ height: "100%", width: "100%" }}
-          end={{ x: 0.5, y: 0.9 }}
+          end={{ x: 0.5, y: 0.8 }}
         >
           <View style={styles.body}>
-            <Text style={styles.titleText}>F1 Board Radio Keychain</Text>
-            <Text style={styles.priceText}>$ 9.99</Text>
+            <View style={styles.textContainer}>
+              {this.props.item.title.length < 40 && (
+                <Text style={styles.titleText}>{this.props.item.title}</Text>
+              )}
+              {this.props.item.title.length > 40 && (
+                <Text style={styles.titleText}>
+                  {this.props.item.title.substring(0, 40) + ". . . "}
+                </Text>
+              )}
+            </View>
+            <Text style={styles.priceText}>{this.props.item.price}</Text>
           </View>
         </LinearGradient>
       </ImageBackground>
@@ -48,6 +60,11 @@ const styles = StyleSheet.create({
     padding: 20,
     position: "absolute",
     bottom: 20,
+  },
+  textContainer: {
+    width: "100%",
+    // marginBottom: 10,
+    height: 120,
   },
   titleText: {
     top: 10,

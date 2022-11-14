@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // const baseUrl = "http://127.0.0.1:5000";
-const baseUrl = "https://210e-76-66-132-135.ngrok.io";
+// const baseUrl = "https://b4a3-76-66-132-135.ngrok.io";
 
 // RECIPIENTS
 
@@ -23,7 +23,7 @@ export const getRecipient = async (id) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
@@ -40,7 +40,7 @@ export const createRecipient = async (recipient) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
@@ -57,7 +57,7 @@ export const updateRecipient = async (recipient) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
@@ -70,10 +70,10 @@ export const deleteRecipient = async (id) => {
     },
   };
   try {
-    const respone = await axios(config);
+    const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
@@ -88,7 +88,7 @@ export const getAllRecipients = async (userId) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
@@ -106,7 +106,7 @@ export const getUser = async (id) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
@@ -159,7 +159,7 @@ export const saveProduct = async (productId, recipientId) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
@@ -176,13 +176,13 @@ export const unsavedProduct = async (productId, recipientId) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
 // COLLECTIONS
 
-const getCollection = async (collectionId) => {
+export const getCollection = async (collectionId) => {
   const config = {
     method: "get",
     url: `${baseUrl}/collection`,
@@ -194,11 +194,11 @@ const getCollection = async (collectionId) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
-const createCollection = async (collection) => {
+export const createCollection = async (collection) => {
   const config = {
     method: "post",
     url: `${baseUrl}/collection`,
@@ -211,11 +211,11 @@ const createCollection = async (collection) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
-const updateCollection = async (collection) => {
+export const updateCollection = async (collection) => {
   const config = {
     method: "put",
     url: `${baseUrl}/collection`,
@@ -228,11 +228,11 @@ const updateCollection = async (collection) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
-const deleteCollection = async (collectionId) => {
+export const deleteCollection = async (collectionId) => {
   const config = {
     method: "delete",
     url: `${baseUrl}/collection`,
@@ -244,13 +244,13 @@ const deleteCollection = async (collectionId) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
   }
 };
 
 // GET ALL COLLECTIONS
 
-const getAllCollections = async (recipientId) => {
+export const getAllCollections = async (recipientId) => {
   const config = {
     method: "get",
     url: `${baseUrl}/collections/${recipientId}`,
@@ -259,6 +259,19 @@ const getAllCollections = async (recipientId) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log("ERROR");
+    console.log(error);
+  }
+};
+
+export const getRecommendations = async () => {
+  const config = {
+    method: "get",
+    url: `${baseUrl}/recommendations`,
+  };
+  try {
+    const response = await axios(config);
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
 };

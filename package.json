@@ -9,7 +9,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-native-community/datetimepicker": "6.2.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.1",
     "@react-navigation/stack": "^6.3.1",
@@ -24,12 +23,10 @@
     "moment": "^2.29.4",
     "react": "18.0.0",
     "react-native": "0.69.6",
-    "react-native-date-picker": "^4.2.6",
-    "react-native-datepicker": "^1.7.2",
     "react-native-dotenv": "^3.4.2",
     "react-native-dropdown-picker": "^5.4.2",
     "react-native-ionicons": "^4.6.5",
-    "react-native-masked-text": "^1.13.0",
+    "react-native-masked-text": "^1.12.5",
     "react-native-screens": "~3.15.0",
     "react-native-vector-icons": "^9.2.0"
   },

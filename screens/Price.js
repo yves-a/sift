@@ -7,14 +7,31 @@ import {
   Dimensions,
   SafeAreaView,
   Button,
+  BackHandler,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import DropDownPicker from "react-native-dropdown-picker";
+import { createRecipient } from "../clients/FlaskServer";
+import { auth } from "../firebase";
 
-const Price = ({ navigation }) => {
+const handleCreateRecipient = async (recipient) => {
+  const userId = auth.currentUser.uid;
+  const recipientData = {
+    ...recipient,
+    ownerId: userId,
+    gender: "N/A",
+    age: "N/A",
+  };
+  const response = await createRecipient(recipientData);
+  console.log(response);
+};
+
+const Price = ({ navigation, route }) => {
+  const { recipient } = route.params;
+
   let [pressIndex1, setPressIndex1] = React.useState(0);
   let [pressIndex2, setPressIndex2] = React.useState(0);
   let [pressIndex3, setPressIndex3] = React.useState(0);
@@ -100,6 +117,28 @@ const Price = ({ navigation }) => {
             </Text>
           </Pressable>
         </View>
+        <Pressable
+          onPress={async () => {
+            if (pressIndex1 != null) {
+              await handleCreateRecipient({
+                ...recipient,
+                price: currentIndex,
+              });
+              navigation.navigate("Home");
+            }
+          }}
+          style={({ pressed }) => [
+            {
+              backgroundColor:
+                pressed || pressIndex1 == 0 ? "#4F4F4F24" : "#4F4F4F",
+            },
+            styles.nextButton,
+          ]}
+          title="Next"
+          accessibilityLabel="Go to the next page, Interests."
+        >
+          <Text style={styles.text}>Next</Text>
+        </Pressable>
       </View>
     </View>
   );

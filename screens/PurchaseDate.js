@@ -13,15 +13,14 @@ import {
 import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { TextInputMask } from "react-native-masked-text";
-import DatePicker from "react-native-datepicker";
-import moment from "moment";
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default class PurchaseDate extends Component {
   constructor(props) {
     super(props);
     this.state = { date: null, dt: null, registrationDate: "" };
+    console.log(this.props.route.params.recipient);
   }
+
   checkValue(str, max) {
     if (str.charAt(0) !== "0" || str == "00") {
       var num = parseInt(str);
@@ -67,7 +66,7 @@ export default class PurchaseDate extends Component {
           <View style={styles.backButton}>
             <Pressable
               onPress={() => {
-                navigation.goBack();
+                this.props.navigation.goBack();
               }}
               title="Go to Page"
               accessibilityLabel="Go to the previous page, Shopping For."
@@ -77,9 +76,7 @@ export default class PurchaseDate extends Component {
           </View>
           <View style={styles.skipButton}>
             <Pressable
-              onPress={() => {
-                // navigation.navigate("Relationship");
-              }}
+              onPress={() => {}}
               title="Skip"
               accessibilityLabel="Go to the next page, Relationship."
             >
@@ -131,7 +128,14 @@ export default class PurchaseDate extends Component {
           <Button
             style={styles.buto}
             onPress={() => {
-              // navigation.navigate("Relationship")
+              console.log(this.state.dt);
+              console.log(this.props.route.params.recipient);
+              this.props.navigation.navigate("Relationship", {
+                recipient: {
+                  ...this.props.route.params.recipient,
+                  date: this.state.dt,
+                },
+              });
             }}
             color="white"
             title="Next"

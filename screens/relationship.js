@@ -1,14 +1,16 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Ionicons";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const Home = ({ navigation }) => {
+const Relationship = ({ navigation, route }) => {
   let [fontsLoaded, error] = useFonts({
     "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
   });
+
+  const { recipient } = route.params;
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -37,7 +39,7 @@ const Home = ({ navigation }) => {
           title="Go to Page"
           accessibilityLabel="Go to the next page, Interests."
         >
-          <Icon name="chevron-left" size={"40%"} color="#1C1B1F" />
+          <Icon name="chevron-back-outline" size={"40%"} color="#1C1B1F" />
         </Pressable>
       </View>
       <View style={styles.body}>
@@ -54,7 +56,12 @@ const Home = ({ navigation }) => {
         <Pressable
           onPress={() => {
             if (value != null) {
-              navigation.navigate("Interests");
+              navigation.navigate("Interests", {
+                recipient: {
+                  ...recipient,
+                  relationship: value,
+                },
+              });
             }
           }}
           style={({ pressed }) => [
@@ -74,7 +81,7 @@ const Home = ({ navigation }) => {
   );
 };
 
-export default Home;
+export default Relationship;
 
 const styles = StyleSheet.create({
   progressEvent: {
@@ -106,7 +113,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   header: {
-    fontSize: 45,
+    fontSize: 40,
     fontFamily: "SF-Pro-Display",
     color: "#1C1B1F",
     flex: 0.28,

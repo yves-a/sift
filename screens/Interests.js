@@ -14,10 +14,12 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const Home = ({ navigation }) => {
+const Interests = ({ navigation, route }) => {
   let [fontsLoaded, error] = useFonts({
     "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
   });
+
+  const { recipient } = route.params;
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
@@ -73,9 +75,18 @@ const Home = ({ navigation }) => {
             },
             styles.nextButton,
           ]}
-          onPress={() => {}}
+          onPress={() => {
+            if (value != "") {
+              navigation.navigate("Price", {
+                recipient: {
+                  ...recipient,
+                  interests: value,
+                },
+              });
+            }
+          }}
           title="Next"
-          accessibilityLabel="Go to the next page, Interests."
+          accessibilityLabel="Go to the next page, Price."
         >
           <Text style={styles.text}>Next</Text>
         </Pressable>
@@ -84,7 +95,7 @@ const Home = ({ navigation }) => {
   );
 };
 
-export default Home;
+export default Interests;
 
 const styles = StyleSheet.create({
   progressEvent: {
