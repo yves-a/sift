@@ -25,6 +25,7 @@ const handleCreateRecipient = async (recipient) => {
     gender: "N/A",
     age: "N/A",
   };
+  console.log(recipientData);
   const response = await createRecipient(recipientData);
   console.log(response);
 };

@@ -12,9 +12,10 @@ import { initializeApp } from "firebase/app";
 const firebaseApp = initializeApp(firebaseConfig);
 
 const auth = getAuth(firebaseApp);
-onAuthStateChanged(auth, (user) => {
-  // Check for user status
-});
+
+// const onAuthStateChanged(auth, (user) => {
+//   // Check for user status
+// });
 
 const provider = new GoogleAuthProvider();
 

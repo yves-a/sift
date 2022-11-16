@@ -184,6 +184,15 @@ class Cards extends Component {
     });
   }
 
+  componentWillReceiveProps(props) {
+    const { users } = this.props;
+    if (props.users !== users) {
+      console.log("users changed");
+      this.setState({ currentIndex: 0 });
+      this.users = props.users;
+    }
+  }
+
   renderUsers = () => {
     return this.users
       .map((item, i) => {
@@ -193,7 +202,7 @@ class Cards extends Component {
           return (
             <Animated.View
               {...this.PanResponder.panHandlers}
-              key={item.id}
+              key={item.asin}
               style={[
                 this.rotateAndTranslate,
                 {
@@ -304,6 +313,17 @@ class Cards extends Component {
             name="chevron-back-outline"
             color="black"
           />
+          <Text
+            style={{
+              position: "absolute",
+              top: -150,
+              marginLeft: SCREEN_WIDTH / 2 - 30,
+              color: "black",
+              fontSize: 30,
+            }}
+          >
+            SIFT
+          </Text>
         </Animated.View>
       </View>
     );

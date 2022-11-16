@@ -16,16 +16,22 @@ import { auth, signInWithEmailAndPassword } from "../firebase.js";
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const onSignInPress = () => {
+    console.log("BRUH");
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        console.log("Inside");
         console.log({ email, password });
-        const user = userCredential.user;
-        navigation.navigate("Home");
+        // const user = userCredential.user;
+        navigation.navigate("Loading");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setError(errorCode);
+        setPassword("");
+        console.log({ errorCode, errorMessage });
       });
   };
 
@@ -75,6 +81,7 @@ const Login = ({ navigation }) => {
             >
               <Text style={styles.formButtonText}>Sign In</Text>
             </TouchableOpacity>
+            <Text>{error}</Text>
           </View>
         )}
       </Formik>

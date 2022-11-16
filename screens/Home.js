@@ -24,6 +24,7 @@ const Home = ({ navigation }) => {
     { label: "PurchaseDate", value: "PurchaseDate" },
     { label: "RecipientName", value: "RecipientName" },
     { label: "Landing", value: "Landing" },
+    { label: "Profile", value: "Profile" },
   ]);
 
   if (!fontsLoaded) {
