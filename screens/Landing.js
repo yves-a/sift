@@ -47,7 +47,7 @@ const Landing = ({ navigation }) => {
   return (
     <View
       style={{
-        backgroundColor: "#3D8AFF",
+        backgroundColor: "#3D6F99",
         height: "100%",
         display: "flex",
         flexDirection: "column",

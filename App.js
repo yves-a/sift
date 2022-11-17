@@ -19,9 +19,10 @@ import PurchaseDate from "./screens/PurchaseDate";
 import Landing from "./screens/Landing";
 import Profile from "./screens/Profile";
 import Loading from "./screens/Loading";
-// import auth from "@react-native-firebase/auth";
-import { auth } from "./firebase.js";
-// import auth from "@react-native-firebase/auth";
+import InterestsV2 from "./screens/InterestsV2";
+import { auth, onAuthStateChanged } from "./firebase.js";
+
+import Icon from "react-native-vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -45,6 +46,7 @@ function ProfileStack() {
       <Stack.Screen name="Price" component={Price} />
       <Stack.Screen name="Name" component={Name} />
       <Stack.Screen name="Swipe" component={Swipe} />
+      <Stack.Screen name="InterestsV2" component={InterestsV2} />
     </Stack.Navigator>
   );
 }
@@ -56,7 +58,7 @@ function SavedStack() {
         headerShown: false,
       }}
     >
-      {/* <Stack.Screen name="Saved" component={Home} /> */}
+      <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );
 }
@@ -111,12 +113,34 @@ export default function App() {
     return (
       <NavigationContainer>
         <Tab.Navigator
-          screenOptions={{
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName = "bookmark";
+
+              if (route.name === "Saved") {
+                iconName = focused ? "bookmark" : "bookmark-outline";
+              } else if (route.name === "Swipe") {
+                iconName = focused ? "gift" : "gift-outline";
+              } else if (route.name === "Profile") {
+                iconName = focused ? "person-circle" : "person-circle-outline";
+              }
+
+              // You can return any component that you like here!
+              return <Icon name={iconName} size={size} color={color} />;
+            },
+            cardStyle: { backgroundColor: "white" },
             headerShown: false,
-          }}
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: "#3D6F99",
+            tabBarInactiveTintColor: "gray",
+          })}
         >
           <Tab.Screen name="Swipe" component={SwipeStack} />
-          <Tab.Screen name="Saved" component={SavedStack} />
+          <Tab.Screen
+            name="Saved"
+            component={SavedStack}
+            options={{ tabBarBadge: 32 }}
+          />
           <Tab.Screen name="Profile" component={ProfileStack} />
         </Tab.Navigator>
       </NavigationContainer>
@@ -133,7 +157,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#00fff",
+    // backgroundColor: "#00fff",
     alignItems: "center",
     justifyContent: "center",
   },

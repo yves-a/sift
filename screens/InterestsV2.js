@@ -8,20 +8,28 @@ import {
   SafeAreaView,
   Button,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Ionicons";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import DropDownPicker from "react-native-dropdown-picker";
+import CirculeButton from "../components/CircleButton";
 
 const { width, height } = Dimensions.get("window");
 
-const Interests = ({ navigation, route }) => {
+const InterestsV2 = ({ navigation, route }) => {
   let [fontsLoaded, error] = useFonts({
     "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
   });
 
   const { recipient } = route.params;
+
+  const [sports, setSports] = useState(false);
+  const [reading, setReading] = useState(false);
+  const [dontKnow, setDontKnow] = useState(false);
+  const [cookingBaking, setCookingBaking] = useState(false);
+  const [fitness, setFitness] = useState(false);
+  const [videoGames, setVideoGames] = useState(false);
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
@@ -51,30 +59,85 @@ const Interests = ({ navigation, route }) => {
           title="Go to Page"
           accessibilityLabel="Go back a page."
         >
-          <Icon name="chevron-left" size={"40%"} color="#1C1B1F" />
+          <Icon name="chevron-back-outline" size={"40%"} color="#1C1B1F" />
         </Pressable>
       </View>
       <View style={styles.body}>
         <Text style={styles.header}>What are their favourite hobbies?</Text>
 
-        <DropDownPicker
-          style={styles.dropDown}
-          multiple={true}
-          min={0}
-          max={Object.keys(items).length}
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          placeholder="Select"
-        />
+        <View style={{ top: 20 }}>
+          <Pressable
+            style={{ position: "absolute", left: -20, top: -20 }}
+            onPress={() => {
+              setReading(!reading);
+            }}
+          >
+            <CirculeButton text={"Reading"} size={120} pressed={reading} />
+          </Pressable>
+          <Pressable
+            style={{ position: "absolute", left: 200, top: -30 }}
+            onPress={() => {
+              setFitness(!fitness);
+            }}
+          >
+            <CirculeButton text={"Fitness"} size={100} pressed={fitness} />
+          </Pressable>
+          <Pressable
+            style={{ position: "absolute", left: -20, top: 150 }}
+            onPress={() => {
+              setSports(!sports);
+            }}
+          >
+            <CirculeButton text={"Sports"} size={140} pressed={sports} />
+          </Pressable>
+          <Pressable
+            style={{ position: "absolute", left: 100, top: 70 }}
+            onPress={() => {
+              setDontKnow(!dontKnow);
+            }}
+          >
+            <CirculeButton text={"Don't Know"} size={100} pressed={dontKnow} />
+          </Pressable>
+
+          <Pressable
+            style={{ position: "absolute", left: 150, top: 220 }}
+            onPress={() => {
+              setCookingBaking(!cookingBaking);
+            }}
+          >
+            <CirculeButton
+              text={"Cooking & Baking"}
+              size={100}
+              pressed={cookingBaking}
+            />
+          </Pressable>
+          <Pressable
+            style={{ position: "absolute", left: 210, top: 90 }}
+            onPress={() => {
+              setVideoGames(!videoGames);
+            }}
+          >
+            <CirculeButton
+              text={"Video Games"}
+              size={150}
+              pressed={videoGames}
+            />
+          </Pressable>
+        </View>
 
         <Pressable
           style={({ pressed }) => [
             {
-              backgroundColor: pressed || value == "" ? "#4F4F4F24" : "#4F4F4F",
+              backgroundColor:
+                pressed ||
+                (sports ||
+                  fitness ||
+                  videoGames ||
+                  cookingBaking ||
+                  dontKnow ||
+                  reading) == ""
+                  ? "#4F4F4F24"
+                  : "#4F4F4F",
             },
             styles.nextButton,
           ]}
@@ -98,7 +161,7 @@ const Interests = ({ navigation, route }) => {
   );
 };
 
-export default Interests;
+export default InterestsV2;
 
 const styles = StyleSheet.create({
   progressEvent: {
@@ -128,20 +191,21 @@ const styles = StyleSheet.create({
   body: {
     flex: 0.5,
     width: "80%",
+    top: -80,
   },
   header: {
     flexShrink: 1,
-    fontSize: 45,
+    fontSize: 40,
     fontFamily: "SF-Pro-Display",
     color: "#1C1B1F",
-    paddingBottom: "10%",
+    paddingVertical: "10%",
   },
   nextButton: {
     color: "white",
     borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 32,
-    top: "10%",
+    top: "95%",
   },
   text: {
     fontSize: 16,

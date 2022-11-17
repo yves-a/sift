@@ -299,7 +299,7 @@ class Cards extends Component {
           </View>
         </Animated.View>
         <Animated.View style={{ zIndex: this.ZindexScale }}>
-          <Icon
+          {/* <Icon
             style={{
               position: "absolute",
               top: -150,
@@ -312,7 +312,7 @@ class Cards extends Component {
             }}
             name="chevron-back-outline"
             color="black"
-          />
+          /> */}
           <Text
             style={{
               position: "absolute",

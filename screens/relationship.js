@@ -34,7 +34,7 @@ const Relationship = ({ navigation, route }) => {
       <View style={styles.backButton}>
         <Pressable
           onPress={() => {
-            navigation.navigate("Home");
+            navigation.goBack();
           }}
           title="Go to Page"
           accessibilityLabel="Go to the next page, Interests."

@@ -25,6 +25,7 @@
     "moment": "^2.29.4",
     "react": "18.0.0",
     "react-native": "0.69.6",
+    "react-native-bubble-select": "^0.6.0",
     "react-native-dotenv": "^3.4.2",
     "react-native-dropdown-picker": "^5.4.2",
     "react-native-gesture-handler": "^2.8.0",

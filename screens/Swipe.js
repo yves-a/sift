@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
 import Cards from "../components/Cards";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
@@ -7,6 +7,9 @@ import { useIsFocused } from "@react-navigation/native";
 import { getRecommendations } from "../clients/FlaskServer";
 import { currRecipient, updateCurrRecipient } from "../Global.js";
 import { async } from "@firebase/util";
+
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const Users = [
   {
@@ -103,11 +106,24 @@ const Swipe = ({ navigation, route }) => {
   }
 
   return (
-    <View>
+    <View style={{ backgroundColor: "white" }}>
       <Text style={{ top: 40 }}></Text>
-      <Text style={styles.container}>{global.currRec}</Text>
+      <View
+        style={{
+          height: SCREEN_HEIGHT,
+          width: SCREEN_WIDTH,
+          top: 50,
+          position: "absolute",
+          backgroundColor: "white",
+        }}
+      ></View>
+      <Text style={styles.container}></Text>
       <View style={styles.cards}>
-        <Cards navigation={navigation} users={recommendations} />
+        <Cards
+          style={{ backgroundColor: "white" }}
+          navigation={navigation}
+          users={recommendations}
+        />
       </View>
     </View>
   );
@@ -119,5 +135,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 75,
   },
-  cards: {},
+  cards: {
+    backgroundColor: "white",
+  },
 });

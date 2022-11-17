@@ -11,7 +11,7 @@ import {
 } from "react-native";
 // import DatePicker from "react-native-datepicker";
 import { useFonts } from "expo-font";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Ionicons";
 import { TextInputMask } from "react-native-masked-text";
 
 export default class PurchaseDate extends Component {
@@ -71,10 +71,10 @@ export default class PurchaseDate extends Component {
               title="Go to Page"
               accessibilityLabel="Go to the previous page, Shopping For."
             >
-              <Icon name="chevron-left" size={"40%"} color="#1C1B1F" />
+              <Icon name="chevron-back-outline" size={"40%"} color="#1C1B1F" />
             </Pressable>
           </View>
-          <View style={styles.skipButton}>
+          {/* <View style={styles.skipButton}>
             <Pressable
               onPress={() => {}}
               title="Skip"
@@ -82,7 +82,7 @@ export default class PurchaseDate extends Component {
             >
               <Text style={styles.skipText}>SKIP</Text>
             </Pressable>
-          </View>
+          </View> */}
         </View>
         <Text style={styles.header}>You're Buying By</Text>
         <View style={styles.datePick}>

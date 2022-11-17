@@ -11,6 +11,7 @@ import Carousel from "react-native-reanimated-carousel";
 import Icon from "react-native-vector-icons/Ionicons";
 import ProfileCard from "../components/ProfileCard";
 import { auth } from "../firebase";
+import { getAllRecipients } from "../clients/FlaskServer";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height * 0.7;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -28,14 +29,20 @@ const baseOption = {
 
 const Profile = ({ navigation }) => {
   const [currentUser, setCurrentUser] = useState(0);
+  const [recipients, setRecipients] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
     // setRecommendations(Users);
     // queryRecommendations();
+    const response = await getAllRecipients(auth.currentUser.uid);
+    console.log(response);
+    // response.append({ id: auth.currentUser.uid });
+    setRecipients(response);
   }, []);
 
   return (
     <View>
+      <View style={{ backgroundColor: "white", height: 1000 }} />
       <View style={styles.header}>
         <Text style={styles.container}>{global.currRec}</Text>
         <Text style={styles.headerText}>SIFT</Text>
@@ -43,7 +50,6 @@ const Profile = ({ navigation }) => {
           style={{ right: 20 }}
           onPress={() => {
             auth.signOut();
-            // navigation.navigate("Login");
           }}
         >
           <Icon name="reorder-three-outline" size={40} color="black" />
@@ -54,14 +60,17 @@ const Profile = ({ navigation }) => {
         <Carousel
           {...baseOption}
           loop
-          data={[...new Array(6).keys()]}
+          data={recipients}
           scrollAnimationDuration={1000}
           onSnapToItem={(index) => {
+            // console.log(JSON.stringify(recipients[index].name));
             setCurrentUser(index);
             console.log(index);
             global.currRec = index;
           }}
-          renderItem={({ index }) => <ProfileCard name={"Alex"} />}
+          renderItem={({ index }) => (
+            <ProfileCard name={recipients[index].name} />
+          )}
         />
       </View>
       <View style={styles.buttonContainer}>
@@ -94,7 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 75,
+    marginTop: -920,
   },
   headerText: {
     fontSize: 30,
