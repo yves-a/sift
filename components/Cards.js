@@ -10,8 +10,9 @@ import {
 } from "react-native";
 
 import ProductCard from "./ProductCard";
+import { saveProduct } from "../clients/FlaskServer";
 
-const SCREEN_HEIGHT = Dimensions.get("window").height * 0.7;
+const SCREEN_HEIGHT = Dimensions.get("window").height * 0.8;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -119,12 +120,29 @@ class Cards extends Component {
     });
   }
   UNSAFE_componentWillMount() {
+    this.props.navigation.getParent().setOptions({
+      tabBarStyle: {
+        display: "flex",
+      },
+    });
     this.PanResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
       onPanResponderMove: (evt, gestureState) => {
+        if (gestureState.dy > 30 || gestureState.dy < -30) {
+          this.props.navigation.getParent().setOptions({
+            tabBarStyle: {
+              display: "none",
+            },
+          });
+        }
         this.position.setValue({ x: gestureState.dx, y: gestureState.dy });
       },
       onPanResponderRelease: (evt, gestureState) => {
+        this.props.navigation.getParent().setOptions({
+          tabBarStyle: {
+            display: "flex",
+          },
+        });
         if (gestureState.dx < -120) {
           this.position.setValue({ x: 400, y: 0 });
           this.setState(
@@ -152,7 +170,13 @@ class Cards extends Component {
         } else if (gestureState.dy < -120) {
           this.position.setValue({ x: 500, y: 0 });
           this.setState(
-            { currentIndex: calcIndex(this.state.currentIndex, 1, this.users) },
+            {
+              currentIndex: calcIndex(
+                this.state.currentIndex - 1,
+                1,
+                this.users
+              ),
+            },
             () => {
               Animated.spring(this.position, {
                 toValue: { x: 0, y: 0 },
@@ -161,10 +185,18 @@ class Cards extends Component {
               }).start();
             }
           );
+          console.log(`Trashed ${this.users[this.state.currentIndex].title}`);
+          this.users.splice(this.state.currentIndex, 1);
         } else if (gestureState.dy > 120) {
           this.position.setValue({ x: 500, y: 0 });
           this.setState(
-            { currentIndex: calcIndex(this.state.currentIndex, 1, this.users) },
+            {
+              currentIndex: calcIndex(
+                this.state.currentIndex - 1,
+                1,
+                this.users
+              ),
+            },
             () => {
               Animated.spring(this.position, {
                 toValue: { x: 0, y: 0 },
@@ -173,6 +205,13 @@ class Cards extends Component {
               }).start();
             }
           );
+          saveProduct(this.users[this.state.currentIndex].asin, global.currRec);
+          console.log(
+            `Saved ${this.users[this.state.currentIndex].asin} to ${
+              global.currRec
+            }`
+          );
+          this.users.splice(this.state.currentIndex, 1);
         } else {
           Animated.spring(this.position, {
             toValue: { x: 0, y: 0 },
@@ -269,7 +308,7 @@ class Cards extends Component {
         />
         <View
           style={{
-            height: 100,
+            height: 50,
           }}
         ></View>
         <View style={{ flex: 1 }}>{this.renderUsers()}</View>
@@ -299,24 +338,10 @@ class Cards extends Component {
           </View>
         </Animated.View>
         <Animated.View style={{ zIndex: this.ZindexScale }}>
-          {/* <Icon
-            style={{
-              position: "absolute",
-              top: -150,
-              left: 20,
-              color: "black",
-              fontSize: 30,
-            }}
-            onPress={() => {
-              this.props.navigation.goBack();
-            }}
-            name="chevron-back-outline"
-            color="black"
-          /> */}
           <Text
             style={{
               position: "absolute",
-              top: -150,
+              top: -130,
               marginLeft: SCREEN_WIDTH / 2 - 30,
               color: "black",
               fontSize: 30,

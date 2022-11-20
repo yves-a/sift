@@ -25,6 +25,8 @@ const Home = ({ navigation }) => {
     { label: "RecipientName", value: "RecipientName" },
     { label: "Landing", value: "Landing" },
     { label: "Profile", value: "Profile" },
+    { label: "CreateCollection", value: "CreateCollection" },
+    { label: "Overlays", value: "Overlays" },
   ]);
 
   if (!fontsLoaded) {
@@ -33,9 +35,6 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.progressBar}>
-        <View style={styles.progressEvent}></View>
-      </View>
       <View style={styles.backButton}></View>
       <View style={styles.body}>
         <Text style={styles.header}>Navigation Testing</Text>

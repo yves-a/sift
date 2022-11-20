@@ -20,6 +20,9 @@ import Landing from "./screens/Landing";
 import Profile from "./screens/Profile";
 import Loading from "./screens/Loading";
 import InterestsV2 from "./screens/InterestsV2";
+import CreateCollection from "./screens/CreateCollection";
+import Overlays from "./screens/Overlays";
+// import Over
 import { auth, onAuthStateChanged } from "./firebase.js";
 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -59,6 +62,8 @@ function SavedStack() {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="CreateCollection" component={CreateCollection} />
+      <Stack.Screen name="Overlays" component={Overlays} />
     </Stack.Navigator>
   );
 }
@@ -125,7 +130,6 @@ export default function App() {
                 iconName = focused ? "person-circle" : "person-circle-outline";
               }
 
-              // You can return any component that you like here!
               return <Icon name={iconName} size={size} color={color} />;
             },
             cardStyle: { backgroundColor: "white" },

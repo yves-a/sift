@@ -9,51 +9,47 @@ import {
 import React, { useState, useEffect } from "react";
 import Carousel from "react-native-reanimated-carousel";
 import Icon from "react-native-vector-icons/Ionicons";
+import { useSharedValue } from "react-native-reanimated";
 import ProfileCard from "../components/ProfileCard";
 import { auth } from "../firebase";
 import { getAllRecipients } from "../clients/FlaskServer";
 
-const SCREEN_HEIGHT = Dimensions.get("window").height * 0.7;
+const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const COUNT = 3;
 
+const itemSize = 200;
+
 const baseOption = {
   vertical: false,
   width: SCREEN_WIDTH / 1.5,
-  height: SCREEN_WIDTH,
+  height: SCREEN_WIDTH / 1.25,
   style: {
     width: SCREEN_WIDTH,
+    height: SCREEN_WIDTH,
   },
 };
 
 const Profile = ({ navigation }) => {
-  const [currentUser, setCurrentUser] = useState(0);
+  // const [currentUser, setCurrentUser] = useState(0);
   const [recipients, setRecipients] = useState([]);
 
   useEffect(async () => {
-    // setRecommendations(Users);
-    // queryRecommendations();
     const response = await getAllRecipients(auth.currentUser.uid);
     console.log(response);
-    // response.append({ id: auth.currentUser.uid });
-    setRecipients(response);
+    setRecipients([
+      { _id: auth.currentUser.uid, name: "Grady (You)" },
+      ...response,
+    ]);
   }, []);
 
   return (
     <View>
       <View style={{ backgroundColor: "white", height: 1000 }} />
       <View style={styles.header}>
-        <Text style={styles.container}>{global.currRec}</Text>
+        <Text style={styles.container}></Text>
         <Text style={styles.headerText}>SIFT</Text>
-        <Pressable
-          style={{ right: 20 }}
-          onPress={() => {
-            auth.signOut();
-          }}
-        >
-          <Icon name="reorder-three-outline" size={40} color="black" />
-        </Pressable>
       </View>
 
       <View style={styles.carouselContainer}>
@@ -61,35 +57,60 @@ const Profile = ({ navigation }) => {
           {...baseOption}
           loop
           data={recipients}
+          windowSize={10}
           scrollAnimationDuration={1000}
-          onSnapToItem={(index) => {
-            // console.log(JSON.stringify(recipients[index].name));
-            setCurrentUser(index);
-            console.log(index);
-            global.currRec = index;
+          mode="stack"
+          modeConfig={{
+            opacityInterval: 2,
           }}
-          renderItem={({ index }) => (
-            <ProfileCard name={recipients[index].name} />
+          onSnapToItem={(index) => {
+            console.log(recipients[index]._id);
+            global.currRec = recipients[index]._id;
+          }}
+          renderItem={({ index, animationValue }) => (
+            <ProfileCard
+              name={recipients[index].name}
+              img={require("../assets/tester.jpg")}
+            />
           )}
         />
       </View>
-      <View style={styles.buttonContainer}>
-        <View style={styles.addProfileButton}>
+      <View style={styles.buttonsContainer}>
+        <View style={styles.button}>
+          <Pressable
+            onPress={() => {
+              auth.signOut();
+            }}
+          >
+            <Icon
+              style={{ ...styles.icon, top: 25 }}
+              name="settings-outline"
+              size={30}
+              color="black"
+            />
+          </Pressable>
+          <Text style={styles.buttonText}>Settings</Text>
+        </View>
+        <View style={{ ...styles.button, top: 60 }}>
           <Pressable
             onPress={() => {
               navigation.navigate("RecipientName");
             }}
           >
-            <Icon style={styles.icon} name="add" size={40} color="white" />
+            <Icon style={styles.icon} name="add" size={40} color="black" />
           </Pressable>
+          <Text style={styles.buttonText}>Add Profile</Text>
         </View>
-        <View style={styles.addProfileButton}>
-          <Icon
-            style={{ ...styles.icon, left: 3, top: 35 }}
-            name="pencil-outline"
-            size={30}
-            color="white"
-          />
+        <View style={styles.button}>
+          <Pressable>
+            <Icon
+              style={{ ...styles.icon, left: 3, top: 25 }}
+              name="pencil-outline"
+              size={30}
+              color="black"
+            />
+          </Pressable>
+          <Text style={styles.buttonText}>Edit Profile</Text>
         </View>
       </View>
     </View>
@@ -109,45 +130,44 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginLeft: "auto",
     marginRight: "auto",
-    left: 20,
+    top: 3,
+    // left: 20,
   },
   carouselContainer: {
     marginTop: 30,
-    height: 400,
-    alignContent: "center",
+    // height: 400,
+    // alignItems: "center",
     flex: 1,
   },
   carousel: {
     height: 400,
   },
-  buttonContainer: {
+  buttonsContainer: {
     flexDirection: "row",
+    top: 280,
+    padding: 30,
   },
-  addProfileButton: {
+  button: {
     marginLeft: "auto",
     marginRight: "auto",
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 1,
-    height: 100,
-    width: 100,
-    borderRadius: 50,
-    backgroundColor: "#2F3956",
-    top: SCREEN_HEIGHT / 2,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.58,
+    shadowRadius: 4,
+    height: 80,
+    width: 80,
+    borderRadius: 40,
+    backgroundColor: "white",
   },
-  //   editProfileButton: {
-  //     marginLeft: "auto",
-  //     marginRight: "auto",
-  //     height: 100,
-  //     width: 100,
-  //     borderRadius: 50,
-  //     backgroundColor: "#E4474A",
-  //     top: SCREEN_HEIGHT / 2,
-  //   },
   icon: {
     marginLeft: "auto",
     marginRight: "auto",
-    top: 30,
+    top: 20,
+  },
+  buttonText: {
+    color: "black",
+    fontSize: 15,
+    textAlign: "center",
+    top: 60,
   },
 });

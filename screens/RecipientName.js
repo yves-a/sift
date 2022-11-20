@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Pressable,
   SafeAreaView,
@@ -27,6 +27,18 @@ const RecipientName = ({ navigation }) => {
     }
   };
 
+  useEffect(() => {
+    navigation.getParent()?.setOptions({
+      tabBarStyle: {
+        display: "none",
+      },
+    });
+    return () =>
+      navigation.getParent()?.setOptions({
+        tabBarStyle: undefined,
+      });
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -53,7 +65,7 @@ const styles = StyleSheet.create({
   container: {
     position: "absolute",
     width: "100%",
-    height: "100%",
+    height: "120%",
     backgroundColor: "white",
   },
   buttonActive: {
@@ -90,7 +102,7 @@ const styles = StyleSheet.create({
     gap: 8,
     position: "absolute",
     width: "80%",
-    height: "4.5%",
+    height: "4%",
     left: "10%",
     top: 462,
     opacity: 0.3,
