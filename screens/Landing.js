@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import gift from "../assets/images/gift.png";
 import confetti from "../assets/images/confetti.png";
+import whitelogo from "../assets/images/whitelogo.png";
 import { AntDesign } from "@expo/vector-icons";
 import {
   auth,
@@ -54,9 +55,13 @@ const Landing = ({ navigation }) => {
       }}
     >
       <View style={styles.imageContainer}>
-        <Image style={styles.gift} source={gift}></Image>
-        <Image style={styles.confetti} source={confetti}></Image>
-        <Text style={styles.title}>SIFT</Text>
+        {/* <Image style={styles.gift} source={gift}></Image> */}
+        <Image
+          style={{ marginVertical: 275, height: 200, width: 400, right: 20 }}
+          source={whitelogo}
+        ></Image>
+        {/* <Image style={styles.confetti} source={confetti}></Image> */}
+        {/* <Text style={styles.title}>SIFT</Text> */}
       </View>
       {signInOptions ? (
         <View style={styles.buttons}>

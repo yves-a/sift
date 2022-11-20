@@ -125,7 +125,7 @@ const Price = ({ navigation, route }) => {
                 ...recipient,
                 price: currentIndex,
               });
-              navigation.navigate("Profile");
+              navigation.navigate("Profile", { updatedUser: true });
             }
           }}
           style={({ pressed }) => [

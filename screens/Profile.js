@@ -13,6 +13,7 @@ import { useSharedValue } from "react-native-reanimated";
 import ProfileCard from "../components/ProfileCard";
 import { auth } from "../firebase";
 import { getAllRecipients } from "../clients/FlaskServer";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -31,11 +32,13 @@ const baseOption = {
   },
 };
 
-const Profile = ({ navigation }) => {
+const Profile = ({ route, navigation }) => {
   // const [currentUser, setCurrentUser] = useState(0);
+
   const [recipients, setRecipients] = useState([]);
 
   useEffect(async () => {
+    console.log("useEffect");
     const response = await getAllRecipients(auth.currentUser.uid);
     console.log(response);
     setRecipients([
@@ -44,6 +47,23 @@ const Profile = ({ navigation }) => {
     ]);
   }, []);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      async function fetchData() {
+        const response = await getAllRecipients(auth.currentUser.uid);
+        const updatedRecipients = [
+          { _id: auth.currentUser.uid, name: "Grady (You)" },
+          ...response,
+        ];
+        if (updatedRecipients.length != recipients.length) {
+          console.log("Updated Recipients");
+          setRecipients(updatedRecipients);
+        }
+      }
+      fetchData();
+    }, [])
+  );
+
   return (
     <View>
       <View style={{ backgroundColor: "white", height: 1000 }} />
@@ -51,6 +71,7 @@ const Profile = ({ navigation }) => {
         <Text style={styles.container}></Text>
         <Text style={styles.headerText}>SIFT</Text>
       </View>
+      {/* <Text>{JSON.stringify(recipients)}</Text> */}
 
       <View style={styles.carouselContainer}>
         <Carousel
