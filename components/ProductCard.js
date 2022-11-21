@@ -9,6 +9,7 @@ import {
   PanResponder,
   ImageBackground,
   ScrollView,
+  Pressable,
 } from "react-native";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height * 0.7;
@@ -35,14 +36,20 @@ class ProductCard extends Component {
         >
           <View style={styles.body}>
             <View style={styles.textContainer}>
-              {this.props.item.title.length < 40 && (
-                <Text style={styles.titleText}>{this.props.item.title}</Text>
-              )}
-              {this.props.item.title.length > 40 && (
-                <Text style={styles.titleText}>
-                  {this.props.item.title.substring(0, 40) + ". . . "}
-                </Text>
-              )}
+              <Pressable
+                onPress={() => {
+                  console.log("pressed");
+                }}
+              >
+                {this.props.item.title.length < 40 && (
+                  <Text style={styles.titleText}>{this.props.item.title}</Text>
+                )}
+                {this.props.item.title.length > 40 && (
+                  <Text style={styles.titleText}>
+                    {this.props.item.title.substring(0, 40) + ". . . "}
+                  </Text>
+                )}
+              </Pressable>
             </View>
             <Text style={styles.priceText}>{this.props.item.price}</Text>
           </View>
