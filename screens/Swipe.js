@@ -80,7 +80,7 @@ const Swipe = ({ navigation, route }) => {
   const [recommendations, setRecommendations] = useState([]);
 
   useEffect(async () => {
-    const rslt = await getRecommendations();
+    const rslt = await getRecommendations(global.currRec);
     console.log(rslt);
     setRecommendations(rslt);
   }, []);
@@ -89,7 +89,7 @@ const Swipe = ({ navigation, route }) => {
     React.useCallback(() => {
       console.log("Screen was focused");
       async function fetchData() {
-        const rslt = await getRecommendations();
+        const rslt = await getRecommendations(global.currRec);
         currId = global.currRec;
         setRecommendations(rslt);
       }

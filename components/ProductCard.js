@@ -20,19 +20,27 @@ import { LinearGradient } from "expo-linear-gradient";
 class ProductCard extends Component {
   render() {
     return (
-      <ImageBackground
+      <View
         style={{
           height: this.props.height,
           width: this.props.width,
+          backgroundColor: "white",
         }}
-        source={require("../assets/tester.jpg")}
-        // source={{ uri: this.props.item.img }}
       >
+        <Image
+          style={{
+            top: 50,
+            height: this.props.height / 2,
+            width: this.props.width,
+          }}
+          source={require("../assets/tester.jpg")}
+          // source={{ uri: this.props.item.img }}
+        ></Image>
         {/* <Text>{this.prop}</Text> */}
         <LinearGradient
-          colors={["transparent", "transparent", "#000000"]}
-          style={{ height: "100%", width: "100%" }}
-          end={{ x: 0.5, y: 0.8 }}
+          colors={["transparent", "transparent", "transparent", "#000000"]}
+          style={{ height: "100%", width: "100%", position: "absolute" }}
+          end={{ x: 0.5, y: 0.9 }}
         >
           <View style={styles.body}>
             <View style={styles.textContainer}>
@@ -54,7 +62,8 @@ class ProductCard extends Component {
             <Text style={styles.priceText}>{this.props.item.price}</Text>
           </View>
         </LinearGradient>
-      </ImageBackground>
+        {/* </ImageBackground> */}
+      </View>
     );
   }
 }
@@ -66,7 +75,8 @@ const styles = StyleSheet.create({
   body: {
     padding: 20,
     position: "absolute",
-    bottom: 20,
+    top: 350,
+    // bottom: 20,
   },
   textContainer: {
     width: "100%",

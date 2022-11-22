@@ -10,7 +10,11 @@ import {
 } from "react-native";
 
 import ProductCard from "./ProductCard";
-import { saveProduct } from "../clients/FlaskServer";
+import {
+  getRecommendations,
+  saveProduct,
+  updateCollection,
+} from "../clients/FlaskServer";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height * 0.8;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -187,6 +191,9 @@ class Cards extends Component {
           );
           console.log(`Trashed ${this.users[this.state.currentIndex].title}`);
           this.users.splice(this.state.currentIndex, 1);
+          if (this.users.length === 0) {
+            this.updateUsers();
+          }
         } else if (gestureState.dy > 120) {
           this.position.setValue({ x: 500, y: 0 });
           this.setState(
@@ -232,6 +239,12 @@ class Cards extends Component {
     }
   }
 
+  async updateUsers() {
+    let newUsers = await getRecommendations();
+    this.users = newUsers;
+    this.setState({ currentIndex: 0 });
+  }
+
   renderUsers = () => {
     return this.users
       .map((item, i) => {
@@ -241,7 +254,7 @@ class Cards extends Component {
           return (
             <Animated.View
               {...this.PanResponder.panHandlers}
-              key={item.asin}
+              key={item.asin || item._id}
               style={[
                 this.rotateAndTranslate,
                 {
@@ -249,6 +262,13 @@ class Cards extends Component {
                   width: SCREEN_WIDTH - 60,
                   paddingHorizontal: 30,
                   position: "absolute",
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 5,
+                  },
+                  shadowOpacity: 0.5,
+                  shadowRadius: 20,
                 },
               ]}
             >

@@ -263,10 +263,23 @@ export const getAllCollections = async (recipientId) => {
   }
 };
 
-export const getRecommendations = async () => {
+export const getRecommendations = async (recipientId) => {
+  console.log(`Recipient: ${recipientId}`);
+  let headers = {};
+  if (!recipientId) {
+    headers = {
+      "x-random": "true",
+    };
+  } else {
+    headers = {
+      "x-recipientId": recipientId,
+    };
+  }
+
   const config = {
     method: "get",
     url: `${baseUrl}/recommendations`,
+    headers,
   };
   try {
     const response = await axios(config);
