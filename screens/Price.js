@@ -22,8 +22,6 @@ const handleCreateRecipient = async (recipient) => {
   const recipientData = {
     ...recipient,
     ownerId: userId,
-    gender: "N/A",
-    age: "N/A",
   };
   console.log(recipientData);
   const response = await createRecipient(recipientData);
@@ -121,6 +119,7 @@ const Price = ({ navigation, route }) => {
         <Pressable
           onPress={async () => {
             if (pressIndex1 != null) {
+              console.log(recipient);
               await handleCreateRecipient({
                 ...recipient,
                 price: currentIndex,
@@ -130,8 +129,7 @@ const Price = ({ navigation, route }) => {
           }}
           style={({ pressed }) => [
             {
-              backgroundColor:
-                pressed || pressIndex1 == 0 ? "#4F4F4F24" : "#4F4F4F",
+              opacity: pressed || pressIndex1 == 0 ? 0.3 : 1,
             },
             styles.nextButton,
           ]}
@@ -149,23 +147,22 @@ export default Price;
 
 const styles = StyleSheet.create({
   progressEvent: {
-    flex: 0.75,
+    flex: 0.9,
     backgroundColor: "#333333",
     height: "100%",
   },
   progressBar: {
     flexDirection: "row",
-    flex: 0.03,
     backgroundColor: "#e0e0de",
     width: "100%",
-    height: "5%",
+    height: 15,
   },
   container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "top",
-    top: "10%",
+    top: "5.5%",
   },
   backButton: {
     flex: 0.2,
@@ -173,11 +170,10 @@ const styles = StyleSheet.create({
     top: "5%",
   },
   body: {
-    flex: 0.5,
+    // flex: 0.5,
     width: "80%",
   },
   header: {
-    flexShrink: 1,
     fontSize: 45,
     color: "#1C1B1F",
     paddingBottom: "10%",
@@ -198,6 +194,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 32,
     top: "10%",
+    backgroundColor: "#2F3956",
   },
   text: {
     fontSize: 16,

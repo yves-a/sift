@@ -17,34 +17,25 @@ import CirculeButton from "../components/CircleButton";
 
 const { width, height } = Dimensions.get("window");
 
-const InterestsV2 = ({ navigation, route }) => {
+const Personality = ({ navigation, route }) => {
   let [fontsLoaded, error] = useFonts({
     "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
   });
 
   const { recipient } = route.params;
 
-  const [sports, setSports] = useState(false);
-  const [reading, setReading] = useState(false);
-  const [cookingBaking, setCookingBaking] = useState(false);
-  const [fitness, setFitness] = useState(false);
-  const [videoGames, setVideoGames] = useState(false);
-  const [tech, setTech] = useState(false);
-  const [music, setMusic] = useState(false);
-  const [art, setArt] = useState(false);
-  const [travel, setTravel] = useState(false);
-  const [fashion, setFashion] = useState(false);
+  const [extraverted, setextraverted] = useState(false);
+  const [intraverted, setintraverted] = useState(false);
+  const [outdoorsy, setoutdoorsy] = useState(false);
+  const [creative, setcreative] = useState(false);
+  const [motivated, setmotivated] = useState(false);
+  const [chill, setchill] = useState(false);
+  const [workaholic, setworkaholic] = useState(false);
+  const [active, setactive] = useState(false);
+  const [simple, setsimple] = useState(false);
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
-  const [items, setItems] = useState([
-    { label: "Reading", value: "reading" },
-    { label: "Fitness", value: "fitness" },
-    { label: "Sports", value: "sports" },
-    { label: "Video Games", value: "videogames" },
-    { label: "Cooking & Baking", value: "cooking" },
-  ]);
-
   const updateValues = (interest) => {
     if (value.includes(interest)) {
       setValue(value.filter((item) => item !== interest));
@@ -70,115 +61,109 @@ const InterestsV2 = ({ navigation, route }) => {
         </Pressable>
       </View>
       <View style={styles.body}>
-        <Text style={styles.header}>What are their interests?</Text>
+        <Text style={styles.header}>What are they like?</Text>
 
         <View style={{ top: 20 }}>
           <Pressable
-            style={{ position: "absolute", left: -20, top: 30 }}
+            style={{ position: "absolute", left: -25, top: 100 }}
             onPress={() => {
-              setReading(!reading);
-              updateValues("reading");
-            }}
-          >
-            <CirculeButton text={"Reading"} size={109} pressed={reading} />
-          </Pressable>
-
-          <Pressable
-            style={{ position: "absolute", left: 75, top: -40 }}
-            onPress={() => {
-              setTech(!tech);
-              updateValues("tech");
-            }}
-          >
-            <CirculeButton text={"Technology"} size={109} pressed={tech} />
-          </Pressable>
-
-          <Pressable
-            style={{ position: "absolute", left: 220, top: -60 }}
-            onPress={() => {
-              setMusic(!music);
-              updateValues("music");
-            }}
-          >
-            <CirculeButton text={"Music"} size={115} pressed={music} />
-          </Pressable>
-
-          <Pressable
-            style={{ position: "absolute", left: 55, top: 105 }}
-            onPress={() => {
-              setSports(!sports);
-              updateValues("sports");
-            }}
-          >
-            <CirculeButton text={"Sports"} size={130} pressed={sports} />
-          </Pressable>
-
-          <Pressable
-            style={{ position: "absolute", left: 150, top: 210 }}
-            onPress={() => {
-              setCookingBaking(!cookingBaking);
-              updateValues("cooking");
+              setintraverted(!intraverted);
+              updateValues("intraverted");
             }}
           >
             <CirculeButton
-              text={"Cooking & Baking"}
-              size={115}
-              pressed={cookingBaking}
+              text={"Intraverted"}
+              size={135}
+              pressed={intraverted}
             />
           </Pressable>
 
           <Pressable
-            style={{ position: "absolute", left: 160, top: 40 }}
+            style={{ position: "absolute", left: -5, top: -30 }}
             onPress={() => {
-              setTravel(!travel);
-              updateValues("travel");
+              setchill(!chill);
+              updateValues("chill");
             }}
           >
-            <CirculeButton text={"Travel"} size={100} pressed={travel} />
+            <CirculeButton text={"Chill"} size={125} pressed={chill} />
+          </Pressable>
+
+          <Pressable
+            style={{ position: "absolute", left: 220, top: -80 }}
+            onPress={() => {
+              setworkaholic(!workaholic);
+              updateValues("workaholic");
+            }}
+          >
+            <CirculeButton
+              text={"Workaholic"}
+              size={125}
+              pressed={workaholic}
+            />
+          </Pressable>
+
+          <Pressable
+            style={{ position: "absolute", left: 105, top: 165 }}
+            onPress={() => {
+              setextraverted(!extraverted);
+              updateValues("extraverted");
+            }}
+          >
+            <CirculeButton
+              text={"Extraverted"}
+              size={130}
+              pressed={extraverted}
+            />
+          </Pressable>
+
+          <Pressable
+            style={{ position: "absolute", left: 100, top: 310 }}
+            onPress={() => {
+              setoutdoorsy(!outdoorsy);
+              updateValues("outdoorsy");
+            }}
+          >
+            <CirculeButton text={"Outdoorsy"} size={115} pressed={outdoorsy} />
+          </Pressable>
+
+          <Pressable
+            style={{ position: "absolute", left: 120, top: 15 }}
+            onPress={() => {
+              setsimple(!simple);
+              updateValues("simple");
+            }}
+          >
+            <CirculeButton text={"Simple"} size={130} pressed={simple} />
           </Pressable>
 
           <Pressable
             style={{ position: "absolute", left: 230, top: 115 }}
             onPress={() => {
-              setVideoGames(!videoGames);
-              updateValues("videogames");
+              setmotivated(!motivated);
+              updateValues("motivated");
             }}
           >
-            <CirculeButton
-              text={"Video Games"}
-              size={120}
-              pressed={videoGames}
-            />
+            <CirculeButton text={"Motivated"} size={120} pressed={motivated} />
           </Pressable>
 
           <Pressable
-            style={{ position: "absolute", left: -30, top: 200 }}
+            style={{ position: "absolute", left: -30, top: 240 }}
             onPress={() => {
-              setFitness(!fitness);
-              updateValues("fitness");
+              setcreative(!creative);
+              updateValues("creative");
             }}
           >
-            <CirculeButton text={"Fitness"} size={110} pressed={fitness} />
+            <CirculeButton text={"Creative"} size={130} pressed={creative} />
           </Pressable>
 
           <Pressable
-            style={{ position: "absolute", left: 40, top: 290 }}
+            style={{ position: "absolute", left: 220, top: 250 }}
             onPress={() => {
-              setFashion(!fashion);
-              updateValues("fashion");
+              setactive(!active);
+              updateValues("active");
             }}
           >
-            <CirculeButton text={"Fashion"} size={130} pressed={fashion} />
-          </Pressable>
-
-          <Pressable
-            style={{ position: "absolute", left: 220, top: 310 }}
-            onPress={() => {
-              setArt(!art);
-              updateValues("art");
-            }}
-          >
-            <CirculeButton text={"Art"} size={110} pressed={art} />
+            <CirculeButton text={"Active"} size={120} pressed={active} />
           </Pressable>
         </View>
 
@@ -187,16 +172,15 @@ const InterestsV2 = ({ navigation, route }) => {
             {
               opacity:
                 pressed ||
-                (sports ||
-                  fitness ||
-                  videoGames ||
-                  cookingBaking ||
-                  reading ||
-                  tech ||
-                  music ||
-                  art ||
-                  fashion ||
-                  travel) == ""
+                (extraverted ||
+                  creative ||
+                  motivated ||
+                  outdoorsy ||
+                  intraverted ||
+                  chill ||
+                  workaholic ||
+                  active ||
+                  simple) == ""
                   ? 0.3
                   : 1,
             },
@@ -204,10 +188,11 @@ const InterestsV2 = ({ navigation, route }) => {
           ]}
           onPress={() => {
             if (value != "") {
-              navigation.navigate("Price", {
+              //   console.log([...recipient.interests, value]);
+              navigation.navigate("InterestsV2", {
                 recipient: {
                   ...recipient,
-                  interests: [...recipient.interests, ...value],
+                  interests: value,
                 },
               });
             }
@@ -222,11 +207,11 @@ const InterestsV2 = ({ navigation, route }) => {
   );
 };
 
-export default InterestsV2;
+export default Personality;
 
 const styles = StyleSheet.create({
   progressEvent: {
-    flex: 0.7,
+    flex: 0.5,
     backgroundColor: "#333333",
     height: "100%",
   },

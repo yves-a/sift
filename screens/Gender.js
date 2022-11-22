@@ -5,7 +5,7 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const Relationship = ({ navigation, route }) => {
+const Gender = ({ navigation, route }) => {
   let [fontsLoaded, error] = useFonts({
     "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
   });
@@ -15,12 +15,8 @@ const Relationship = ({ navigation, route }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-    { label: "Significant Other", value: "partner" },
-    { label: "Parent", value: "parent" },
-    { label: "Friend", value: "friend" },
-    { label: "Coworker", value: "coworker" },
-    { label: "Sibling", value: "sibling" },
-    { label: "Grandparent", value: "grandparent" },
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
     { label: "Other", value: "other" },
   ]);
 
@@ -41,7 +37,7 @@ const Relationship = ({ navigation, route }) => {
         </Pressable>
       </View>
       <View style={styles.body}>
-        <Text style={styles.header}>You're Buying For</Text>
+        <Text style={styles.header}>They are a</Text>
         <DropDownPicker
           open={open}
           value={value}
@@ -54,10 +50,10 @@ const Relationship = ({ navigation, route }) => {
         <Pressable
           onPress={() => {
             if (value != null) {
-              navigation.navigate("Gender", {
+              navigation.navigate("Age", {
                 recipient: {
                   ...recipient,
-                  relationship: value,
+                  gender: value,
                 },
               });
             }
@@ -69,7 +65,7 @@ const Relationship = ({ navigation, route }) => {
             styles.nextButton,
           ]}
           title="Next"
-          accessibilityLabel="Go to the next page, Gender."
+          accessibilityLabel="Go to the next page, Interests."
         >
           <Text style={styles.text}>Next</Text>
         </Pressable>
@@ -78,11 +74,11 @@ const Relationship = ({ navigation, route }) => {
   );
 };
 
-export default Relationship;
+export default Gender;
 
 const styles = StyleSheet.create({
   progressEvent: {
-    flex: 0.2,
+    flex: 0.3,
     backgroundColor: "#333333",
     height: "100%",
   },

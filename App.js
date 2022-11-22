@@ -21,7 +21,10 @@ import Profile from "./screens/Profile";
 import Loading from "./screens/Loading";
 import InterestsV2 from "./screens/InterestsV2";
 import CreateCollection from "./screens/CreateCollection";
+import Gender from "./screens/Gender";
 import Overlays from "./screens/Overlays";
+import Age from "./screens/Age";
+import Personality from "./screens/Personality";
 // import Over
 import { auth, onAuthStateChanged } from "./firebase.js";
 
@@ -50,6 +53,9 @@ function ProfileStack() {
       <Stack.Screen name="Name" component={Name} />
       <Stack.Screen name="Swipe" component={Swipe} />
       <Stack.Screen name="InterestsV2" component={InterestsV2} />
+      <Stack.Screen name="Gender" component={Gender} />
+      <Stack.Screen name="Age" component={Age} />
+      <Stack.Screen name="Personality" component={Personality} />
     </Stack.Navigator>
   );
 }

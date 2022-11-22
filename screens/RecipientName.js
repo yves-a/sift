@@ -49,21 +49,29 @@ const RecipientName = ({ navigation }) => {
         style={styles.input}
         onChangeText={(value) => setTextInputName(value)}
       />
-      <View style={styles.button}>
-        <Button
-          style={styles.buto}
-          color="white"
-          onPress={checkTextInput}
-          title="Next"
-        />
-      </View>
+      <Pressable
+        onPress={() => {
+          if (textInputName != "") {
+            checkTextInput();
+          }
+        }}
+        style={({ pressed }) => [
+          {
+            opacity: pressed || textInputName == "" ? 0.3 : 1,
+          },
+          styles.nextButton,
+        ]}
+        title="Next"
+        accessibilityLabel="Go to the next page, Interests."
+      >
+        <Text style={styles.text}>Next</Text>
+      </Pressable>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
     width: "100%",
     height: "120%",
     backgroundColor: "white",
@@ -71,12 +79,18 @@ const styles = StyleSheet.create({
   buttonActive: {
     backgroundColor: "red",
   },
+  head: {
+    fontSize: 45,
+    lineHeight: 52,
+    left: "10%",
+    marginTop: 175,
+    width: "80%",
+  },
   input: {
-    position: "absolute",
     width: "80%",
     height: 50,
     left: "10%",
-    top: 394,
+    marginTop: 40,
     justifyContent: "center",
     fontSize: 18,
     alignItems: "center",
@@ -86,36 +100,23 @@ const styles = StyleSheet.create({
     padding: 10,
     color: "black",
   },
-  head: {
-    position: "absolute",
-    fontSize: 45,
-    lineHeight: 52,
-    left: "10%",
-    top: 204,
-    width: "80%",
-    height: 104,
-    lineHeight: 52,
-  },
-  button: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 8,
-    position: "absolute",
-    width: "80%",
-    height: "4%",
-    left: "10%",
-    top: 462,
-    opacity: 0.3,
-    marginTop: "9%",
-    backgroundColor: "rgba(79, 79, 79, 1)",
-    borderRadius: 7,
-  },
-  buto: {
-    position: "absolute",
+  nextButton: {
     color: "white",
-    justifyContent: "center",
-    alignContent: "center",
-    fontSize: 18,
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    marginTop: 40,
+    width: "85%",
+    left: "7.5%",
+    backgroundColor: "#2F3956",
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
+    textAlign: "center",
   },
 });
 

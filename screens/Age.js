@@ -2,10 +2,9 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
-import DropDownPicker from "react-native-dropdown-picker";
+import Slider from "react-native-sliders";
 
-const Relationship = ({ navigation, route }) => {
+const Age = ({ navigation, route }) => {
   let [fontsLoaded, error] = useFonts({
     "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
   });
@@ -14,15 +13,8 @@ const Relationship = ({ navigation, route }) => {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: "Significant Other", value: "partner" },
-    { label: "Parent", value: "parent" },
-    { label: "Friend", value: "friend" },
-    { label: "Coworker", value: "coworker" },
-    { label: "Sibling", value: "sibling" },
-    { label: "Grandparent", value: "grandparent" },
-    { label: "Other", value: "other" },
-  ]);
+  const [age, setAge] = useState(25);
+  const [changed, setChanged] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -41,30 +33,29 @@ const Relationship = ({ navigation, route }) => {
         </Pressable>
       </View>
       <View style={styles.body}>
-        <Text style={styles.header}>You're Buying For</Text>
-        <DropDownPicker
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          placeholder="Select"
+        <Text style={styles.header}>They are {age}</Text>
+        <Slider
+          value={age / 100}
+          onValueChange={(value) => {
+            setAge(parseInt(value * 100));
+            setChanged(true);
+          }}
         />
+
         <Pressable
           onPress={() => {
-            if (value != null) {
-              navigation.navigate("Gender", {
+            if (changed) {
+              navigation.navigate("Personality", {
                 recipient: {
                   ...recipient,
-                  relationship: value,
+                  age: age,
                 },
               });
             }
           }}
           style={({ pressed }) => [
             {
-              opacity: pressed || value == null ? 0.3 : 1,
+              opacity: pressed || !changed ? 0.3 : 1,
             },
             styles.nextButton,
           ]}
@@ -78,11 +69,11 @@ const Relationship = ({ navigation, route }) => {
   );
 };
 
-export default Relationship;
+export default Age;
 
 const styles = StyleSheet.create({
   progressEvent: {
-    flex: 0.2,
+    flex: 0.4,
     backgroundColor: "#333333",
     height: "100%",
   },
@@ -107,7 +98,7 @@ const styles = StyleSheet.create({
   body: {
     flex: 0.5,
     width: "80%",
-    marginTop: "12%",
+    marginTop: "15%",
   },
   header: {
     fontSize: 42,
