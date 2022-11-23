@@ -25,6 +25,10 @@ import Gender from "./screens/Gender";
 import Overlays from "./screens/Overlays";
 import Age from "./screens/Age";
 import Personality from "./screens/Personality";
+import Saved from "./screens/Saved";
+import FullSaved from "./screens/FullSaved";
+import Collection from "./screens/Collection";
+import AddSaved from "./screens/AddSaved";
 // import Over
 import { auth, onAuthStateChanged } from "./firebase.js";
 
@@ -67,6 +71,10 @@ function SavedStack() {
         headerShown: false,
       }}
     >
+      <Stack.Screen name="Saved" component={Saved} />
+      <Stack.Screen name="FullSaved" component={FullSaved} />
+      <Stack.Screen name="Collection" component={Collection} />
+      <Stack.Screen name="AddSaved" component={AddSaved} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="CreateCollection" component={CreateCollection} />
       <Stack.Screen name="Overlays" component={Overlays} />

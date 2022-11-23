@@ -212,12 +212,11 @@ class Cards extends Component {
               }).start();
             }
           );
-          saveProduct(this.users[this.state.currentIndex].asin, global.currRec);
-          console.log(
-            `Saved ${this.users[this.state.currentIndex].asin} to ${
-              global.currRec
-            }`
-          );
+          const id =
+            this.users[this.state.currentIndex].asin ||
+            this.users[this.state.currentIndex]._id;
+          saveProduct(id, global.currRec);
+          console.log(`Saved ${id} to ${global.currRec}`);
           this.users.splice(this.state.currentIndex, 1);
         } else {
           Animated.spring(this.position, {

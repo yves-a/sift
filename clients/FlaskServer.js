@@ -248,6 +248,19 @@ export const deleteCollection = async (collectionId) => {
   }
 };
 
+export const getSavedProducts = async (recipientId) => {
+  const config = {
+    method: "get",
+    url: `${baseUrl}/savedProducts/${recipientId}`,
+  };
+  try {
+    const response = await axios(config);
+    return response.data;
+  } catch (error) {
+    return [];
+  }
+};
+
 // GET ALL COLLECTIONS
 
 export const getAllCollections = async (recipientId) => {
@@ -259,7 +272,7 @@ export const getAllCollections = async (recipientId) => {
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return [];
   }
 };
 

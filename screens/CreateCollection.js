@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import { AntDesign } from "@expo/vector-icons";
+import { createCollection } from "../clients/FlaskServer";
 const CreateCollection = ({ navigation }) => {
   return (
     <View style={styles.containerName}>
@@ -28,7 +29,14 @@ const CreateCollection = ({ navigation }) => {
       <Text style={styles.title}>Give your collection a name.</Text>
       <Formik
         initialValues={{ collection: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          createCollection({
+            name: values.collection,
+            products: [],
+            ownerId: global.currRec,
+          });
+          navigation.navigate("Saved");
+        }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View>
