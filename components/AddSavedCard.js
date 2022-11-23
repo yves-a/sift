@@ -1,10 +1,17 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import React, { useState } from "react";
+import { saveProductToCollection } from "../clients/FlaskServer";
 
-const SavedCard = ({ item }) => {
-  if (item == null) {
-    return null;
-  }
+const AddSavedCard = ({ item, collectionId }) => {
+  const [isSaved, setIsSaved] = useState(false);
+
+  const saveProduct = async () => {
+    if (!isSaved) {
+      setIsSaved(true);
+      saveProductToCollection(collectionId, item._id);
+    }
+  };
 
   const shrinkTitle = (title) => {
     if (title.length > 40) {
@@ -26,22 +33,26 @@ const SavedCard = ({ item }) => {
         // source={{ uri: item.img }}
       ></Image>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{shrinkTitle(item.title || "Unknown")}</Text>
+        <Text style={styles.title}>{shrinkTitle(item.title)}</Text>
         <Text style={{ position: "absolute", top: 70 }}>$ $</Text>
       </View>
       <Pressable
         style={styles.button}
         onPress={() => {
-          console.log("Hey");
+          saveProduct();
         }}
       >
-        <Icon name="ellipsis-horizontal" size={25} color="black" />
+        <Icon
+          name={isSaved ? "checkmark-done-outline" : "bookmark-outline"}
+          size={25}
+          color="black"
+        />
       </Pressable>
     </View>
   );
 };
 
-export default SavedCard;
+export default AddSavedCard;
 
 const styles = StyleSheet.create({
   container: {

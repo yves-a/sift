@@ -10,6 +10,7 @@ import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import SavedCard from "../components/SavedCard";
 import { getCollection } from "../clients/FlaskServer";
+import { useFocusEffect } from "@react-navigation/native";
 
 const data = [
   {
@@ -36,6 +37,18 @@ const Collection = ({ navigation, route }) => {
     setCollectionProducts(rslt["products"]);
   }, []);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("Screen was focused");
+      async function fetchData() {
+        const rslt = await getCollection(item._id);
+        setCollectionProducts(rslt["products"]);
+      }
+      console.log("Request Sent");
+      fetchData();
+    }, [])
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -56,7 +69,7 @@ const Collection = ({ navigation, route }) => {
           <Pressable
             style={styles.addButton}
             onPress={() => {
-              navigation.navigate("AddSaved");
+              navigation.navigate("AddSaved", { collectionId: item._id });
             }}
           >
             <View

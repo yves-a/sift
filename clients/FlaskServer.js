@@ -261,6 +261,23 @@ export const getSavedProducts = async (recipientId) => {
   }
 };
 
+export const saveProductToCollection = async (collectionId, productId) => {
+  const config = {
+    method: "post",
+    url: `${baseUrl}/saveProductToCollection`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: { collectionId, productId },
+  };
+  try {
+    const response = await axios(config);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // GET ALL COLLECTIONS
 
 export const getAllCollections = async (recipientId) => {

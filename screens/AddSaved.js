@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
-import SavedCard from "../components/SavedCard";
+import AddSavedCard from "../components/AddSavedCard";
 import { getSavedProducts } from "../clients/FlaskServer";
 import { auth } from "../firebase";
 
@@ -28,8 +28,10 @@ const data = [
   },
 ];
 
-const AddSaved = ({ navigation }) => {
+const AddSaved = ({ navigation, route }) => {
   const [savedProducts, setSavedProducts] = useState([]);
+
+  const { collectionId } = route.params;
 
   useEffect(async () => {
     const id = global.currRec == auth.currentUser.uid ? null : global.currRec;
@@ -58,7 +60,11 @@ const AddSaved = ({ navigation }) => {
           <View style={styles.line}></View>
           <View style={styles.savedContainer}>
             {savedProducts.map((item) => (
-              <SavedCard item={item} />
+              <AddSavedCard
+                navigation={navigation}
+                item={item}
+                collectionId={collectionId}
+              />
             ))}
           </View>
         </View>
