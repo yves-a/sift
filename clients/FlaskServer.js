@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // const baseUrl = "http://127.0.0.1:5000";
-const baseUrl = "https://2302-76-66-132-135.ngrok.io";
+const baseUrl = "https://4e64-76-66-132-135.ngrok.io";
 
 // RECIPIENTS
 

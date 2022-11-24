@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
-const SavedCard = ({ item }) => {
+const SavedCard = ({ navigation, item }) => {
   if (item == null) {
     return null;
   }
@@ -22,17 +22,21 @@ const SavedCard = ({ item }) => {
           width: "40%",
           borderRadius: 10,
         }}
-        source={require("../assets/tester.jpg")}
-        // source={{ uri: item.img }}
+        // source={require("../assets/tester.jpg")}
+        source={{ uri: item.img }}
       ></Image>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{shrinkTitle(item.title || "Unknown")}</Text>
-        <Text style={{ position: "absolute", top: 70 }}>$ $</Text>
+        <Text style={{ position: "absolute", top: 70 }}>
+          {item.price || "$ $ $ "}
+        </Text>
       </View>
       <Pressable
         style={styles.button}
         onPress={() => {
-          console.log("Hey");
+          navigation.navigate("Product", {
+            item: item,
+          });
         }}
       >
         <Icon name="ellipsis-horizontal" size={25} color="black" />

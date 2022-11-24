@@ -29,6 +29,7 @@ import Saved from "./screens/Saved";
 import FullSaved from "./screens/FullSaved";
 import Collection from "./screens/Collection";
 import AddSaved from "./screens/AddSaved";
+import Product from "./screens/Product";
 // import Over
 import { auth, onAuthStateChanged } from "./firebase.js";
 
@@ -40,6 +41,10 @@ const Stack = createNativeStackNavigator();
 // global.currRec = "123";
 
 const loggedIn = true;
+
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 function ProfileStack() {
   return (
@@ -78,6 +83,7 @@ function SavedStack() {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="CreateCollection" component={CreateCollection} />
       <Stack.Screen name="Overlays" component={Overlays} />
+      <Stack.Screen name="Product" component={Product} />
     </Stack.Navigator>
   );
 }
@@ -90,6 +96,7 @@ function SwipeStack() {
       }}
     >
       <Stack.Screen name="Swipe" component={Swipe} />
+      <Stack.Screen name="Product" component={Product} />
     </Stack.Navigator>
   );
 }

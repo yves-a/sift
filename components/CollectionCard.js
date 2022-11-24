@@ -16,11 +16,12 @@ const CollectionCard = ({ navigation, item }) => {
       style={styles.container}
     >
       <ImageBackground
-        source={require("../assets/tester.jpg")}
+        source={
+          item.img ? { uri: item.img } : require("../assets/images/icon2.png")
+        }
         imageStyle={{ borderRadius: 15 }}
         style={styles.image}
       >
-        {/* <Text style={styles.title}>{t</Text> */}
         <View style={styles.footer}>
           <Text style={styles.title}>{item.name}</Text>
         </View>

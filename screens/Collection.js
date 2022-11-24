@@ -12,21 +12,6 @@ import SavedCard from "../components/SavedCard";
 import { getCollection } from "../clients/FlaskServer";
 import { useFocusEffect } from "@react-navigation/native";
 
-const data = [
-  {
-    id: 1,
-    title: "Nike Air Force 1 '07",
-  },
-  {
-    id: 2,
-    title: "Nike Air Force 1 '07",
-  },
-  {
-    id: 2,
-    title: "Nike Air Force 1 '07",
-  },
-];
-
 const Collection = ({ navigation, route }) => {
   const [collectionProducts, setCollectionProducts] = useState([]);
 
@@ -102,7 +87,7 @@ const Collection = ({ navigation, route }) => {
         <ScrollView style={{ height: "100%" }}>
           <View style={styles.savedContainer}>
             {collectionProducts.map((item) => (
-              <SavedCard item={item} />
+              <SavedCard navigation={navigation} item={item} />
             ))}
           </View>
         </ScrollView>

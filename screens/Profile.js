@@ -52,7 +52,11 @@ const Profile = ({ route, navigation }) => {
       async function fetchData() {
         const response = await getAllRecipients(auth.currentUser.uid);
         const updatedRecipients = [
-          { _id: auth.currentUser.uid, name: "Grady (You)" },
+          {
+            _id: auth.currentUser.uid,
+            name: "Alex (You)",
+            img: "https://media-exp1.licdn.com/dms/image/C5603AQHHh8Rc_PoIzg/profile-displayphoto-shrink_800_800/0/1667966059963?e=1674691200&v=beta&t=nsWxT28Td8hb7_MT1UhFcduVk414Ae8ke6BTag0JzSQ",
+          },
           ...response,
         ];
         if (updatedRecipients.length != recipients.length) {
@@ -91,7 +95,9 @@ const Profile = ({ route, navigation }) => {
           renderItem={({ index, animationValue }) => (
             <ProfileCard
               name={recipients[index].name}
-              img={require("../assets/tester.jpg")}
+              img={
+                recipients[index].img ? { uri: recipients[index].img } : null
+              }
             />
           )}
         />

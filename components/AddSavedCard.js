@@ -29,12 +29,12 @@ const AddSavedCard = ({ item, collectionId }) => {
           width: "40%",
           borderRadius: 10,
         }}
-        source={require("../assets/tester.jpg")}
-        // source={{ uri: item.img }}
+        // source={require("../assets/tester.jpg")}
+        source={{ uri: item.img }}
       ></Image>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{shrinkTitle(item.title)}</Text>
-        <Text style={{ position: "absolute", top: 70 }}>$ $</Text>
+        <Text style={{ position: "absolute", top: 70 }}>{item.price}</Text>
       </View>
       <Pressable
         style={styles.button}

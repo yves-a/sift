@@ -33,8 +33,8 @@ class ProductCard extends Component {
             height: this.props.height / 2,
             width: this.props.width,
           }}
-          source={require("../assets/tester.jpg")}
-          // source={{ uri: this.props.item.img }}
+          // source={require("../assets/tester.jpg")}
+          source={{ uri: this.props.item.img }}
         ></Image>
         {/* <Text>{this.prop}</Text> */}
         <LinearGradient
@@ -47,6 +47,10 @@ class ProductCard extends Component {
               <Pressable
                 onPress={() => {
                   console.log("pressed");
+                  // console.log(this.props.item);
+                  this.props.navigation.navigate("Product", {
+                    item: this.props.item,
+                  });
                 }}
               >
                 {this.props.item.title.length < 40 && (

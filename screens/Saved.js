@@ -14,36 +14,6 @@ import CollectionCard from "../components/CollectionCard";
 import { getAllCollections, getSavedProducts } from "../clients/FlaskServer";
 import { auth } from "../firebase";
 
-const data = [
-  {
-    id: 1,
-    title: "Nike Air Force 1 '07",
-  },
-  {
-    id: 2,
-    title: "Nike Air Force 1 '07",
-  },
-  {
-    id: 2,
-    title: "Nike Air Force 1 '07",
-  },
-];
-
-// const collections = [
-//   {
-//     id: 1,
-//     title: "Nike Air Force 1 '07",
-//   },
-//   {
-//     id: 2,
-//     title: "Nike Air Force 1 '07",
-//   },
-//   {
-//     id: 2,
-//     title: "Nike Air Force 1 '07",
-//   },
-// ];
-
 const Saved = ({ navigation }) => {
   let currId = 0;
   const [collections, setCollections] = useState([]);

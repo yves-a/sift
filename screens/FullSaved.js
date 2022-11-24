@@ -48,7 +48,7 @@ const FullSaved = ({ navigation, route }) => {
         <ScrollView style={{ height: "100%" }}>
           <View style={styles.savedContainer}>
             {items.map((item) => (
-              <SavedCard item={item} />
+              <SavedCard navigation={navigation} item={item} />
             ))}
           </View>
         </ScrollView>

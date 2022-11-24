@@ -275,6 +275,7 @@ class Cards extends Component {
                 height={SCREEN_HEIGHT - 120}
                 width={SCREEN_WIDTH - 60}
                 item={item}
+                navigation={this.props.navigation}
               />
             </Animated.View>
           );
