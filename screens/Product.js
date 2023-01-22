@@ -40,7 +40,7 @@ const Product = ({ navigation, route }) => {
           <Text style={styles.titleText}>{item.title}</Text>
         </ScrollView>
         {/* </LinearGradient> */}
-        <Text style={styles.price}>{item.price}</Text>
+        <Text style={styles.price}>{item.price} CA</Text>
       </View>
       <Pressable
         onPress={() => {

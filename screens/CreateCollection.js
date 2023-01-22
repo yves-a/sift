@@ -2,10 +2,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   TextInput,
   TouchableOpacity,
-  Image,
 } from "react-native";
 import { Formik } from "formik";
 import { AntDesign } from "@expo/vector-icons";

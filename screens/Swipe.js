@@ -1,12 +1,9 @@
-import { View, Text, StyleSheet, Button, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
 import Cards from "../components/Cards";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
-import { useIsFocused } from "@react-navigation/native";
 import { getRecommendations } from "../clients/FlaskServer";
-import { currRecipient, updateCurrRecipient } from "../Global.js";
-import { async } from "@firebase/util";
 import { auth } from "../firebase";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -18,6 +15,10 @@ const Swipe = ({ navigation, route }) => {
   const [recommendations, setRecommendations] = useState([]);
 
   useEffect(async () => {
+    if (global.currRec == "123" || global.currRec == null) {
+      global.currRec = auth.currentUser.uid;
+    }
+    console.log("Current: " + global.currRec);
     const id = global.currRec == auth.currentUser.uid ? null : global.currRec;
     const rslt = await getRecommendations(id);
     console.log(rslt);
@@ -27,7 +28,13 @@ const Swipe = ({ navigation, route }) => {
   useFocusEffect(
     React.useCallback(() => {
       console.log("Screen was focused");
+      console.log("Current: " + auth.currentUser.uid);
+      console.log("Global: " + global.currRec);
       async function fetchData() {
+        if (global.currRec == "123" || global.currRec == null) {
+          global.currRec = auth.currentUser.uid;
+        }
+        console.log("Currents: " + global.currRec);
         const id =
           global.currRec == auth.currentUser.uid ? null : global.currRec;
 
@@ -43,7 +50,7 @@ const Swipe = ({ navigation, route }) => {
     }, [])
   );
 
-  if (recommendations.length === 0) {
+  if (recommendations == null || recommendations.length === 0) {
     return <AppLoading />;
   }
 

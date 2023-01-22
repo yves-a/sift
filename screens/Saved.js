@@ -1,29 +1,24 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import SavedCard from "../components/SavedCard";
 import CollectionCard from "../components/CollectionCard";
 import { getAllCollections, getSavedProducts } from "../clients/FlaskServer";
 import { auth } from "../firebase";
 
 const Saved = ({ navigation }) => {
-  let currId = 0;
   const [collections, setCollections] = useState([]);
   const [savedProducts, setSaveProducts] = useState([]);
 
   useEffect(async () => {
-    const id = global.currRec == auth.currentUser.uid ? null : global.currRec;
+    if (global.currRec == "123" || global.currRec == null) {
+      global.currRec = auth.currentUser.uid;
+    }
+    const id = global.currRec;
     const rslt = await getSavedProducts(id);
     console.log(rslt);
-    setSaveProducts(rslt);
+    setSaveProducts(rslt.reverse());
     const rslt1 = await getAllCollections(id);
     setCollections(rslt1);
     console.log(rslt);
@@ -33,13 +28,15 @@ const Saved = ({ navigation }) => {
     React.useCallback(() => {
       console.log("Screen was focused");
       async function fetchData() {
-        const id =
-          global.currRec == auth.currentUser.uid ? null : global.currRec;
+        if (global.currRec == "123" || global.currRec == null) {
+          global.currRec = auth.currentUser.uid;
+        }
+        const id = global.currRec;
         const rslt = await getSavedProducts(id);
         const rslt1 = await getAllCollections(id);
 
         if (rslt != savedProducts) {
-          setSaveProducts(rslt);
+          setSaveProducts(rslt.reverse());
         }
 
         if (rslt1 != collections) {
@@ -56,9 +53,6 @@ const Saved = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Pressable>
-          {/* <Icon name="chevron-back-outline" size={"40%"} color="black" /> */}
-        </Pressable>
         <Text style={{ fontSize: 20 }}>Saved</Text>
         <Text></Text>
       </View>
@@ -70,14 +64,13 @@ const Saved = ({ navigation }) => {
             {savedProducts
               .slice(0, Math.min(3, savedProducts.length))
               .map((item) => (
-                <SavedCard item={item} />
+                <SavedCard item={item} navigation={navigation} />
               ))}
           </View>
           {savedProducts.length != 0 && (
             <Pressable
               onPress={() => {
                 navigation.navigate("FullSaved", { items: savedProducts });
-                // console.log("Pressed");
               }}
               style={({ pressed }) => [
                 {
@@ -86,7 +79,7 @@ const Saved = ({ navigation }) => {
                 styles.nextButton,
               ]}
               title="See All"
-              accessibilityLabel="Go to the next page, Gender."
+              accessibilityLabel="See all"
             >
               <Text style={styles.text}>See All</Text>
             </Pressable>
@@ -176,11 +169,9 @@ const styles = StyleSheet.create({
   collectionsHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    // padding: 20,
   },
   collectionContainer: {
     flexDirection: "row",
-    // justifyContent: "space-between",
     flex: 1,
     alignItems: "flex-start",
     flexWrap: "wrap",

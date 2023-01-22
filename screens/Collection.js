@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import SavedCard from "../components/SavedCard";

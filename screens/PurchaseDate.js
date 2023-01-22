@@ -1,16 +1,5 @@
-import React, { Component, useState } from "react";
-import {
-  Animated,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
-  Text,
-  View,
-  Button,
-} from "react-native";
-// import DatePicker from "react-native-datepicker";
-import { useFonts } from "expo-font";
+import React, { Component } from "react";
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { TextInputMask } from "react-native-masked-text";
 

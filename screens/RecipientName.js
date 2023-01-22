@@ -6,12 +6,9 @@ import {
   TextInput,
   Text,
   View,
-  Button,
-  TouchableOpacity,
 } from "react-native";
 
 const RecipientName = ({ navigation }) => {
-  const [onPressInActive, SetOnPressInActive] = useState("#33691E");
   const [textInputName, setTextInputName] = useState("");
 
   const checkTextInput = () => {

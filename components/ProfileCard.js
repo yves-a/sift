@@ -9,7 +9,19 @@ import {
 const SCREEN_WIDTH = Dimensions.get("window").width;
 import Icon from "react-native-vector-icons/Ionicons";
 
-const ProfileCard = ({ name, img }) => {
+const colors = [
+  "#EC3E3D",
+  "#B51314",
+  "#F65E5E",
+  "#FA7D85",
+  "#E3302F",
+  "#EB3637",
+  "#F43E3F",
+  "#D62829",
+  "#CA1F1D",
+];
+
+const ProfileCard = ({ name, img, currIdx }) => {
   if (img) {
     return (
       <View
@@ -49,7 +61,7 @@ const ProfileCard = ({ name, img }) => {
     >
       <View
         style={{
-          backgroundColor: "#3D6F99",
+          backgroundColor: colors[currIdx % colors.length],
           height: 200,
           width: 200,
           borderRadius: 100,

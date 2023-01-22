@@ -1,27 +1,9 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  Platform,
-  Dimensions,
-  SafeAreaView,
-  Button,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useState } from "react";
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
-import DropDownPicker from "react-native-dropdown-picker";
 import CirculeButton from "../components/CircleButton";
 
-const { width, height } = Dimensions.get("window");
-
 const Personality = ({ navigation, route }) => {
-  let [fontsLoaded, error] = useFonts({
-    "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
-  });
-
   const { recipient } = route.params;
 
   const [extraverted, setextraverted] = useState(false);
@@ -188,7 +170,6 @@ const Personality = ({ navigation, route }) => {
           ]}
           onPress={() => {
             if (value != "") {
-              //   console.log([...recipient.interests, value]);
               navigation.navigate("InterestsV2", {
                 recipient: {
                   ...recipient,

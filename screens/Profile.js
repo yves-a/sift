@@ -1,21 +1,12 @@
-import {
-  Dimensions,
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  Image,
-} from "react-native";
+import { Dimensions, View, Text, StyleSheet, Pressable } from "react-native";
 import React, { useState, useEffect } from "react";
 import Carousel from "react-native-reanimated-carousel";
 import Icon from "react-native-vector-icons/Ionicons";
-import { useSharedValue } from "react-native-reanimated";
 import ProfileCard from "../components/ProfileCard";
 import { auth } from "../firebase";
 import { getAllRecipients } from "../clients/FlaskServer";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 
-const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const COUNT = 3;
@@ -33,35 +24,23 @@ const baseOption = {
 };
 
 const Profile = ({ route, navigation }) => {
-  // const [currentUser, setCurrentUser] = useState(0);
-
   const [recipients, setRecipients] = useState([]);
 
   useEffect(async () => {
     console.log("useEffect");
     const response = await getAllRecipients(auth.currentUser.uid);
     console.log(response);
-    setRecipients([
-      { _id: auth.currentUser.uid, name: "Grady (You)" },
-      ...response,
-    ]);
+    setRecipients(response);
   }, []);
 
   useFocusEffect(
     React.useCallback(() => {
       async function fetchData() {
         const response = await getAllRecipients(auth.currentUser.uid);
-        const updatedRecipients = [
-          {
-            _id: auth.currentUser.uid,
-            name: "Alex (You)",
-            img: "https://media-exp1.licdn.com/dms/image/C5603AQHHh8Rc_PoIzg/profile-displayphoto-shrink_800_800/0/1667966059963?e=1674691200&v=beta&t=nsWxT28Td8hb7_MT1UhFcduVk414Ae8ke6BTag0JzSQ",
-          },
-          ...response,
-        ];
-        if (updatedRecipients.length != recipients.length) {
+        // const updatedRecipients = e;
+        if (response.length != recipients.length) {
           console.log("Updated Recipients");
-          setRecipients(updatedRecipients);
+          setRecipients(response);
         }
       }
       fetchData();
@@ -75,8 +54,6 @@ const Profile = ({ route, navigation }) => {
         <Text style={styles.container}></Text>
         <Text style={styles.headerText}>SIFT</Text>
       </View>
-      {/* <Text>{JSON.stringify(recipients)}</Text> */}
-
       <View style={styles.carouselContainer}>
         <Carousel
           {...baseOption}
@@ -98,6 +75,7 @@ const Profile = ({ route, navigation }) => {
               img={
                 recipients[index].img ? { uri: recipients[index].img } : null
               }
+              currIdx={index}
             />
           )}
         />

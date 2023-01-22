@@ -38,10 +38,6 @@ import Icon from "react-native-vector-icons/Ionicons";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-// global.currRec = "123";
-
-const loggedIn = true;
-
 import { LogBox } from "react-native";
 LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
@@ -135,7 +131,7 @@ export default function App() {
   if (initializing) return null;
 
   if (user) {
-    global.currRecipient = "123";
+    global.currRecipient = user.uid;
     return (
       <NavigationContainer>
         <Tab.Navigator
@@ -164,7 +160,7 @@ export default function App() {
           <Tab.Screen
             name="Saved"
             component={SavedStack}
-            options={{ tabBarBadge: 32 }}
+            // options={{ tabBarBadge: 32 }}
           />
           <Tab.Screen name="Profile" component={ProfileStack} />
         </Tab.Navigator>

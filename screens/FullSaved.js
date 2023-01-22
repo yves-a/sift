@@ -1,29 +1,7 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-  FlatList,
-} from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
+import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import SavedCard from "../components/SavedCard";
-
-const data = [
-  {
-    id: 1,
-    title: "Nike Air Force 1 '07",
-  },
-  {
-    id: 2,
-    title: "Nike Air Force 1 '07",
-  },
-  {
-    id: 2,
-    title: "Nike Air Force 1 '07",
-  },
-];
 
 const FullSaved = ({ navigation, route }) => {
   const { items } = route.params;

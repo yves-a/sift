@@ -2,17 +2,14 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   TextInput,
   TouchableOpacity,
-  Image,
 } from "react-native";
 import React, { useState } from "react";
-import { Formik } from "formik";
 import styles from "./LoginInFlow.style.js";
 import { AntDesign } from "@expo/vector-icons";
 import { auth, createUserWithEmailAndPassword } from "../firebase.js";
-import { createUser, health } from "../clients/FlaskServer.js";
+import { createUser } from "../clients/FlaskServer.js";
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -1,14 +1,9 @@
-import { View, Text, StyleSheet, Pressable, Image } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import React, { useState } from "react";
-import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const Home = ({ navigation }) => {
-  let [fontsLoaded, error] = useFonts({
-    "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
-  });
-
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("Home");
   const [items, setItems] = useState([

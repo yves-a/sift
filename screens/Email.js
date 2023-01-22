@@ -1,13 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from "react-native";
-import { Formik } from "formik";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./LoginInFlow.style.js";
 import { AntDesign } from "@expo/vector-icons";
 const Email = (props) => {

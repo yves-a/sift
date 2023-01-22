@@ -1,15 +1,9 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useState } from "react";
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const Gender = ({ navigation, route }) => {
-  let [fontsLoaded, error] = useFonts({
-    "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
-  });
-
   const { recipient } = route.params;
 
   const [open, setOpen] = useState(false);

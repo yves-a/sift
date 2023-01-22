@@ -63,7 +63,7 @@ class ProductCard extends Component {
                 )}
               </Pressable>
             </View>
-            <Text style={styles.priceText}>{this.props.item.price}</Text>
+            <Text style={styles.priceText}>{this.props.item.price} CA</Text>
           </View>
         </LinearGradient>
         {/* </ImageBackground> */}

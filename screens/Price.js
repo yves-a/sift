@@ -1,19 +1,6 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  Platform,
-  Dimensions,
-  SafeAreaView,
-  Button,
-  BackHandler,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import React, { useState } from "react";
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
-import DropDownPicker from "react-native-dropdown-picker";
+import React from "react";
 import { createRecipient } from "../clients/FlaskServer";
 import { auth } from "../firebase";
 

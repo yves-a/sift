@@ -1,32 +1,9 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-  FlatList,
-  CheckBox,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import AddSavedCard from "../components/AddSavedCard";
 import { getSavedProducts } from "../clients/FlaskServer";
 import { auth } from "../firebase";
-
-const data = [
-  {
-    id: 1,
-    title: "Nike Air Force 1 '07",
-  },
-  {
-    id: 2,
-    title: "Nike Air Force 1 '07",
-  },
-  {
-    id: 2,
-    title: "Nike Air Force 1 '07",
-  },
-];
 
 const AddSaved = ({ navigation, route }) => {
   const [savedProducts, setSavedProducts] = useState([]);

@@ -1,27 +1,9 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  Platform,
-  Dimensions,
-  SafeAreaView,
-  Button,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import React, { useState } from "react";
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
-import DropDownPicker from "react-native-dropdown-picker";
 import CirculeButton from "../components/CircleButton";
 
-const { width, height } = Dimensions.get("window");
-
 const InterestsV2 = ({ navigation, route }) => {
-  let [fontsLoaded, error] = useFonts({
-    "SF-Pro-Display": require("../assets/fonts/SF-Pro-Display-Regular.otf"),
-  });
-
   const { recipient } = route.params;
 
   const [sports, setSports] = useState(false);
