@@ -9,10 +9,6 @@ import { useFocusEffect } from "@react-navigation/native";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
-const COUNT = 3;
-
-const itemSize = 200;
-
 const baseOption = {
   vertical: false,
   width: SCREEN_WIDTH / 1.5,
@@ -26,20 +22,19 @@ const baseOption = {
 const Profile = ({ route, navigation }) => {
   const [recipients, setRecipients] = useState([]);
 
-  useEffect(async () => {
-    console.log("useEffect");
-    const response = await getAllRecipients(auth.currentUser.uid);
-    console.log(response);
-    setRecipients(response);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await getAllRecipients(auth.currentUser.uid);
+      setRecipients(response);
+    }
+    fetchData();
   }, []);
 
   useFocusEffect(
     React.useCallback(() => {
       async function fetchData() {
         const response = await getAllRecipients(auth.currentUser.uid);
-        // const updatedRecipients = e;
         if (response.length != recipients.length) {
-          console.log("Updated Recipients");
           setRecipients(response);
         }
       }
@@ -66,7 +61,6 @@ const Profile = ({ route, navigation }) => {
             opacityInterval: 2,
           }}
           onSnapToItem={(index) => {
-            console.log(recipients[index]._id);
             global.currRec = recipients[index]._id;
           }}
           renderItem={({ index, animationValue }) => (

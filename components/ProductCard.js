@@ -46,8 +46,6 @@ class ProductCard extends Component {
             <View style={styles.textContainer}>
               <Pressable
                 onPress={() => {
-                  console.log("pressed");
-                  // console.log(this.props.item);
                   this.props.navigation.navigate("Product", {
                     item: this.props.item,
                   });

@@ -293,7 +293,6 @@ export const getAllCollections = async (recipientId) => {
 };
 
 export const getRecommendations = async (recipientId) => {
-  console.log(`Recipient: ${recipientId}`);
   let headers = {};
   if (!recipientId) {
     headers = {

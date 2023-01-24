@@ -15,8 +15,6 @@ const Personality = ({ navigation, route }) => {
   const [workaholic, setworkaholic] = useState(false);
   const [active, setactive] = useState(false);
   const [simple, setsimple] = useState(false);
-
-  const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
   const updateValues = (interest) => {
     if (value.includes(interest)) {
@@ -222,7 +220,6 @@ const styles = StyleSheet.create({
   header: {
     flexShrink: 1,
     fontSize: 40,
-    fontFamily: "SF-Pro-Display",
     color: "#1C1B1F",
     paddingVertical: "6%",
   },

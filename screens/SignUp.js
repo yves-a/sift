@@ -19,11 +19,9 @@ const SignUp = ({ navigation }) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (response) => {
         const create = await createUser(response.user.uid);
-        console.log(create);
         navigation.navigate("Loading");
       })
       .catch((error) => {
-        console.log(error);
         setError(error.message);
       });
   };

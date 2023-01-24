@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
     marginTop: -200,
   },
   title: {
-    fontFamily: "SF Pro Display",
     fontStyle: "normal",
     fontSize: "24px",
     fontWeight: "400",
@@ -132,7 +131,6 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   formButtonTextSignUp: {
-    fontFamily: "SF Pro Display",
     fontStyle: "normal",
     fontSize: "14px",
     fontWeight: "500",

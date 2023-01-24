@@ -10,7 +10,6 @@ const CollectionCard = ({ navigation, item }) => {
   return (
     <Pressable
       onPress={() => {
-        console.log("pressed");
         navigation.navigate("Collection", { item });
       }}
       style={styles.container}

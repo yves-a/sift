@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import React, { useState } from "react";
-import AppLoading from "expo-app-loading";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const Interests = ({ navigation, route }) => {
@@ -17,10 +16,6 @@ const Interests = ({ navigation, route }) => {
     { label: "Cooking & Baking", value: "cookingBaking" },
     { label: "Don't Know", value: "dontKnow" },
   ]);
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
 
   return (
     <View style={styles.container}>
@@ -116,7 +111,6 @@ const styles = StyleSheet.create({
   header: {
     flexShrink: 1,
     fontSize: 45,
-    fontFamily: "SF-Pro-Display",
     color: "#1C1B1F",
     paddingBottom: "10%",
   },

@@ -10,9 +10,7 @@ const handleCreateRecipient = async (recipient) => {
     ...recipient,
     ownerId: userId,
   };
-  console.log(recipientData);
   const response = await createRecipient(recipientData);
-  console.log(response);
 };
 
 const Price = ({ navigation, route }) => {
@@ -106,7 +104,6 @@ const Price = ({ navigation, route }) => {
         <Pressable
           onPress={async () => {
             if (pressIndex1 != null) {
-              console.log(recipient);
               await handleCreateRecipient({
                 ...recipient,
                 price: currentIndex,

@@ -6,7 +6,6 @@ import SavedCard from "../components/SavedCard";
 const FullSaved = ({ navigation, route }) => {
   const { items } = route.params;
 
-  console.log(items);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -26,7 +25,7 @@ const FullSaved = ({ navigation, route }) => {
         <ScrollView style={{ height: "100%" }}>
           <View style={styles.savedContainer}>
             {items.map((item) => (
-              <SavedCard navigation={navigation} item={item} />
+              <SavedCard key={item._id} navigation={navigation} item={item} />
             ))}
           </View>
         </ScrollView>

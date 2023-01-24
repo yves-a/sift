@@ -7,7 +7,6 @@ export default class PurchaseDate extends Component {
   constructor(props) {
     super(props);
     this.state = { date: null, dt: "", registrationDate: "" };
-    console.log(this.props.route.params.recipient);
   }
 
   checkValue(str, max) {

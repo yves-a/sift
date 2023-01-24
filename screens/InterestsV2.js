@@ -238,7 +238,6 @@ const styles = StyleSheet.create({
   header: {
     flexShrink: 1,
     fontSize: 40,
-    fontFamily: "SF-Pro-Display",
     color: "#1C1B1F",
     paddingVertical: "6%",
   },

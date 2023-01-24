@@ -10,19 +10,20 @@ const Collection = ({ navigation, route }) => {
 
   const { item } = route.params;
 
-  useEffect(async () => {
-    const rslt = await getCollection(item._id);
-    setCollectionProducts(rslt["products"]);
+  useEffect(() => {
+    async function fetchData() {
+      const rslt = await getCollection(item._id);
+      setCollectionProducts(rslt["products"]);
+    }
+    fetchData();
   }, []);
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log("Screen was focused");
       async function fetchData() {
         const rslt = await getCollection(item._id);
         setCollectionProducts(rslt["products"]);
       }
-      console.log("Request Sent");
       fetchData();
     }, [])
   );
@@ -80,7 +81,7 @@ const Collection = ({ navigation, route }) => {
         <ScrollView style={{ height: "100%" }}>
           <View style={styles.savedContainer}>
             {collectionProducts.map((item) => (
-              <SavedCard navigation={navigation} item={item} />
+              <SavedCard key={item._id} navigation={navigation} item={item} />
             ))}
           </View>
         </ScrollView>

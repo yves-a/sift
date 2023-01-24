@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 42,
-    fontFamily: "SF-Pro-Display",
     color: "#1C1B1F",
     flex: 0.28,
     marginBottom: "8%",

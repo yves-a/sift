@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
 import Cards from "../components/Cards";
 import { useFocusEffect } from "@react-navigation/native";
-import AppLoading from "expo-app-loading";
 import { getRecommendations } from "../clients/FlaskServer";
 import { auth } from "../firebase";
 
@@ -14,27 +13,24 @@ let currId = 0;
 const Swipe = ({ navigation, route }) => {
   const [recommendations, setRecommendations] = useState([]);
 
-  useEffect(async () => {
-    if (global.currRec == "123" || global.currRec == null) {
-      global.currRec = auth.currentUser.uid;
+  useEffect(() => {
+    async function fetchData() {
+      if (global.currRec == "123" || global.currRec == null) {
+        global.currRec = auth.currentUser.uid;
+      }
+      const id = global.currRec == auth.currentUser.uid ? null : global.currRec;
+      const rslt = await getRecommendations(id);
+      setRecommendations(rslt);
     }
-    console.log("Current: " + global.currRec);
-    const id = global.currRec == auth.currentUser.uid ? null : global.currRec;
-    const rslt = await getRecommendations(id);
-    console.log(rslt);
-    setRecommendations(rslt);
+    fetchData();
   }, []);
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log("Screen was focused");
-      console.log("Current: " + auth.currentUser.uid);
-      console.log("Global: " + global.currRec);
       async function fetchData() {
         if (global.currRec == "123" || global.currRec == null) {
           global.currRec = auth.currentUser.uid;
         }
-        console.log("Currents: " + global.currRec);
         const id =
           global.currRec == auth.currentUser.uid ? null : global.currRec;
 
@@ -44,14 +40,13 @@ const Swipe = ({ navigation, route }) => {
       }
 
       if (currId != global.currRec) {
-        console.log("Request Sent");
         fetchData();
       }
     }, [])
   );
 
   if (recommendations == null || recommendations.length === 0) {
-    return <AppLoading />;
+    return;
   }
 
   return (

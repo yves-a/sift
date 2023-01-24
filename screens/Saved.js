@@ -11,22 +11,22 @@ const Saved = ({ navigation }) => {
   const [collections, setCollections] = useState([]);
   const [savedProducts, setSaveProducts] = useState([]);
 
-  useEffect(async () => {
-    if (global.currRec == "123" || global.currRec == null) {
-      global.currRec = auth.currentUser.uid;
+  useEffect(() => {
+    async function fetchData() {
+      if (global.currRec == "123" || global.currRec == null) {
+        global.currRec = auth.currentUser.uid;
+      }
+      const id = global.currRec;
+      const rslt = await getSavedProducts(id);
+      setSaveProducts(rslt.reverse());
+      const rslt1 = await getAllCollections(id);
+      setCollections(rslt1);
     }
-    const id = global.currRec;
-    const rslt = await getSavedProducts(id);
-    console.log(rslt);
-    setSaveProducts(rslt.reverse());
-    const rslt1 = await getAllCollections(id);
-    setCollections(rslt1);
-    console.log(rslt);
+    fetchData();
   }, []);
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log("Screen was focused");
       async function fetchData() {
         if (global.currRec == "123" || global.currRec == null) {
           global.currRec = auth.currentUser.uid;
@@ -43,9 +43,7 @@ const Saved = ({ navigation }) => {
           setCollections(rslt1);
         }
         currId = global.currRec;
-        console.log(rslt1);
       }
-      console.log("Request Sent");
       fetchData();
     }, [])
   );
@@ -64,7 +62,7 @@ const Saved = ({ navigation }) => {
             {savedProducts
               .slice(0, Math.min(3, savedProducts.length))
               .map((item) => (
-                <SavedCard item={item} navigation={navigation} />
+                <SavedCard key={item._id} item={item} navigation={navigation} />
               ))}
           </View>
           {savedProducts.length != 0 && (
@@ -105,6 +103,7 @@ const Saved = ({ navigation }) => {
           <View style={styles.collectionContainer}>
             {collections.map((item) => (
               <CollectionCard
+                key={item._id}
                 navigation={navigation}
                 item={item}
                 style={{ borderRadius: 20 }}

@@ -1,10 +1,7 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React, { useState, useEffect } from "react";
-import Home from "./screens/Home";
 import Name from "./screens/Name";
 import Login from "./screens/Login";
 import Forgot from "./screens/Forgot";
@@ -22,7 +19,6 @@ import Loading from "./screens/Loading";
 import InterestsV2 from "./screens/InterestsV2";
 import CreateCollection from "./screens/CreateCollection";
 import Gender from "./screens/Gender";
-import Overlays from "./screens/Overlays";
 import Age from "./screens/Age";
 import Personality from "./screens/Personality";
 import Saved from "./screens/Saved";
@@ -30,8 +26,7 @@ import FullSaved from "./screens/FullSaved";
 import Collection from "./screens/Collection";
 import AddSaved from "./screens/AddSaved";
 import Product from "./screens/Product";
-// import Over
-import { auth, onAuthStateChanged } from "./firebase.js";
+import { auth } from "./firebase.js";
 
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -39,8 +34,8 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 import { LogBox } from "react-native";
-LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
-LogBox.ignoreAllLogs(); //Ignore all log notifications
+// LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+// LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 function ProfileStack() {
   return (
@@ -76,9 +71,7 @@ function SavedStack() {
       <Stack.Screen name="FullSaved" component={FullSaved} />
       <Stack.Screen name="Collection" component={Collection} />
       <Stack.Screen name="AddSaved" component={AddSaved} />
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="CreateCollection" component={CreateCollection} />
-      <Stack.Screen name="Overlays" component={Overlays} />
       <Stack.Screen name="Product" component={Product} />
     </Stack.Navigator>
   );
@@ -157,11 +150,7 @@ export default function App() {
           })}
         >
           <Tab.Screen name="Swipe" component={SwipeStack} />
-          <Tab.Screen
-            name="Saved"
-            component={SavedStack}
-            // options={{ tabBarBadge: 32 }}
-          />
+          <Tab.Screen name="Saved" component={SavedStack} />
           <Tab.Screen name="Profile" component={ProfileStack} />
         </Tab.Navigator>
       </NavigationContainer>
@@ -174,12 +163,3 @@ export default function App() {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: "#00fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

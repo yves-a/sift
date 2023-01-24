@@ -22,7 +22,6 @@ const Name = ({ navigation }) => {
         onSubmit={async (values) => {
           if (values.name !== "") {
             const response = await addName(auth.currentUser.uid, values.name);
-            console.log(response);
             navigation.navigate("Home");
           }
         }}

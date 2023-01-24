@@ -189,7 +189,6 @@ class Cards extends Component {
               }).start();
             }
           );
-          console.log(`Trashed ${this.users[this.state.currentIndex].title}`);
           this.users.splice(this.state.currentIndex, 1);
           if (this.users.length === 0) {
             this.updateUsers();
@@ -216,7 +215,6 @@ class Cards extends Component {
             this.users[this.state.currentIndex].asin ||
             this.users[this.state.currentIndex]._id;
           saveProduct(id, global.currRec);
-          console.log(`Saved ${id} to ${global.currRec}`);
           this.users.splice(this.state.currentIndex, 1);
         } else {
           Animated.spring(this.position, {
@@ -232,7 +230,6 @@ class Cards extends Component {
   componentWillReceiveProps(props) {
     const { users } = this.props;
     if (props.users !== users) {
-      console.log("users changed");
       this.setState({ currentIndex: 0 });
       this.users = props.users;
     }

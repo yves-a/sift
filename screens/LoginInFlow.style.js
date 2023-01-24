@@ -25,7 +25,6 @@ export default StyleSheet.create({
     marginTop: -350,
   },
   title: {
-    fontFamily: "SF Pro Display",
     fontStyle: "normal",
     fontSize: "45px",
     fontWeight: "400",
@@ -37,7 +36,6 @@ export default StyleSheet.create({
     alignSelf: "flex-start",
   },
   subheading: {
-    fontFamily: "SF Pro Display",
     fontStyle: "normal",
     fontSize: "12px",
     fontWeight: "500",
@@ -50,7 +48,6 @@ export default StyleSheet.create({
     marginTop: 5,
   },
   subheadingTOS: {
-    fontFamily: "SF Pro Display",
     fontStyle: "normal",
     fontSize: "12px",
     fontWeight: "400",
@@ -60,11 +57,8 @@ export default StyleSheet.create({
     color: "rgba(0, 0, 0, 0.5)",
     alignSelf: "center",
     margin: 10,
-    // height: 'fitContent',
-    // backgroundColor: 'black',
   },
   subheadingForgot: {
-    fontFamily: "SF Pro Display",
     fontStyle: "normal",
     fontSize: "12px",
     fontWeight: "400",
@@ -79,7 +73,6 @@ export default StyleSheet.create({
   },
 
   subheadingEmail: {
-    fontFamily: "SF Pro Display",
     fontStyle: "normal",
     fontSize: "12px",
     fontWeight: "400",
@@ -148,7 +141,6 @@ export default StyleSheet.create({
     bottom: "-30%",
   },
   formButtonText: {
-    fontFamily: "SF Pro Display",
     fontStyle: "normal",
     fontSize: "14px",
     fontWeight: "500",
@@ -158,7 +150,6 @@ export default StyleSheet.create({
     alignSelf: "center",
   },
   formButtonTextSignUp: {
-    fontFamily: "SF Pro Display",
     fontStyle: "normal",
     fontSize: "14px",
     fontWeight: "500",

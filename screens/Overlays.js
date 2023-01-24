@@ -216,7 +216,6 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   optionText: {
-    fontFamily: "SF Pro Display",
     fontStyle: "500",
     fontSize: "16px",
     lineHeight: "24px",

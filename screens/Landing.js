@@ -1,16 +1,5 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
-import { Formik } from "formik";
-import gift from "../assets/images/gift.png";
-import confetti from "../assets/images/confetti.png";
 import whitelogo from "../assets/images/whitelogo.png";
 import { AntDesign } from "@expo/vector-icons";
 import {
@@ -23,27 +12,27 @@ import {
 const Landing = ({ navigation }) => {
   const [signInOptions, setSignInOptions] = useState(false);
 
-  const googleSignIn = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-  };
+  // const googleSignIn = () => {
+  //   signInWithPopup(auth, provider)
+  //     .then((result) => {
+  //       // This gives you a Google Access Token. You can use it to access the Google API.
+  //       const credential = GoogleAuthProvider.credentialFromResult(result);
+  //       const token = credential.accessToken;
+  //       // The signed-in user info.
+  //       const user = result.user;
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       // Handle Errors here.
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       // The email of the user's account used.
+  //       const email = error.customData.email;
+  //       // The AuthCredential type that was used.
+  //       const credential = GoogleAuthProvider.credentialFromError(error);
+  //       // ...
+  //     });
+  // };
 
   return (
     <View
@@ -182,7 +171,6 @@ const styles = StyleSheet.create({
     left: "5%",
   },
   title: {
-    // fontFamily: "Bryant Pro",
     fontSize: "57px",
     fontWeight: "700",
     lineHeight: "64px",
@@ -220,8 +208,6 @@ const styles = StyleSheet.create({
     color: "#FCFCFC",
   },
   buttonText: {
-    // fontFamily: "SF Pro Display",
-    fontStyle: "normal",
     fontWeight: "500",
     fontSize: "14px",
     lineHeight: "18px",
@@ -244,8 +230,6 @@ const styles = StyleSheet.create({
     gap: "8px",
   },
   subheading: {
-    // fontFamily: "SF Pro Display",
-    fontStyle: "normal",
     fontSize: "12px",
     fontWeight: "500",
     lineHeight: "20px",

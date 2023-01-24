@@ -10,11 +10,12 @@ const AddSaved = ({ navigation, route }) => {
 
   const { collectionId } = route.params;
 
-  useEffect(async () => {
-    const id = global.currRec == auth.currentUser.uid ? null : global.currRec;
-    const rslt = await getSavedProducts(id);
-    console.log(rslt);
-    setSavedProducts(rslt);
+  useEffect(() => {
+    async function fetchData() {
+      const rslt = await getSavedProducts(global.currRec);
+      setSavedProducts(rslt);
+    }
+    fetchData();
   }, []);
 
   return (
@@ -38,6 +39,7 @@ const AddSaved = ({ navigation, route }) => {
           <View style={styles.savedContainer}>
             {savedProducts.map((item) => (
               <AddSavedCard
+                key={item._id}
                 navigation={navigation}
                 item={item}
                 collectionId={collectionId}
