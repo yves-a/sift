@@ -227,7 +227,7 @@ class Cards extends Component {
     });
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     const { users } = this.props;
     if (props.users !== users) {
       this.setState({ currentIndex: 0 });

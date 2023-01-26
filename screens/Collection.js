@@ -36,7 +36,7 @@ const Collection = ({ navigation, route }) => {
             navigation.goBack();
           }}
         >
-          <Icon name="chevron-back-outline" size={"40%"} color="black" />
+          <Icon name="chevron-back-outline" size={40} color="black" />
         </Pressable>
         <Text style={{ right: 20, fontSize: 20 }}></Text>
         <Text></Text>

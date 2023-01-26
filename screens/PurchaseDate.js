@@ -59,7 +59,7 @@ export default class PurchaseDate extends Component {
               title="Go to Page"
               accessibilityLabel="Go to the previous page, Shopping For."
             >
-              <Icon name="chevron-back-outline" size={"40%"} color="#1C1B1F" />
+              <Icon name="chevron-back-outline" size={40} color="#1C1B1F" />
             </Pressable>
           </View>
         </View>

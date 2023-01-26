@@ -2,12 +2,12 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import whitelogo from "../assets/images/whitelogo.png";
 import { AntDesign } from "@expo/vector-icons";
-import {
-  auth,
-  provider,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "../firebase";
+// import {
+//   auth,
+//   provider,
+//   signInWithPopup,
+//   GoogleAuthProvider,
+// } from "../firebase";
 
 const Landing = ({ navigation }) => {
   const [signInOptions, setSignInOptions] = useState(false);
@@ -171,10 +171,10 @@ const styles = StyleSheet.create({
     left: "5%",
   },
   title: {
-    fontSize: "57px",
+    fontSize: 57,
     fontWeight: "700",
-    lineHeight: "64px",
-    letterSpacing: "-4px",
+    lineHeight: 64,
+    letterSpacing: -4,
     textAlign: "left",
     color: "#FFFFFF",
     position: "relative",
@@ -194,8 +194,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderStyle: "solid",
     borderColor: "#FCFCFC",
-    borderWidth: "2px",
-    borderRadius: "7px",
+    borderWidth: 2,
+    borderRadius: 7,
     paddingVertical: 8,
     paddingHorizontal: 12,
     height: 44,
@@ -204,21 +204,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 5,
-    gap: "8px",
+    gap: 8,
     color: "#FCFCFC",
   },
   buttonText: {
     fontWeight: "500",
-    fontSize: "14px",
-    lineHeight: "18px",
+    fontSize: 14,
+    lineHeight: 18,
   },
   createAccountButton: {
     elevation: 8,
     backgroundColor: "#FCFCFC",
     borderStyle: "solid",
     borderColor: "#FCFCFC",
-    borderWidth: "2px",
-    borderRadius: "7px",
+    borderWidth: 2,
+    borderRadius: 7,
     paddingVertical: 8,
     paddingHorizontal: 12,
     height: 44,
@@ -227,13 +227,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 5,
-    gap: "8px",
+    gap: 8,
   },
   subheading: {
-    fontSize: "12px",
+    fontSize: 12,
     fontWeight: "500",
-    lineHeight: "20px",
-    letterSpacing: "0.1px",
+    lineHeight: 20,
+    letterSpacing: 0.1,
     textAlign: "right",
     color: "#FCFCFC",
     alignSelf: "flex-end",

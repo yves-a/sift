@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useState, useEffect } from "react";
 import Name from "./screens/Name";
 import Login from "./screens/Login";
@@ -34,8 +35,11 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 import { LogBox } from "react-native";
-// LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
-// LogBox.ignoreAllLogs(); //Ignore all log notifications
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+// LogBox.ignoreLogs([
+//   ["Warning: Async Storage has been extracted from react-native core"],
+// ]);
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 function ProfileStack() {
   return (
@@ -126,40 +130,52 @@ export default function App() {
   if (user) {
     global.currRecipient = user.uid;
     return (
-      <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName = "bookmark";
+      <SafeAreaView style={{ flex: 1 }}>
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName = "bookmark";
 
-              if (route.name === "Saved") {
-                iconName = focused ? "bookmark" : "bookmark-outline";
-              } else if (route.name === "Swipe") {
-                iconName = focused ? "gift" : "gift-outline";
-              } else if (route.name === "Profile") {
-                iconName = focused ? "person-circle" : "person-circle-outline";
-              }
+                if (route.name === "SavedTab" || route.name === "Saved") {
+                  iconName = focused ? "bookmark" : "bookmark-outline";
+                } else if (
+                  route.name === "SwipeTab" ||
+                  route.name === "Swipe"
+                ) {
+                  iconName = focused ? "gift" : "gift-outline";
+                } else if (
+                  route.name === "ProfileTab" ||
+                  route.name === "Profile"
+                ) {
+                  iconName = focused
+                    ? "person-circle"
+                    : "person-circle-outline";
+                }
 
-              return <Icon name={iconName} size={size} color={color} />;
-            },
-            cardStyle: { backgroundColor: "white" },
-            headerShown: false,
-            tabBarShowLabel: false,
-            tabBarActiveTintColor: "#3D6F99",
-            tabBarInactiveTintColor: "gray",
-          })}
-        >
-          <Tab.Screen name="Swipe" component={SwipeStack} />
-          <Tab.Screen name="Saved" component={SavedStack} />
-          <Tab.Screen name="Profile" component={ProfileStack} />
-        </Tab.Navigator>
-      </NavigationContainer>
+                return <Icon name={iconName} size={size} color={color} />;
+              },
+              cardStyle: { backgroundColor: "white" },
+              headerShown: false,
+              tabBarShowLabel: false,
+              tabBarActiveTintColor: "#3D6F99",
+              tabBarInactiveTintColor: "gray",
+            })}
+          >
+            <Tab.Screen name="SwipeTab" component={SwipeStack} />
+            <Tab.Screen name="SavedTab" component={SavedStack} />
+            <Tab.Screen name="ProfileTab" component={ProfileStack} />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
     );
   } else {
     return (
-      <NavigationContainer>
-        <UnauthenticatedStack />
-      </NavigationContainer>
+      <SafeAreaView style={{ flex: 1 }}>
+        <NavigationContainer>
+          <UnauthenticatedStack />
+        </NavigationContainer>
+      </SafeAreaView>
     );
   }
 }

@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "ca.getsift.sift",
-      "buildNumber": "3.0.0"
+      "buildNumber": "6.0.0"
     },
     "android": {
       "adaptiveIcon": {

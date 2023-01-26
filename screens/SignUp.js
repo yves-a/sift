@@ -76,7 +76,7 @@ const customStyles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    position: "fixed",
+    // position: "fixed",
     marginTop: -200,
   },
 });

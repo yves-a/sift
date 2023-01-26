@@ -30,7 +30,7 @@ const Interests = ({ navigation, route }) => {
           title="Go to Page"
           accessibilityLabel="Go back a page."
         >
-          <Icon name="chevron-back-outline" size={"40%"} color="#1C1B1F" />
+          <Icon name="chevron-back-outline" size={40} color="#1C1B1F" />
         </Pressable>
       </View>
       <View style={styles.body}>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "top",
+    // justifyContent: "top",
     top: "10%",
   },
   backButton: {
