@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Ionicons";
 import React, { useState } from "react";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -30,7 +30,7 @@ const Interests = ({ navigation, route }) => {
           title="Go to Page"
           accessibilityLabel="Go back a page."
         >
-          <Icon name="chevron-left" size={"40%"} color="#1C1B1F" />
+          <Icon name="chevron-back-outline" size={"40%"} color="#1C1B1F" />
         </Pressable>
       </View>
       <View style={styles.body}>
