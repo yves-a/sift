@@ -21,6 +21,8 @@ const baseOption = {
 
 const Profile = ({ route, navigation }) => {
   const [recipients, setRecipients] = useState([]);
+  const [currImg, setCurrImage] = useState(0);
+  const [currName, setCurrName] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
@@ -62,6 +64,8 @@ const Profile = ({ route, navigation }) => {
           }}
           onSnapToItem={(index) => {
             global.currRec = recipients[index]._id;
+            setCurrImage(recipients[index].img);
+            setCurrName(recipients[index].name);
           }}
           renderItem={({ index, animationValue }) => (
             <ProfileCard
@@ -101,7 +105,10 @@ const Profile = ({ route, navigation }) => {
           <Text style={styles.buttonText}>Add Profile</Text>
         </View>
         <View style={styles.button}>
-          <Pressable>
+          <Pressable
+          onPress={() => {
+            navigation.navigate("EditProfile", {id: global.currRec, img: currImg, name: currName});
+        }}>
             <Icon
               style={{ ...styles.icon, left: 3, top: 25 }}
               name="pencil-outline"

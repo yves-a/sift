@@ -8,7 +8,7 @@ import Login from "./screens/Login";
 import Forgot from "./screens/Forgot";
 import Email from "./screens/Email";
 import SignUp from "./screens/SignUp";
-import Relationship from "./screens/Relationship";
+import Relationship from "./screens/relationship";
 import Interests from "./screens/Interests";
 import Swipe from "./screens/Swipe";
 import Price from "./screens/Price";
@@ -27,6 +27,7 @@ import FullSaved from "./screens/FullSaved";
 import Collection from "./screens/Collection";
 import AddSaved from "./screens/AddSaved";
 import Product from "./screens/Product";
+import EditProfile from "./screens/EditProfile";
 import { auth } from "./firebase.js";
 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -60,6 +61,7 @@ function ProfileStack() {
       <Stack.Screen name="Gender" component={Gender} />
       <Stack.Screen name="Age" component={Age} />
       <Stack.Screen name="Personality" component={Personality} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
     </Stack.Navigator>
   );
 }
