@@ -1,7 +1,8 @@
 // var axios = require("axios");
 import axios from "axios";
 
-const baseUrl = "https://api.getsift.ca";
+// const baseUrl = "https://api.getsift.ca";
+const baseUrl = "https://2145-184-148-104-118.ngrok.io";
 
 // RECIPIENTS
 

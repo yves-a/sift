@@ -24,6 +24,20 @@ const Profile = ({ route, navigation }) => {
   const [currImg, setCurrImage] = useState(0);
   const [currName, setCurrName] = useState(0);
 
+  const checkName = (name) => {
+    if (name == null) {
+      return "Me";
+    } else if (name == "ME") {
+      if (auth.currentUser.displayName == null) {
+        return "Me";
+      } else {
+        return auth.currentUser.displayName;
+      }
+    } else {
+      return name;
+    }
+  };
+
   useEffect(() => {
     async function fetchData() {
       const response = await getAllRecipients(auth.currentUser.uid);
@@ -69,7 +83,11 @@ const Profile = ({ route, navigation }) => {
           }}
           renderItem={({ index, animationValue }) => (
             <ProfileCard
-              name={recipients[index].name}
+              name={
+                checkName(recipients[index]._id) == auth.currentUser.uid
+                  ? `${checkName(recipients[index].name)} (Me)`
+                  : checkName(recipients[index].name)
+              }
               img={
                 recipients[index].img ? { uri: recipients[index].img } : null
               }
@@ -106,9 +124,16 @@ const Profile = ({ route, navigation }) => {
         </View>
         <View style={styles.button}>
           <Pressable
-          onPress={() => {
-            navigation.navigate("EditProfile", {id: global.currRec, img: currImg, name: currName});
-        }}>
+            onPress={() => {
+              navigation.navigate("EditProfile", {
+                id: global.currRec,
+                img: currImg,
+                name: currName,
+                recipients: recipients,
+                setRecipients: setRecipients,
+              });
+            }}
+          >
             <Icon
               style={{ ...styles.icon, left: 3, top: 25 }}
               name="pencil-outline"

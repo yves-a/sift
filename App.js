@@ -8,7 +8,7 @@ import Login from "./screens/Login";
 import Forgot from "./screens/Forgot";
 import Email from "./screens/Email";
 import SignUp from "./screens/SignUp";
-import Relationship from "./screens/relationship";
+import Relationship from "./screens/Relationship";
 import Interests from "./screens/Interests";
 import Swipe from "./screens/Swipe";
 import Price from "./screens/Price";
