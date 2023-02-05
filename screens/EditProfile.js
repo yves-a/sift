@@ -110,7 +110,10 @@ const EditProfile = ({ route, navigation }) => {
       </View>
       <View style={styles.itemsContainer}>
         <View style={styles.imageContainer}>
-          <Image style={styles.profileImage} source={profileImage}></Image>
+          <Image
+            style={styles.profileImage}
+            source={profileImage || require("../assets/images/profile.jpg")}
+          ></Image>
         </View>
         <Pressable
           onPress={() => {

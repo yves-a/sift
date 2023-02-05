@@ -4,16 +4,19 @@ import {
   StyleSheet,
   Pressable,
   Image,
-  TextInput,
   Text,
+  TextInput,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
-import { updateProfile } from "firebase/auth";
+import {
+  deleteUser,
+  signOut,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+} from "firebase/auth";
 import { auth, storage } from "../firebase";
-import { LinearGradient } from "expo-linear-gradient";
-import * as ImagePicker from "expo-image-picker";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
 
 const checkName = (name) => {
   if (name == null) {
@@ -29,57 +32,26 @@ const checkName = (name) => {
   }
 };
 
-const Settings = ({ route, navigation }) => {
-  const { id, img, name, recipients, setRecipients } = route.params;
-  const [originalName, setOriginalName] = useState(checkName(name));
+const EditProfile = ({ route, navigation }) => {
+  const { id, name } = route.params;
   const [profileImage, setProfileImage] = useState();
   const [text, setText] = useState(checkName(name));
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [password, setPassword] = useState("");
 
-  const handleUpdateName = () => {
-    if (text != originalName) {
-      if (id == auth.currentUser.uid) {
-        updateProfile(auth.currentUser, {
-          displayName: text,
-        });
-      } else {
-      }
-    }
+  const handleDeleteAccount = async () => {
+    const credential = EmailAuthProvider.credential(
+      auth.currentUser.email,
+      password
+    );
 
-    const updatedRecipients = recipients.map((recipient) => {
-      if (recipient._id == id) {
-        recipient.name = text;
-      }
-      return recipient;
-    });
-    setRecipients(updatedRecipients);
+    await reauthenticateWithCredential(auth.currentUser, credential);
+
+    await deleteUser(auth.currentUser);
   };
 
-  const [image, setImage] = useState(img || "../assets/images/image.png");
-
-  const handleEditImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    const storageRef = ref(storage, "images/" + id);
-    const file = await fetch(result.assets[0].uri);
-    const blob = await file.blob();
-
-    // setImage(result.assets[0]);
-
-    // console.log(await getDownloadURL(ref(storage, "images/" + id)));
-    uploadBytes(storageRef, blob);
-
-    getDownloadURL(storageRef).then((url) => {
-      setImage(url);
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
+  const handleSignout = async () => {
+    await signOut(auth);
   };
 
   useEffect(() => {
@@ -87,68 +59,87 @@ const Settings = ({ route, navigation }) => {
       try {
         const url = await getDownloadURL(ref(storage, `images/${id}`));
         setProfileImage({ uri: url });
-        console.log(url);
-      } catch (error) {
-        // console.log(error);
-        // return null;
-      }
+      } catch (error) {}
     }
     fetchImage();
   }, [id]);
 
   return (
     <View>
+      {confirmDelete && (
+        <View style={styles.confirmDelete}>
+          <Text style={styles.confirmDeleteText}>
+            Are you sure you want to delete this account?
+          </Text>
+          <Text style={{ fontSize: 20, textAlign: "center" }}>
+            Type your password to confirm.
+          </Text>
+          <TextInput
+            style={styles.confirmDeleteInput}
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
+          ></TextInput>
+          <View style={styles.confirmDeleteButtons}>
+            <Pressable
+              onPress={() => {
+                setConfirmDelete(false);
+              }}
+            >
+              <Text style={styles.confirmDeleteButtonText}>Cancel</Text>
+            </Pressable>
+            <Pressable onPress={handleDeleteAccount}>
+              <Text style={styles.confirmDeleteButtonText}>Delete</Text>
+            </Pressable>
+          </View>
+        </View>
+      )}
       <View style={{ backgroundColor: "white", height: 1000 }} />
       <View style={styles.header}>
         <Pressable
           onPress={() => {
-            handleUpdateName();
             navigation.goBack();
           }}
         >
           <Icon name="chevron-back-outline" size={40} color="black" />
         </Pressable>
       </View>
+      <Pressable onPress={handleSignout}>
+        <Icon name={"log-out-outline"} size={40} style={styles.signout} />
+      </Pressable>
       <View style={styles.itemsContainer}>
         <View style={styles.imageContainer}>
-          <Image style={styles.profileImage} source={profileImage}></Image>
+          <Image
+            style={styles.profileImage}
+            source={profileImage || require("../assets/images/profile.jpg")}
+          ></Image>
         </View>
-        <Pressable
-          onPress={() => {
-            handleEditImage();
-          }}
-        >
-          <LinearGradient
-            colors={["transparent", "black"]}
-            style={styles.gradient}
-          >
-            <Pressable
-              style={{ height: 200, width: 200 }}
-              onPress={() => {
-                handleEditImage();
-              }}
-            />
-            <Text style={styles.imageText}>Tap to Edit</Text>
-          </LinearGradient>
-        </Pressable>
         <View style={styles.input}>
-          <Text
-            style={styles.textInput}
-            placeholderTextColor="#000000"
-            value={text}
-            editable={true}
-            onChangeText={(text) => setText(text)}
-          />
-          <Pressable>
-            <Icon name="pencil-outline" size={30} color="black" />
+          <Text style={styles.textInput} value={text}>
+            {text}
+          </Text>
+        </View>
+        <View style={styles.button}>
+          <Pressable
+            onPress={() => {
+              setConfirmDelete(true);
+            }}
+          >
+            <Icon
+              style={{ ...styles.icon, top: 20, left: 2, height: 40 }}
+              name="trash-outline"
+              size={40}
+              color="black"
+            />
           </Pressable>
+          <Text style={styles.buttonText}>Delete Account</Text>
         </View>
       </View>
     </View>
   );
 };
 
-export default Settings;
+export default EditProfile;
 
 const styles = StyleSheet.create({
   arc: {
@@ -178,7 +169,7 @@ const styles = StyleSheet.create({
   input: {
     flexDirection: "row",
     marginTop: 30,
-    top: -200,
+    // top: -200,
   },
   textInput: {
     backgroundColor: "white",
@@ -197,5 +188,64 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 150,
     left: 50,
+  },
+  button: {
+    marginTop: 50,
+    marginLeft: "auto",
+    marginRight: "auto",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.58,
+    shadowRadius: 4,
+    height: 80,
+    width: 80,
+    borderRadius: 40,
+    backgroundColor: "white",
+  },
+  icon: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    top: 20,
+  },
+  buttonText: {
+    color: "black",
+    fontSize: 15,
+    textAlign: "center",
+    top: 60,
+  },
+  confirmDelete: {
+    backgroundColor: "white",
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+    position: "absolute",
+    left: 0,
+    zIndex: 1,
+  },
+  confirmDeleteText: {
+    fontSize: 40,
+    textAlign: "center",
+    marginTop: 250,
+    padding: 20,
+  },
+  confirmDeleteButtons: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: 20,
+  },
+  confirmDeleteButtonText: {
+    fontSize: 20,
+    color: "blue",
+  },
+  signout: {
+    position: "absolute",
+    right: 30,
+    top: -40,
+  },
+  confirmDeleteInput: {
+    height: 40,
+    margin: 12,
+    padding: 10,
+    textAlign: "center",
+    fontSize: 20,
   },
 });

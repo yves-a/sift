@@ -102,7 +102,10 @@ const Profile = ({ route, navigation }) => {
         <View style={styles.button}>
           <Pressable
             onPress={() => {
-              auth.signOut();
+              navigation.navigate("Settings", {
+                id: auth.currentUser.uid,
+                name: auth.currentUser.displayName,
+              });
             }}
           >
             <Icon
@@ -169,13 +172,9 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     top: 3,
-    // left: 20,
   },
   carouselContainer: {
     marginTop: 30,
-    // left:
-    // height: 400,
-    // alignItems: "center",
     flex: 1,
   },
   carousel: {
