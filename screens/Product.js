@@ -59,7 +59,9 @@ const Product = ({ navigation, route }) => {
           styles.buttonContainer,
         ]}
         onPress={() => {
-          Linking.openURL(`https://www.amazon.ca/dp/${item._id}/ref=nosim`);
+          Linking.openURL(
+            `https://www.amazon.ca/dp/${item._id}/ref=nosim?tag=giftgiver0b-20`
+          );
         }}
       >
         <Text style={styles.buttonText}>Check Listing</Text>
