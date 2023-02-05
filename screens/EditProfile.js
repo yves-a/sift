@@ -10,9 +10,10 @@ import {
 import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import { updateProfile } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, storage } from "../firebase";
 import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from "expo-image-picker";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const checkName = (name) => {
   if (name == null) {
@@ -31,6 +32,7 @@ const checkName = (name) => {
 const EditProfile = ({ route, navigation }) => {
   const { id, img, name, recipients, setRecipients } = route.params;
   const [originalName, setOriginalName] = useState(checkName(name));
+  const [profileImage, setProfileImage] = useState();
   const [text, setText] = useState(checkName(name));
 
   const handleUpdateName = () => {
@@ -52,7 +54,7 @@ const EditProfile = ({ route, navigation }) => {
     setRecipients(updatedRecipients);
   };
 
-  const [image, setImage] = useState(require("../assets/images/image.png"));
+  const [image, setImage] = useState(img || "../assets/images/image.png");
 
   const handleEditImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -62,12 +64,37 @@ const EditProfile = ({ route, navigation }) => {
       quality: 1,
     });
 
-    console.log(result);
+    const storageRef = ref(storage, "images/" + id);
+    const file = await fetch(result.assets[0].uri);
+    const blob = await file.blob();
+
+    // setImage(result.assets[0]);
+
+    // console.log(await getDownloadURL(ref(storage, "images/" + id)));
+    uploadBytes(storageRef, blob);
+
+    getDownloadURL(storageRef).then((url) => {
+      setImage(url);
+    });
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
   };
+
+  useEffect(() => {
+    async function fetchImage() {
+      try {
+        const url = await getDownloadURL(ref(storage, `images/${id}`));
+        setProfileImage({ uri: url });
+        console.log(url);
+      } catch (error) {
+        // console.log(error);
+        // return null;
+      }
+    }
+    fetchImage();
+  }, [id]);
 
   return (
     <View>
@@ -84,21 +111,26 @@ const EditProfile = ({ route, navigation }) => {
       </View>
       <View style={styles.itemsContainer}>
         <View style={styles.imageContainer}>
-          <Image style={styles.profileImage} source={image}></Image>
+          <Image style={styles.profileImage} source={profileImage}></Image>
         </View>
-        <LinearGradient
-          colors={["transparent", "black"]}
-          style={styles.gradient}
+        <Pressable
+          onPress={() => {
+            handleEditImage();
+          }}
         >
-          <Pressable
-            style={{ height: 200, width: 200 }}
-            onPress={() => {
-              console.log("Hello");
-              handleEditImage();
-            }}
-          />
-          <Text style={styles.imageText}>Tap to Edit</Text>
-        </LinearGradient>
+          <LinearGradient
+            colors={["transparent", "black"]}
+            style={styles.gradient}
+          >
+            <Pressable
+              style={{ height: 200, width: 200 }}
+              onPress={() => {
+                handleEditImage();
+              }}
+            />
+            <Text style={styles.imageText}>Tap to Edit</Text>
+          </LinearGradient>
+        </Pressable>
         <View style={styles.input}>
           <TextInput
             style={styles.textInput}

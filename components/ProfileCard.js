@@ -8,6 +8,9 @@ import {
 } from "react-native";
 const SCREEN_WIDTH = Dimensions.get("window").width;
 import Icon from "react-native-vector-icons/Ionicons";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
+import React, { useState, useEffect } from "react";
 
 const colors = [
   "#EC3E3D",
@@ -21,7 +24,39 @@ const colors = [
   "#CA1F1D",
 ];
 
-const ProfileCard = ({ name, img, currIdx }) => {
+const ProfileCard = ({ id, name, currIdx }) => {
+  // const getImage = async () => {
+  //   try {
+  //     const url = await getDownloadURL(ref(storage, `images/${id}`));
+  //     console.log(url);
+  //     return { uri: url };
+  //     // setImg({ uri: url });
+  //   } catch (error) {
+  //     // console.log(error);
+  //     return null;
+  //   }
+  //   return null;
+  // };
+
+  const [img, setImg] = useState();
+  // console.log(img);
+
+  useEffect(() => {
+    async function fetchImage() {
+      console.log("HELL)");
+      try {
+        const url = await getDownloadURL(ref(storage, `images/${id}`));
+        console.log(url);
+        // return { uri: url };
+        setImg({ uri: url });
+      } catch (error) {
+        // console.log(error);
+        return null;
+      }
+    }
+    fetchImage();
+  }, [id]);
+
   if (img) {
     return (
       <View

@@ -43,6 +43,7 @@ const Profile = ({ route, navigation }) => {
       const response = await getAllRecipients(auth.currentUser.uid);
       setRecipients(response);
     }
+
     fetchData();
   }, []);
 
@@ -57,6 +58,25 @@ const Profile = ({ route, navigation }) => {
       fetchData();
     }, [])
   );
+
+  // useEffect(() => {
+  //   async function getImages() {
+  //     for (let i = 0; i < recipients.length; i++) {
+  //       try {
+  //         const image = await getDownloadURL(
+  //           ref(storage, "images/" + recipients[i]._id)
+  //         );
+  //         setRecipients((prev) => {
+  //           prev[i].img = image;
+  //           return prev;
+  //         });
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //   }
+  //   getImages();
+  // }, []);
 
   return (
     <View>
@@ -88,10 +108,9 @@ const Profile = ({ route, navigation }) => {
                   ? `${checkName(recipients[index].name)} (Me)`
                   : checkName(recipients[index].name)
               }
-              img={
-                recipients[index].img ? { uri: recipients[index].img } : null
-              }
+              img={recipients[index].img}
               currIdx={index}
+              id={recipients[index]._id}
             />
           )}
         />
