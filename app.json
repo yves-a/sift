@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Get Sift",
-    "slug": "Get Sift",
+    "name": "team2-frontend",
+    "slug": "team2-frontend",
     "privacy": "unlisted",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "ca.getsift.sift",
-      "buildNumber": "7.0.0"
+      "buildNumber": "8.0.0",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "The app accesses your photos to set a profile photo."
+      }
     },
     "android": {
       "adaptiveIcon": {
