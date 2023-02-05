@@ -17,9 +17,9 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "ca.getsift.sift",
-      "buildNumber": "8.0.0",
+      "buildNumber": "9.0.0",
       "infoPlist": {
         "NSPhotoLibraryUsageDescription": "The app accesses your photos to set a profile photo."
       }
