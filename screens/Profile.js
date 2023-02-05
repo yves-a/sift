@@ -59,25 +59,6 @@ const Profile = ({ route, navigation }) => {
     }, [])
   );
 
-  // useEffect(() => {
-  //   async function getImages() {
-  //     for (let i = 0; i < recipients.length; i++) {
-  //       try {
-  //         const image = await getDownloadURL(
-  //           ref(storage, "images/" + recipients[i]._id)
-  //         );
-  //         setRecipients((prev) => {
-  //           prev[i].img = image;
-  //           return prev;
-  //         });
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //   }
-  //   getImages();
-  // }, []);
-
   return (
     <View>
       <View style={{ backgroundColor: "white", height: 1000 }} />
@@ -88,11 +69,10 @@ const Profile = ({ route, navigation }) => {
       <View style={styles.carouselContainer}>
         <Carousel
           {...baseOption}
-          loop
           data={recipients}
           windowSize={10}
-          scrollAnimationDuration={1000}
-          mode="stack"
+          scrollAnimationDuration={100}
+          loop={false}
           modeConfig={{
             opacityInterval: 2,
           }}
@@ -140,7 +120,12 @@ const Profile = ({ route, navigation }) => {
               navigation.navigate("RecipientName");
             }}
           >
-            <Icon style={styles.icon} name="add" size={40} color="black" />
+            <Icon
+              style={{ ...styles.icon, left: 2 }}
+              name="add"
+              size={40}
+              color="black"
+            />
           </Pressable>
           <Text style={styles.buttonText}>Add Profile</Text>
         </View>
@@ -188,6 +173,7 @@ const styles = StyleSheet.create({
   },
   carouselContainer: {
     marginTop: 30,
+    // left:
     // height: 400,
     // alignItems: "center",
     flex: 1,

@@ -14,7 +14,7 @@ import { auth, storage } from "../firebase";
 import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from "expo-image-picker";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { updateRecipientName } from "../clients/FlaskServer";
+import { updateRecipientName, deleteRecipient } from "../clients/FlaskServer";
 
 const checkName = (name) => {
   if (name == null) {
@@ -57,8 +57,6 @@ const EditProfile = ({ route, navigation }) => {
     navigation.setOptions({ recipients: updatedRecipients });
   };
 
-  // const [image, setImage] = useState(img || "../assets/images/image.png");
-
   const handleEditImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -74,6 +72,17 @@ const EditProfile = ({ route, navigation }) => {
     uploadBytes(storageRef, blob);
 
     setProfileImage({ uri: result.assets[0].uri });
+  };
+
+  const handleRemoveRecipient = async () => {
+    const result = await deleteRecipient(id, auth.currentUser.uid);
+    console.log(result);
+    const updatedRecipients = recipients.filter(
+      (recipient) => recipient._id != id
+    );
+    setRecipients(updatedRecipients);
+    navigation.setOptions({ recipients: updatedRecipients });
+    navigation.goBack();
   };
 
   useEffect(() => {
@@ -133,6 +142,19 @@ const EditProfile = ({ route, navigation }) => {
             <Icon name="pencil-outline" size={30} color="black" />
           </Pressable>
         </View>
+        {id != auth.currentUser.uid && (
+          <View style={styles.button}>
+            <Pressable onPress={handleRemoveRecipient}>
+              <Icon
+                style={{ ...styles.icon, top: 20, height: 40 }}
+                name="close-outline"
+                size={40}
+                color="black"
+              />
+            </Pressable>
+            <Text style={styles.buttonText}>Remove Recipient</Text>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -187,5 +209,29 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 150,
     left: 50,
+  },
+  button: {
+    marginTop: -150,
+    marginLeft: "auto",
+    marginRight: "auto",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.58,
+    shadowRadius: 4,
+    height: 80,
+    width: 80,
+    borderRadius: 40,
+    backgroundColor: "white",
+  },
+  icon: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    top: 20,
+  },
+  buttonText: {
+    color: "black",
+    fontSize: 15,
+    textAlign: "center",
+    top: 60,
   },
 });

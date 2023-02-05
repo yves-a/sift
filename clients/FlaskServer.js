@@ -61,12 +61,13 @@ export const updateRecipient = async (recipient) => {
   }
 };
 
-export const deleteRecipient = async (id) => {
+export const deleteRecipient = async (id, ownerId) => {
   const config = {
     method: "delete",
     url: `${baseUrl}/recipient`,
-    headers: {
+    data: {
       id: id,
+      ownerId: ownerId,
     },
   };
   try {
