@@ -21,12 +21,29 @@ const baseOption = {
 
 const Profile = ({ route, navigation }) => {
   const [recipients, setRecipients] = useState([]);
+  const [currImg, setCurrImage] = useState(0);
+  const [currName, setCurrName] = useState(0);
+
+  const checkName = (name) => {
+    if (name == null) {
+      return "Me";
+    } else if (name == "ME") {
+      if (auth.currentUser.displayName == null) {
+        return "Me";
+      } else {
+        return auth.currentUser.displayName;
+      }
+    } else {
+      return name;
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
       const response = await getAllRecipients(auth.currentUser.uid);
       setRecipients(response);
     }
+
     fetchData();
   }, []);
 
@@ -52,24 +69,31 @@ const Profile = ({ route, navigation }) => {
       <View style={styles.carouselContainer}>
         <Carousel
           {...baseOption}
-          loop
           data={recipients}
           windowSize={10}
-          scrollAnimationDuration={1000}
-          mode="stack"
+          scrollAnimationDuration={100}
+          loop={false}
           modeConfig={{
             opacityInterval: 2,
           }}
           onSnapToItem={(index) => {
             global.currRec = recipients[index]._id;
+            setCurrImage(recipients[index].img);
+            setCurrName(recipients[index].name);
           }}
           renderItem={({ index, animationValue }) => (
             <ProfileCard
-              name={recipients[index].name}
-              img={
-                recipients[index].img ? { uri: recipients[index].img } : null
+              name={
+                checkName(recipients[index]._id) == auth.currentUser.uid
+                  ? `${checkName(recipients[index].name)} (Me)`
+                  : checkName(recipients[index].name)
               }
+              img={recipients[index].img}
               currIdx={index}
+              id={recipients[index]._id}
+              options={{
+                recipients,
+              }}
             />
           )}
         />
@@ -78,7 +102,10 @@ const Profile = ({ route, navigation }) => {
         <View style={styles.button}>
           <Pressable
             onPress={() => {
-              auth.signOut();
+              navigation.navigate("Settings", {
+                id: auth.currentUser.uid,
+                name: auth.currentUser.displayName,
+              });
             }}
           >
             <Icon
@@ -96,12 +123,27 @@ const Profile = ({ route, navigation }) => {
               navigation.navigate("RecipientName");
             }}
           >
-            <Icon style={styles.icon} name="add" size={40} color="black" />
+            <Icon
+              style={{ ...styles.icon, left: 2 }}
+              name="add"
+              size={40}
+              color="black"
+            />
           </Pressable>
           <Text style={styles.buttonText}>Add Profile</Text>
         </View>
         <View style={styles.button}>
-          <Pressable>
+          <Pressable
+            onPress={() => {
+              navigation.navigate("EditProfile", {
+                id: global.currRec,
+                img: currImg,
+                name: currName,
+                recipients: recipients,
+                setRecipients: setRecipients,
+              });
+            }}
+          >
             <Icon
               style={{ ...styles.icon, left: 3, top: 25 }}
               name="pencil-outline"
@@ -130,12 +172,9 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     top: 3,
-    // left: 20,
   },
   carouselContainer: {
     marginTop: 30,
-    // height: 400,
-    // alignItems: "center",
     flex: 1,
   },
   carousel: {

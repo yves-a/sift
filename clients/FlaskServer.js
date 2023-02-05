@@ -60,13 +60,31 @@ export const updateRecipient = async (recipient) => {
   }
 };
 
-export const deleteRecipient = async (id) => {
+export const deleteRecipient = async (id, ownerId) => {
   const config = {
     method: "delete",
     url: `${baseUrl}/recipient`,
-    headers: {
+    data: {
       id: id,
+      ownerId: ownerId,
     },
+  };
+  try {
+    const response = await axios(config);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateRecipientName = async (id, name) => {
+  const config = {
+    method: "patch",
+    url: `${baseUrl}/recipient`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: { id, name },
   };
   try {
     const response = await axios(config);

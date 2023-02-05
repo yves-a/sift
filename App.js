@@ -27,6 +27,8 @@ import FullSaved from "./screens/FullSaved";
 import Collection from "./screens/Collection";
 import AddSaved from "./screens/AddSaved";
 import Product from "./screens/Product";
+import EditProfile from "./screens/EditProfile";
+import Settings from "./screens/Settings";
 import { auth } from "./firebase.js";
 
 import Icon from "react-native-vector-icons/Ionicons";
@@ -60,6 +62,8 @@ function ProfileStack() {
       <Stack.Screen name="Gender" component={Gender} />
       <Stack.Screen name="Age" component={Age} />
       <Stack.Screen name="Personality" component={Personality} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="Settings" component={Settings} />
     </Stack.Navigator>
   );
 }
