@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   backButton: {
     flex: 0.8,
     left: -15,
-    // top: "5%",
+    top: "5%",
   },
   datePick: {
     marginTop: "10%",
@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "#fff",
     alignItems: "center",
+    top: "7%",
   },
   progressEvent: {
     flex: 0.1,

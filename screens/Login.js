@@ -4,6 +4,9 @@ import { Formik } from "formik";
 import styles from "./LoginInFlow.style.js";
 import { AntDesign } from "@expo/vector-icons";
 import { auth, signInWithEmailAndPassword } from "../firebase";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+
+// const auth = getAuth()
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -20,6 +23,24 @@ const Login = ({ navigation }) => {
       .catch((error) => {
         setError("Password or email is incorrect!");
         console.log(error);
+      });
+  };
+
+  const handleResetPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setError("Please check your email!");
+      })
+      .catch((error) => {
+        if (error.code === "auth/missing-email") {
+          setError("Please enter an email, then try again :)");
+        }
+        if (
+          error.code === "auth/invalid-email" ||
+          error.code === "auth/user-not-found"
+        ) {
+          setError("No account attached to this email");
+        }
       });
   };
 
@@ -50,14 +71,17 @@ const Login = ({ navigation }) => {
             secureTextEntry
           />
         </View>
-        <Text style={styles.subheading}>Forgot Password</Text>
+        <TouchableOpacity onPress={handleResetPassword}>
+          <Text style={styles.subheading}>Forgot Password</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           onPress={handleSignIn}
           style={styles.formButtonContainer}
         >
           <Text style={styles.formButtonText}>Sign In</Text>
         </TouchableOpacity>
-        <Text>{error}</Text>
+        <Text style={{ paddingLeft: "2%" }}>{error}</Text>
       </View>
       {/* )} */}
       {/* </Formik> */}

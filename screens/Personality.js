@@ -215,13 +215,14 @@ const styles = StyleSheet.create({
   body: {
     flex: 0.5,
     width: "80%",
-    top: -80,
+    top: "-7%",
   },
   header: {
     flexShrink: 1,
     fontSize: 40,
     color: "#1C1B1F",
-    paddingVertical: "6%",
+    paddingTop: "-5%",
+    paddingBottom: "20%",
   },
   nextButton: {
     color: "white",

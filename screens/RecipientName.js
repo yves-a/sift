@@ -6,7 +6,9 @@ import {
   TextInput,
   Text,
   View,
+  TouchableOpacity,
 } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const RecipientName = ({ navigation }) => {
   const [textInputName, setTextInputName] = useState("");
@@ -38,6 +40,20 @@ const RecipientName = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.progressBar}>
+        <View style={styles.progressEvent}></View>
+      </View>
+      <View style={styles.backButton}>
+        <Pressable
+          onPress={() => {
+            navigation.goBack();
+          }}
+          title="Go to Page"
+          accessibilityLabel="Go back a page."
+        >
+          <Icon name="chevron-back-outline" size={40} color="#1C1B1F" />
+        </Pressable>
+      </View>
       <View>
         <Text style={styles.head}>You're shopping for</Text>
       </View>
@@ -68,13 +84,32 @@ const RecipientName = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  progressEvent: {
+    flex: 0.0,
+    backgroundColor: "#333333",
+    height: "100%",
+  },
+  progressBar: {
+    flexDirection: "row",
+    backgroundColor: "#e0e0de",
     width: "100%",
-    height: "120%",
-    backgroundColor: "white",
+    height: 15,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    // alignItems: 'center',
+    // justifyContent: "top",
+    top: "7%",
   },
   buttonActive: {
     backgroundColor: "red",
+  },
+  backButton: {
+    flex: 0.2,
+    right: "36%",
+    top: "5%",
+    alignSelf: "center",
   },
   head: {
     fontSize: 45,
