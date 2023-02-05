@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 200,
     height: 200,
-    borderRadius: "200%",
+    borderRadius: 100,
   },
   input: {
     flexDirection: "row",
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     top: -200,
-    borderRadius: "200%",
+    borderRadius: 100,
   },
   imageText: {
     color: "white",

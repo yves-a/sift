@@ -54,7 +54,7 @@ const InterestsV2 = ({ navigation, route }) => {
       <View style={styles.body}>
         <Text style={styles.header}>What are their interests?</Text>
 
-        <View style={{ top: 20 }}>
+        <View style={{ top: 40 }}>
           <Pressable
             style={{ position: "absolute", left: -20, top: 30 }}
             onPress={() => {
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 32,
-    top: "110%",
+    top: "115%",
     backgroundColor: "#2F3956",
   },
   text: {

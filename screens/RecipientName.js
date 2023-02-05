@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     lineHeight: 52,
     left: "10%",
-    marginTop: 175,
+    marginTop: 100,
     width: "80%",
   },
   input: {

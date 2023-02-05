@@ -43,7 +43,7 @@ const Personality = ({ navigation, route }) => {
       <View style={styles.body}>
         <Text style={styles.header}>What are they like?</Text>
 
-        <View style={{ top: 20 }}>
+        <View style={{ top: -20 }}>
           <Pressable
             style={{ position: "absolute", left: -25, top: 100 }}
             onPress={() => {
@@ -69,7 +69,7 @@ const Personality = ({ navigation, route }) => {
           </Pressable>
 
           <Pressable
-            style={{ position: "absolute", left: 220, top: -80 }}
+            style={{ position: "absolute", left: 235, top: -20 }}
             onPress={() => {
               setworkaholic(!workaholic);
               updateValues("workaholic");
@@ -77,7 +77,7 @@ const Personality = ({ navigation, route }) => {
           >
             <CirculeButton
               text={"Workaholic"}
-              size={125}
+              size={115}
               pressed={workaholic}
             />
           </Pressable>
@@ -107,7 +107,7 @@ const Personality = ({ navigation, route }) => {
           </Pressable>
 
           <Pressable
-            style={{ position: "absolute", left: 120, top: 15 }}
+            style={{ position: "absolute", left: 115, top: 30 }}
             onPress={() => {
               setsimple(!simple);
               updateValues("simple");
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 32,
-    top: "110%",
+    top: "105%",
     backgroundColor: "#2F3956",
   },
   text: {
