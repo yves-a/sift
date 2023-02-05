@@ -14,7 +14,6 @@ import { auth, storage } from "../firebase";
 import { LinearGradient } from "expo-linear-gradient";
 import * as ImagePicker from "expo-image-picker";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { updateRecipientName } from "../clients/FlaskServer";
 
 const checkName = (name) => {
   if (name == null) {
@@ -30,20 +29,19 @@ const checkName = (name) => {
   }
 };
 
-const EditProfile = ({ route, navigation }) => {
+const Settings = ({ route, navigation }) => {
   const { id, img, name, recipients, setRecipients } = route.params;
   const [originalName, setOriginalName] = useState(checkName(name));
   const [profileImage, setProfileImage] = useState();
   const [text, setText] = useState(checkName(name));
 
-  const handleUpdateName = async () => {
+  const handleUpdateName = () => {
     if (text != originalName) {
       if (id == auth.currentUser.uid) {
-        await updateProfile(auth.currentUser, {
+        updateProfile(auth.currentUser, {
           displayName: text,
         });
       } else {
-        const rslt = await updateRecipientName(id, text);
       }
     }
 
@@ -54,10 +52,9 @@ const EditProfile = ({ route, navigation }) => {
       return recipient;
     });
     setRecipients(updatedRecipients);
-    navigation.setOptions({ recipients: updatedRecipients });
   };
 
-  // const [image, setImage] = useState(img || "../assets/images/image.png");
+  const [image, setImage] = useState(img || "../assets/images/image.png");
 
   const handleEditImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -71,9 +68,18 @@ const EditProfile = ({ route, navigation }) => {
     const file = await fetch(result.assets[0].uri);
     const blob = await file.blob();
 
+    // setImage(result.assets[0]);
+
+    // console.log(await getDownloadURL(ref(storage, "images/" + id)));
     uploadBytes(storageRef, blob);
 
-    setProfileImage({ uri: result.assets[0].uri });
+    getDownloadURL(storageRef).then((url) => {
+      setImage(url);
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
   };
 
   useEffect(() => {
@@ -81,7 +87,11 @@ const EditProfile = ({ route, navigation }) => {
       try {
         const url = await getDownloadURL(ref(storage, `images/${id}`));
         setProfileImage({ uri: url });
-      } catch (error) {}
+        console.log(url);
+      } catch (error) {
+        // console.log(error);
+        // return null;
+      }
     }
     fetchImage();
   }, [id]);
@@ -122,7 +132,7 @@ const EditProfile = ({ route, navigation }) => {
           </LinearGradient>
         </Pressable>
         <View style={styles.input}>
-          <TextInput
+          <Text
             style={styles.textInput}
             placeholderTextColor="#000000"
             value={text}
@@ -138,7 +148,7 @@ const EditProfile = ({ route, navigation }) => {
   );
 };
 
-export default EditProfile;
+export default Settings;
 
 const styles = StyleSheet.create({
   arc: {

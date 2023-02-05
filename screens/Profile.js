@@ -111,6 +111,9 @@ const Profile = ({ route, navigation }) => {
               img={recipients[index].img}
               currIdx={index}
               id={recipients[index]._id}
+              options={{
+                recipients,
+              }}
             />
           )}
         />

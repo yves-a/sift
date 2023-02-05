@@ -25,25 +25,10 @@ const colors = [
 ];
 
 const ProfileCard = ({ id, name, currIdx }) => {
-  // const getImage = async () => {
-  //   try {
-  //     const url = await getDownloadURL(ref(storage, `images/${id}`));
-  //     console.log(url);
-  //     return { uri: url };
-  //     // setImg({ uri: url });
-  //   } catch (error) {
-  //     // console.log(error);
-  //     return null;
-  //   }
-  //   return null;
-  // };
-
   const [img, setImg] = useState();
-  // console.log(img);
 
   useEffect(() => {
     async function fetchImage() {
-      console.log("HELL)");
       try {
         const url = await getDownloadURL(ref(storage, `images/${id}`));
         console.log(url);

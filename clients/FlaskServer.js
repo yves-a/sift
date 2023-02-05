@@ -77,6 +77,23 @@ export const deleteRecipient = async (id) => {
   }
 };
 
+export const updateRecipientName = async (id, name) => {
+  const config = {
+    method: "patch",
+    url: `${baseUrl}/recipient`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: { id, name },
+  };
+  try {
+    const response = await axios(config);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // GET ALL RECIPIENTS
 
 export const getAllRecipients = async (userId) => {
