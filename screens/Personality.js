@@ -52,7 +52,7 @@ const Personality = ({ navigation, route }) => {
             }}
           >
             <CirculeButton
-              text={"Intraverted"}
+              text={"Introverted"}
               size={135}
               pressed={intraverted}
             />
@@ -90,7 +90,7 @@ const Personality = ({ navigation, route }) => {
             }}
           >
             <CirculeButton
-              text={"Extraverted"}
+              text={"Extroverted"}
               size={130}
               pressed={extraverted}
             />
