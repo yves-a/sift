@@ -14,7 +14,15 @@ const CreateCollection = ({ navigation }) => {
       <View style={styles.header}>
         {/* Couldnt figure out a different way to center besides using empty space */}
         <Text style={styles.title}>{"    "}</Text>
-        <Text style={styles.title}>SIFT</Text>
+        <Text
+          style={{
+            ...styles.title,
+            fontFamily: "BryantPro-Bold",
+            letterSpacing: -1,
+          }}
+        >
+          SIFT
+        </Text>
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();

@@ -51,7 +51,7 @@ const Saved = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={{ fontSize: 20 }}>Saved</Text>
+        <Text style={styles.title}>Saved</Text>
         <Text></Text>
       </View>
 
@@ -122,6 +122,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
   },
+  title: {
+    fontSize: 20,
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
   header: {
     marginTop: 50,
     flexDirection: "row",
@@ -130,9 +138,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   savedText: {
-    fontSize: 25,
+    fontSize: 20,
     padding: 10,
     left: 20,
+    fontWeight: "bold",
   },
   savedContainer: {
     padding: 20,
@@ -168,6 +177,7 @@ const styles = StyleSheet.create({
   collectionsHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 10,
   },
   collectionContainer: {
     flexDirection: "row",
@@ -176,5 +186,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     marginBottom: 100,
     paddingHorizontal: 20,
+    marginTop: 10,
   },
 });

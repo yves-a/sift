@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useState, useEffect } from "react";
+import { useFonts } from "expo-font";
 import Name from "./screens/Name";
 import Login from "./screens/Login";
 import Forgot from "./screens/Forgot";
@@ -116,6 +117,10 @@ function UnauthenticatedStack() {
 }
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "BryantPro-Bold": require("./assets/fonts/BryantPro-Bold.otf"),
+  });
+
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 

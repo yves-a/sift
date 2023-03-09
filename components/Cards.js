@@ -362,6 +362,8 @@ class Cards extends Component {
               marginLeft: SCREEN_WIDTH / 2 - 30,
               color: "black",
               fontSize: 30,
+              fontFamily: "BryantPro-Bold",
+              letterSpacing: -1,
             }}
           >
             SIFT

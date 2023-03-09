@@ -82,6 +82,7 @@ const ProfileCard = ({ id, name, currIdx }) => {
       <View
         style={{
           backgroundColor: colors[currIdx % colors.length],
+          // backgroundColor: "#2F3956",
           height: 200,
           width: 200,
           borderRadius: 100,

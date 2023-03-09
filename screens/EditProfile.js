@@ -121,7 +121,7 @@ const EditProfile = ({ route, navigation }) => {
           }}
         >
           <LinearGradient
-            colors={["transparent", "black"]}
+            colors={["transparent", "transparent"]}
             style={styles.gradient}
           >
             <Pressable
@@ -130,7 +130,7 @@ const EditProfile = ({ route, navigation }) => {
                 handleEditImage();
               }}
             />
-            <Text style={styles.imageText}>Tap to Edit</Text>
+            {/* <Text style={styles.imageText}>Tap to Edit</Text> */}
           </LinearGradient>
         </Pressable>
         <View style={styles.input}>

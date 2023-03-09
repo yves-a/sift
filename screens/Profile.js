@@ -172,6 +172,8 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     top: 3,
+    fontFamily: "BryantPro-Bold",
+    letterSpacing: -1,
   },
   carouselContainer: {
     marginTop: 30,

@@ -21,6 +21,10 @@ const SavedCard = ({ navigation, item }) => {
           height: "100%",
           width: "40%",
           borderRadius: 10,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 5 },
+          shadowOpacity: 0.58,
+          shadowRadius: 4,
         }}
         // source={require("../assets/tester.jpg")}
         source={{ uri: item.img }}

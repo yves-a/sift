@@ -33,38 +33,44 @@ class ProductCard extends Component {
             height: this.props.height / 2,
             width: this.props.width,
           }}
-          // source={require("../assets/tester.jpg")}
           source={{ uri: this.props.item.img }}
         ></Image>
-        {/* <Text>{this.prop}</Text> */}
-        <LinearGradient
-          colors={["transparent", "transparent", "transparent", "#000000"]}
-          style={{ height: "100%", width: "100%", position: "absolute" }}
-          end={{ x: 0.5, y: 0.9 }}
-        >
-          <View style={styles.body}>
-            <View style={styles.textContainer}>
-              <Pressable
-                onPress={() => {
-                  this.props.navigation.navigate("Product", {
-                    item: this.props.item,
-                  });
-                }}
-              >
-                {this.props.item.title.length < 40 && (
-                  <Text style={styles.titleText}>{this.props.item.title}</Text>
-                )}
-                {this.props.item.title.length > 40 && (
-                  <Text style={styles.titleText}>
-                    {this.props.item.title.substring(0, 40) + ". . . "}
-                  </Text>
-                )}
-              </Pressable>
-            </View>
-            <Text style={styles.priceText}>{this.props.item.price} CA</Text>
+        <View style={styles.body}>
+          <View style={styles.textContainer}>
+            <Pressable
+              onPress={() => {
+                this.props.navigation.navigate("Product", {
+                  item: this.props.item,
+                });
+              }}
+            >
+              {this.props.item.title.length < 40 && (
+                <Text style={styles.titleText}>{this.props.item.title}</Text>
+              )}
+              {this.props.item.title.length > 40 && (
+                <Text style={styles.titleText}>
+                  {this.props.item.title.substring(0, 40) + ". . . "}
+                </Text>
+              )}
+            </Pressable>
           </View>
-        </LinearGradient>
-        {/* </ImageBackground> */}
+          <Text style={styles.priceText}>{this.props.item.price} CA</Text>
+        </View>
+        <Icon
+          name="information-circle-outline"
+          size={30}
+          color={"white"}
+          onPress={() => {
+            this.props.navigation.navigate("Product", {
+              item: this.props.item,
+            });
+          }}
+          style={{
+            position: "relative",
+            top: "41%",
+            left: "84%",
+          }}
+        />
       </View>
     );
   }
@@ -78,6 +84,9 @@ const styles = StyleSheet.create({
     padding: 20,
     position: "absolute",
     top: 350,
+    backgroundColor: "#2F3956",
+    width: "100%",
+    height: "37%",
     // bottom: 20,
   },
   textContainer: {
